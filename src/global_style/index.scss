@@ -1,5 +1,15 @@
 @import 'reset';
+@font-face {
+	font-family: 'Stratos';
+	src: url(../../public/Stratos-Regular.woff2) format(woff2);
+}
 
 html {
 	font-size: 16px;
+}
+
+body {
+	background-color: rgba(#000, 85%);
+	font-family: 'Stratos';
+	color: #fff;
 }
