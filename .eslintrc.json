@@ -1,0 +1,21 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true
+	},
+	"extends": ["eslint:recommended", "prettier"],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["prettier", "@typescript-eslint", "jsx-a11y"],
+	"parserOptions": {
+		"ecmaVersion": 2020
+	},
+	"rules": {
+		"no-console": "warn",
+		"prettier/prettier": "error",
+		"camelcase": ["error"],
+		"eqeqeq": ["error", "always"],
+		"no-unused-vars": "off"
+	},
+	"root": true
+}
