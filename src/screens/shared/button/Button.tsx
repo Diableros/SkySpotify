@@ -6,15 +6,10 @@ export enum ButtonStyle {
 	White = 'white',
 }
 
-export enum ButtonTitle {
-	Login = 'Войти',
-	Reg = 'Зарегистрироваться',
-}
-
 type ButtonStyleType = {
 	style: ButtonStyle;
-	title: ButtonTitle;
-	action: React.MouseEventHandler;
+	title: string;
+	action?: React.MouseEventHandler;
 };
 
 const Button = ({ style, title, action }: ButtonStyleType) => {
