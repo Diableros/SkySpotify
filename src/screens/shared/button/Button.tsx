@@ -13,18 +13,24 @@ type ButtonStyleType = {
 };
 
 const Button = ({ style, title, action }: ButtonStyleType) => {
-	return (
-		<button
-			className={clsx(
-				s.btn,
-				style === ButtonStyle.Purple && s['btn--purple'],
-				style === ButtonStyle.White && s['btn--white']
-			)}
-			onClick={action}
-		>
-			{title}
-		</button>
-	);
+	switch (style) {
+		case ButtonStyle.Purple:
+			return (
+				<button className={clsx(s.btn, s['btn--purple'])} onClick={action}>
+					{title}
+				</button>
+			);
+
+		case ButtonStyle.White:
+			return (
+				<div className={clsx(s.btn, s['btn--white'])} onClick={action}>
+					{title}
+				</div>
+			);
+
+		default:
+			return <div>Smth wrong...</div>;
+	}
 };
 
 export default Button;

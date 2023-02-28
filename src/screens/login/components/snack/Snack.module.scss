@@ -1,0 +1,19 @@
+.error,
+.message {
+	right: 1rem;
+	bottom: 1rem;
+	color: white;
+	width: 280px;
+	text-align: center;
+	padding: 1rem;
+	margin: 0.5rem;
+	border-radius: 8px;
+}
+
+.error {
+	background-color: #e55;
+}
+
+.message {
+	background-color: green;
+}

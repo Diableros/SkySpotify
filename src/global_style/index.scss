@@ -4,12 +4,22 @@
 	src: url(../../public/Stratos-Regular.woff2) format(woff2);
 }
 
+:root {
+	--main-dark: #2b2b2b;
+	--middle-dark: #4e4e4e;
+	--more-dark: #1e1e1e;
+}
+
 html {
 	font-size: 16px;
 }
 
 body {
-	background-color: rgba(#000, 85%);
+	background-color: var(--main-dark);
 	font-family: 'Stratos';
 	color: #fff;
+}
+
+#root {
+	height: 100%;
 }

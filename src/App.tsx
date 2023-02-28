@@ -1,10 +1,10 @@
 import s from 'App.module.scss';
-import LoginScreen from 'screens/login/LoginScreen';
+import { Outlet } from 'react-router-dom';
 
 function App() {
 	return (
 		<div className={s.wrapper}>
-			<LoginScreen />
+			<Outlet />
 		</div>
 	);
 }

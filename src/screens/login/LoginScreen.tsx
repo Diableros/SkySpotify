@@ -1,69 +1,83 @@
 import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form/dist/types';
 import Button, { ButtonStyle } from '../shared/button/Button';
-import s from './LoginScreen.module.scss';
 import logo from 'img/logo.svg';
+import s from './LoginScreen.module.scss';
+import Snack from './components/snack/Snack';
 
 const LoginScreen = () => {
-	const [registartionView, setRegistratoinView] =
-		React.useState<Boolean>(false);
+	const [isRegister, setIsRegister] = React.useState<Boolean>(false);
 
-	const handleLoginButton: React.MouseEventHandler = (e) => {
-		const target = e.target as HTMLElement;
-		console.log(`Click on "${target.innerHTML}"`);
-	};
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<LoginFieldsType>();
 
-	const handleRegistrationButtonClick: React.MouseEventHandler = (e) => {
-		const target = e.target as HTMLElement;
-		console.log(`Click on "${target.innerHTML}"`);
-		setRegistratoinView(true);
-	};
-
-	const handleFormSubmit: React.FormEventHandler = (e) => {
-		e.preventDefault();
-		const form = e.target as HTMLFormElement;
-		console.log('Form submit prevent', form);
+	const onSubmit: SubmitHandler<LoginFieldsType> = (data) => {
+		console.log('Handle form data processing: ' + JSON.stringify(data));
 	};
 
 	return (
-		<form className={s.form} onSubmit={handleFormSubmit}>
-			<img src={logo} />
-			<div className={s['form__input-box']}>
-				<input
-					className={s.form__input}
-					type="text"
-					placeholder="Логин"
-					name="login"
-				/>
-				<input
-					className={s.form__input}
-					type="password"
-					placeholder="Пароль"
-					name="password"
-				/>
-				{registartionView ? (
+		<>
+			<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+				<a href="/">
+					<img src={logo} />
+				</a>
+				<div className={s['form__input-box']}>
+					<input
+						className={s.form__input}
+						type="text"
+						placeholder="Логин"
+						{...register('login', {
+							required: '(длина 4-20 символов)',
+							minLength: 4,
+							maxLength: 20,
+						})}
+					/>
 					<input
 						className={s.form__input}
 						type="password"
-						placeholder="Повторите пароль"
-						name="confirmPassword"
+						placeholder="Пароль"
+						{...register('password', {
+							required: '(длина 8-30 символов)',
+							minLength: 8,
+							maxLength: 20,
+						})}
 					/>
-				) : null}
-			</div>
-			<div className={s['form__button-box']}>
-				{registartionView ? null : (
-					<Button
-						style={ButtonStyle.Purple}
-						title="Войти"
-						action={handleLoginButton}
-					/>
-				)}
-				<Button
-					style={registartionView ? ButtonStyle.Purple : ButtonStyle.White}
-					title="Зарегистрироваться"
-					action={handleRegistrationButtonClick}
-				/>
-			</div>
-		</form>
+					{isRegister ? (
+						<input
+							className={s.form__input}
+							type="password"
+							placeholder="Повторите пароль"
+							{...register('passwordConfirm', {
+								required: true,
+								minLength: 8,
+								maxLength: 20,
+							})}
+						/>
+					) : null}
+				</div>
+				<div className={s['form__button-box']}>
+					{isRegister ? (
+						<Button style={ButtonStyle.Purple} title="Зарегистрироваться" />
+					) : (
+						<>
+							<Button style={ButtonStyle.Purple} title="Войти" />
+							<Button
+								style={ButtonStyle.White}
+								title="Зарегистрироваться"
+								action={() => setIsRegister(true)}
+							/>
+						</>
+					)}
+				</div>
+			</form>
+			{Object.keys(errors).length > 0 ? (
+				<Snack type="error" data={errors} />
+			) : null}
+		</>
 	);
 };
 

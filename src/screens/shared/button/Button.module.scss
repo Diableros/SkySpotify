@@ -1,10 +1,11 @@
 .btn {
-	width: 100%;
+	width: 278px;
 	padding: 15px 0;
 	text-align: center;
 	border-radius: 6px;
 	font-size: 1.125rem;
 	transition: all 0.2s;
+	cursor: pointer;
 
 	&:active {
 		transform: scale(98%);
