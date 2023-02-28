@@ -1,7 +1,12 @@
 import s from 'App.module.scss';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-	return <div className={s.wrapper}>Hello from React!</div>;
+	return (
+		<div className={s.wrapper}>
+			<Outlet />
+		</div>
+	);
 }
 
 export default App;

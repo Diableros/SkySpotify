@@ -1,0 +1,37 @@
+.form {
+	width: 368px;
+	height: 440px;
+	background-color: #fff;
+	padding: 44px;
+	border-radius: 12px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: #000;
+	font-size: 1.125rem;
+
+	&__input {
+		width: 100%;
+		border-bottom: 1px solid #d0cece;
+		padding: 8px 0;
+
+		&::placeholder {
+			color: #e1e1e1;
+		}
+
+		&-box {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 24px;
+		}
+	}
+
+	&__button-box {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		gap: 20px;
+	}
+}
