@@ -1,7 +1,21 @@
-import * as React from 'react';
+import useSongsQuery from 'hooks/useSongsQuery';
 
 const MainScreen = () => {
-	return <div>MainScreen</div>;
+	const { data, isLoading, isError } = useSongsQuery();
+
+	return (
+		<>
+			{data && !isLoading ? (
+				data.map((elem) => (
+					<div key={elem.id}>
+						{elem.author} - {elem.name}
+					</div>
+				))
+			) : (
+				<p>{!isError ? 'Loading...' : 'Query error...'}</p>
+			)}
+		</>
+	);
 };
 
 export default MainScreen;

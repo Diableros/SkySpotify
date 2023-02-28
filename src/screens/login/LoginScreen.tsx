@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import Button, { ButtonStyle } from '../shared/button/Button';
 import logo from 'img/logo.svg';
 import s from './LoginScreen.module.scss';
-import Snack from './components/snack/Snack';
+import Snack from 'screens/shared/snack/Snack';
 
 const LoginScreen = () => {
 	const [isRegister, setIsRegister] = React.useState<Boolean>(false);
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -17,6 +19,7 @@ const LoginScreen = () => {
 
 	const onSubmit: SubmitHandler<LoginFieldsType> = (data) => {
 		console.log('Handle form data processing: ' + JSON.stringify(data));
+		navigate('main/');
 	};
 
 	return (
@@ -29,8 +32,8 @@ const LoginScreen = () => {
 					<input
 						className={s.form__input}
 						type="text"
-						placeholder="Логин"
-						{...register('login', {
+						placeholder="e-mail"
+						{...register('email', {
 							required: '(длина 4-20 символов)',
 							minLength: 4,
 							maxLength: 20,

@@ -16,7 +16,7 @@ const Router = ({ children }: { children: React.ReactNode }) => {
 					element: <LoginScreen />,
 				},
 				{
-					path: 'main',
+					path: 'main/',
 					element: <MainScreen />,
 				},
 				{
