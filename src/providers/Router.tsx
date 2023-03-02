@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CollectionsScreen from 'screens/collections/CollectionsScreen';
 import Layout from 'screens/layout/Layout';
 import LoginScreen from 'screens/login/LoginScreen';
-import MainScreen from 'screens/main/MainScreen';
+import MainScreen from 'screens/main/MainList';
 import NotFoundScreen from 'screens/not-found/NotFoundScreen';
 import { useAppSelector } from 'hooks/reduxHooks';
 

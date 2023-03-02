@@ -3,7 +3,9 @@
 	height: 70px;
 	display: flex;
 	align-items: flex-end;
-	border-bottom: 1px solid var(--dark);
+	border-bottom: 1px solid var(--dark-gray);
+	padding: 14px;
+	gap: 1rem;
 }
 
 .search {

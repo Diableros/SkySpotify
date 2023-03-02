@@ -4,10 +4,16 @@ import sprite from 'img/sprite.svg';
 
 const Search = () => {
 	return (
-		<div className={s.search}>
+		<div className={s.searchBox}>
 			<svg className={s.searchSvg}>
-				<use xlinkHref={sprite + 'icon-search'} />
+				<use xlinkHref={sprite + '#icon-search'} />
 			</svg>
+			<input
+				className={s.search}
+				type="search"
+				name="search"
+				placeholder="Поиск"
+			/>
 		</div>
 	);
 };
