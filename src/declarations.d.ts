@@ -4,7 +4,7 @@ type LoginFieldsType = {
 	passwordConfirm?: string;
 };
 
-type UserType = {
+type UserDataType = {
 	id: id;
 	username: string;
 	first_name: string;
@@ -22,12 +22,5 @@ type SongType = {
 	album: string;
 	logo: null;
 	track_file: string;
-	stared_user: UserType;
-};
-
-type UserStateType = {
-	id: number;
-	token: string;
-	userName: string;
-	email: string;
+	stared_user: UserDataType;
 };

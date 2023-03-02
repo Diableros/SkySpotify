@@ -5,8 +5,10 @@
 }
 
 :root {
-	--main-dark: #2b2b2b;
-	--middle-dark: #4e4e4e;
+	--main-dark: #181818;
+	--middle-dark: #2e2e2e;
+	--menu-dark: #1c1c1c;
+	--dark: #222;
 	--more-dark: #1e1e1e;
 }
 
@@ -21,5 +23,9 @@ body {
 }
 
 #root {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	height: 100%;
 }

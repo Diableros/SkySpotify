@@ -1,0 +1,76 @@
+.menuBox {
+	height: 100%;
+	min-width: 244px;
+}
+
+.logoSvg {
+	position: absolute;
+	top: 36px;
+	left: 36px;
+	width: 118px;
+	z-index: 5;
+}
+
+.burger {
+	display: block;
+	position: absolute;
+	width: 20px;
+	height: 10px;
+	top: 100px;
+	left: 36px;
+	cursor: pointer;
+	z-index: 5;
+
+	&::before,
+	&::after {
+		left: 0;
+		position: absolute;
+		content: '';
+		width: 100%;
+		height: 1px;
+		background-color: #fff;
+		z-index: 5;
+	}
+
+	&::before {
+		top: 0px;
+	}
+
+	&::after {
+		bottom: -1px;
+	}
+
+	span {
+		position: absolute;
+		left: 0;
+		top: 5px;
+		width: 100%;
+		height: 1px;
+		background-color: #fff;
+		z-index: 5;
+	}
+}
+
+.slider {
+	position: relative;
+	width: 244px;
+	height: 100%;
+	background-color: var(--menu-dark);
+	display: flex;
+	flex-direction: column;
+	padding: 152px 36px;
+	gap: 32px;
+	left: -100%;
+	transition: left 0.3s ease-in-out;
+
+	&Show {
+		left: 0;
+	}
+}
+
+.themeSvg {
+	width: 39px;
+	height: 39px;
+	cursor: pointer;
+	color: #fff;
+}

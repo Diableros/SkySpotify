@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import Button, { ButtonStyle } from '../shared/button/Button';
 import logo from 'img/logo.svg';
 import s from './LoginScreen.module.scss';
 import Snack from 'screens/shared/snack/Snack';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import { userLogin } from 'store/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 const LoginScreen = () => {
 	const [isRegister, setIsRegister] = React.useState<Boolean>(false);
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const {
@@ -18,8 +21,18 @@ const LoginScreen = () => {
 	} = useForm<LoginFieldsType>();
 
 	const onSubmit: SubmitHandler<LoginFieldsType> = (data) => {
-		console.log('Handle form data processing: ' + JSON.stringify(data));
-		navigate('main/');
+		// just for probe
+		dispatch(
+			userLogin({
+				login: true,
+				id: 1,
+				email: data.email,
+				token: 'blablabla',
+				userName: data.email,
+			})
+		);
+
+		navigate('/');
 	};
 
 	return (
@@ -31,12 +44,14 @@ const LoginScreen = () => {
 				<div className={s['form__input-box']}>
 					<input
 						className={s.form__input}
-						type="text"
+						type="email"
 						placeholder="e-mail"
 						{...register('email', {
-							required: '(длина 4-20 символов)',
+							required: '(Нужен формат e-mail)',
 							minLength: 4,
 							maxLength: 20,
+							pattern:
+								/^[A-Za-z0-9'.']{2,40}@[A-Za-z0-9]{2,40}.[A-Za-z0-9]{2,7}$/,
 						})}
 					/>
 					<input

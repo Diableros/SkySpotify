@@ -1,12 +1,11 @@
 import s from 'App.module.scss';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, Navigate } from 'react-router-dom';
+import { useAppSelector } from 'hooks/reduxHooks';
 
 function App() {
-	return (
-		<div className={s.wrapper}>
-			<Outlet />
-		</div>
-	);
+	const userLogin = useAppSelector((state) => state.user.login);
+
+	return userLogin ? <Outlet /> : <Navigate to="/login" />;
 }
 
 export default App;
