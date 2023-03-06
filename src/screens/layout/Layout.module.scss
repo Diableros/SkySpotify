@@ -1,0 +1,12 @@
+.layoutTop {
+	width: 100%;
+	flex-grow: 1;
+	display: flex;
+
+	&Right {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+}
