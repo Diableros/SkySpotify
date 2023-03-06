@@ -1,28 +1,28 @@
-._ {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	background-color: var(--more-dark);
-	gap: 2rem;
+.notFound {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--more-dark);
+  gap: 2rem;
 
-	&title {
-		font-size: 10.5rem;
-		line-height: 8rem;
-	}
+  &Title {
+    font-size: 10.5rem;
+    line-height: 8rem;
+  }
 
-	&subTitle {
-		font-size: 40px;
-		height: 2rem;
-	}
+  &SubTitle {
+    font-size: 40px;
+    height: 2rem;
+  }
 
-	&text {
-		text-align: center;
-		line-height: 1.5rem;
-		width: 17.75rem;
-		font-size: 1.125rem;
-		color: var(--middle-dark);
-	}
+  &Text {
+    text-align: center;
+    line-height: 1.5rem;
+    width: 17.75rem;
+    font-size: 1.125rem;
+    color: var(--middle-dark);
+  }
 }

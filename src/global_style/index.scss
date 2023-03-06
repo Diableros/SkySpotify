@@ -1,32 +1,32 @@
 @import 'reset';
 @font-face {
-	font-family: 'Stratos';
-	src: url(../../public/Stratos-Regular.woff2) format(woff2);
+  font-family: 'Stratos';
+  src: url(../../assets/Stratos-Regular.woff2) format(woff2);
 }
 
 :root {
-	--main-dark: #181818;
-	--middle-dark: #2e2e2e;
-	--dark-gray: #4e4e4e;
-	--menu-dark: #1c1c1c;
-	--dark: #222;
-	--more-dark: #1e1e1e;
+  --main-dark: #181818;
+  --middle-dark: #2e2e2e;
+  --dark-gray: #4e4e4e;
+  --menu-dark: #1c1c1c;
+  --dark: #222;
+  --more-dark: #1e1e1e;
 }
 
 html {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 body {
-	background-color: var(--main-dark);
-	font-family: 'Stratos';
-	color: #fff;
+  background-color: var(--main-dark);
+  font-family: 'Stratos';
+  color: #fff;
 }
 
 #root {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
