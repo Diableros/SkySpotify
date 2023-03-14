@@ -1,0 +1,28 @@
+.user {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	padding: 1rem;
+	gap: 1rem;
+
+	&Name{
+		text-align: left;
+		overflow: hidden;
+		line-height: 2rem;
+	}
+
+ &AvaBox {
+	width: 60px;
+	height: 60px;
+border: 2px solid var(--dark-gray);
+	border-radius: 50%;
+	overflow: hidden;
+ }
+
+	&Svg {
+		width: 100%;
+		height: 120%;
+		fill: var(--dark-gray);
+	}
+}

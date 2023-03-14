@@ -10,7 +10,7 @@ import { useAppDispatch } from '@/hooks/reduxHooks';
 import Button, { ButtonStyle } from '../shared/button/Button';
 
 const LoginScreen = () => {
-  const [isRegister, setIsRegister] = React.useState<Boolean>(false);
+  const [isRegister, setIsRegister] = React.useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ const LoginScreen = () => {
     <>
       <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <a href="/">
-          <img src={logo} />
+          <img src={logo} alt="Skyspotify logo" />
         </a>
         <div className={s['form__input-box']}>
           <input

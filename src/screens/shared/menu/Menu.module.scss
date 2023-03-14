@@ -21,6 +21,19 @@
 	cursor: pointer;
 	z-index: 5;
 
+
+	&:hover::before,
+	&:hover::after,
+	&:hover span {
+		background-color: var(--hover-color);
+	}
+
+	&:active::after,
+	&:active::before,
+	&:active span {
+		background-color: var(--active-color);
+	}
+
 	&::before,
 	&::after {
 		left: 0;

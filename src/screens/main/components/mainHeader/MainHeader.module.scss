@@ -20,6 +20,7 @@
 
 	&text {
 		margin-right: 5px;
+		flex: none;
 	}
 
 	&button {
@@ -33,13 +34,13 @@
 		padding: 7px 22px 10px;
 
 		&:hover {
-			border-color: #d9b6ff;
-			color: #d9b6ff;
+			border-color: var(--hover-color);
+			color: var(--hover-color);
 		}
 
 		&:active {
-			border-color: #ad61ff;
-			color: #ad61ff;
+			border-color: var(--active-color);
+			color: var(--active-color);
 		}
 	}
 }
