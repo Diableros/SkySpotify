@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer, { UserStateType } from './userSlice';
-import interfaceReducer, { InterfaceStateType } from './interfaceSlice';
+import userReducer from './userSlice';
+import interfaceReducer from './interfaceSlice';
 
 const store = configureStore({
-	reducer: {
-		user: userReducer,
-		interface: interfaceReducer,
-	},
+  reducer: {
+    user: userReducer,
+    interface: interfaceReducer,
+  },
 });
 
 export default store;
