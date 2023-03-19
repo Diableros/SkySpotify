@@ -1,24 +1,24 @@
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { SubmitHandler } from 'react-hook-form/dist/types';
-import logo from '@/img/logo.svg';
-import s from './LoginScreen.module.scss';
-import Snack from '@/screens/shared/snack/Snack';
-import { userLogin } from '@/store/userSlice';
-import { useAppDispatch } from '@/hooks/reduxHooks';
-import Button, { ButtonStyle } from '../shared/button/Button';
+import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { SubmitHandler } from 'react-hook-form/dist/types'
+import logo from '@/img/logo.svg'
+import s from './LoginScreen.module.scss'
+import Snack from '@/screens/components/Snack/Snack'
+import { userLogin } from '@/store/userSlice'
+import { useAppDispatch } from '@/hooks/reduxHooks'
+import Button, { ButtonStyle } from '../components/Button/Button'
 
 const LoginScreen = () => {
-  const [isRegister, setIsRegister] = React.useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [isRegister, setIsRegister] = React.useState<boolean>(false)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFieldsType>();
+  } = useForm<LoginFieldsType>()
 
   const onSubmit: SubmitHandler<LoginFieldsType> = (data) => {
     // just for probe
@@ -30,10 +30,10 @@ const LoginScreen = () => {
         token: 'blablabla',
         userName: data.email,
       })
-    );
+    )
 
-    navigate('/');
-  };
+    navigate('/')
+  }
 
   return (
     <>
@@ -96,7 +96,7 @@ const LoginScreen = () => {
         <Snack type="error" data={errors} />
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default LoginScreen;
+export default LoginScreen

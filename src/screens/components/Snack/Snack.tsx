@@ -1,11 +1,11 @@
-import { FieldErrors } from 'react-hook-form/dist/types';
-import sb from './SnackBox.module.scss';
-import s from './Snack.module.scss';
+import { FieldErrors } from 'react-hook-form/dist/types'
+import sb from './SnackBox.module.scss'
+import s from './Snack.module.scss'
 
 type SnackPropsType = {
-  type: keyof typeof s;
-  data: FieldErrors<LoginFieldsType>;
-};
+  type: keyof typeof s
+  data: FieldErrors<LoginFieldsType>
+}
 
 const Snack = ({ type, data }: SnackPropsType) => {
   return (
@@ -19,7 +19,7 @@ const Snack = ({ type, data }: SnackPropsType) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Snack;
+export default Snack

@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import img1 from '@/img/collection_playlist_of_the_day.png';
-import img2 from '@/img/collection_100_dance_hits.png';
-import img3 from '@/img/collection_indi_charge.png';
-import s from './CollectionsNav.module.scss';
+import { Link } from 'react-router-dom'
+import img1 from '@/img/collection_playlist_of_the_day.png'
+import img2 from '@/img/collection_100_dance_hits.png'
+import img3 from '@/img/collection_indi_charge.png'
+import s from './CollectionsNav.module.scss'
 
 const CollectionsNav = () => {
   return (
@@ -17,7 +17,7 @@ const CollectionsNav = () => {
         <img src={img3} alt="Indi charge" />
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default CollectionsNav;
+export default CollectionsNav

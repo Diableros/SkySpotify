@@ -1,7 +1,7 @@
-import * as React from 'react';
-import s from './SongBox.module.scss';
-import cover from '@/img/blank_cover.png';
-import sprite from '@/img/sprite.svg';
+import * as React from 'react'
+import s from './SongBox.module.scss'
+import cover from '@/img/blank_cover.png'
+import sprite from '@/img/sprite.svg'
 
 const SongBox = () => {
   return (
@@ -24,7 +24,7 @@ const SongBox = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SongBox;
+export default SongBox

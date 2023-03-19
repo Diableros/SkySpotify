@@ -1,12 +1,12 @@
 const getPadTime = (time: number): string => {
-  return time.toString().padStart(2, '0');
-};
+  return time.toString().padStart(2, '0')
+}
 
 const formatTrackTime = (seconds: number): string => {
-  const min = getPadTime(Math.floor(seconds / 60));
-  const sec = getPadTime(seconds % 60);
+  const min = getPadTime(Math.floor(seconds / 60))
+  const sec = getPadTime(seconds % 60)
 
-  return `${min}:${sec}`;
-};
+  return `${min}:${sec}`
+}
 
-export default formatTrackTime;
+export default formatTrackTime

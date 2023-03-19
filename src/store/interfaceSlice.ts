@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 const interfaceInitialState = {
   showMenu: false,
-};
+}
 
-export type InterfaceStateType = typeof interfaceInitialState;
+export type InterfaceStateType = typeof interfaceInitialState
 
 const interfaceSlice = createSlice({
   name: 'interface',
@@ -12,11 +12,11 @@ const interfaceSlice = createSlice({
   reducers: {
     toggleShowMenu(state) {
       // eslint-disable-next-line
-      state.showMenu = !state.showMenu;
+      state.showMenu = !state.showMenu
     },
   },
-});
+})
 
-export const { toggleShowMenu } = interfaceSlice.actions;
+export const { toggleShowMenu } = interfaceSlice.actions
 
-export default interfaceSlice.reducer;
+export default interfaceSlice.reducer

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button, { ButtonStyle } from '@/screens/shared/button/Button';
-import s from './NotFoundScreen.module.scss';
-import smileCrying from '@/img/smileCrying.png';
+import * as React from 'react'
+import { useNavigate } from 'react-router-dom'
+import Button, { ButtonStyle } from '@/screens/components/Button/Button'
+import s from './NotFoundScreen.module.scss'
+import smileCrying from '@/img/smileCrying.png'
 
 const NotFoundScreen = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <main className={s.notFound}>
@@ -22,7 +22,7 @@ const NotFoundScreen = () => {
         action={() => navigate('/')}
       />
     </main>
-  );
-};
+  )
+}
 
-export default NotFoundScreen;
+export default NotFoundScreen

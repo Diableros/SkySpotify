@@ -1,5 +1,5 @@
-import HeaderButton, { ButtonType } from './HeaderButton/HeaderButton';
-import s from './MainHeader.module.scss';
+import HeaderButton, { ButtonType } from './HeaderButton/HeaderButton'
+import s from './MainHeader.module.scss'
 // import  from './HeaderButton/HeaderButton';
 
 const MainHeader = () => {
@@ -13,7 +13,7 @@ const MainHeader = () => {
         <HeaderButton type={ButtonType.Genre} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MainHeader;
+export default MainHeader

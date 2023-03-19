@@ -1,5 +1,5 @@
-import * as React from 'react';
-import s from './HeaderButton.module.scss';
+import * as React from 'react'
+import s from './HeaderButton.module.scss'
 
 export enum ButtonType {
   Author = 'исполнителю',
@@ -12,7 +12,7 @@ const HeaderButton = ({ type }: { type: ButtonType }) => {
     <button className={s.searchBtn} type="button">
       {type}
     </button>
-  );
-};
+  )
+}
 
-export default HeaderButton;
+export default HeaderButton

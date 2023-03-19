@@ -1,6 +1,6 @@
-import * as React from 'react';
-import s from './ControlBox.module.scss';
-import sprite from '@/img/sprite.svg';
+import * as React from 'react'
+import s from './ControlBox.module.scss'
+import sprite from '@/img/sprite.svg'
 
 const ControlBox = () => {
   return (
@@ -31,7 +31,7 @@ const ControlBox = () => {
         </svg>
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default ControlBox;
+export default ControlBox

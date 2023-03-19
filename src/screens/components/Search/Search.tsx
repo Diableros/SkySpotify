@@ -1,5 +1,5 @@
-import s from './Search.module.scss';
-import sprite from '@/img/sprite.svg';
+import s from './Search.module.scss'
+import sprite from '@/img/sprite.svg'
 
 const Search = () => {
   return (
@@ -14,7 +14,7 @@ const Search = () => {
         placeholder="Поиск"
       />
     </div>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

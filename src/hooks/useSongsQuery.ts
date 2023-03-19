@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import req from '@/request/KyRequest';
+import { useQuery } from '@tanstack/react-query'
+import req from '@/request/KyRequest'
 
 const useSongsQuery = () => {
   return useQuery({
@@ -10,7 +10,7 @@ const useSongsQuery = () => {
         // console.log(err.message);
       }
     },
-  });
-};
+  })
+}
 
-export default useSongsQuery;
+export default useSongsQuery

@@ -1,5 +1,5 @@
-import clsx from 'clsx';
-import s from './Button.module.scss';
+import clsx from 'clsx'
+import s from './Button.module.scss'
 
 export enum ButtonStyle {
   Purple = 'purple',
@@ -7,10 +7,10 @@ export enum ButtonStyle {
 }
 
 type ButtonStyleType = {
-  style: ButtonStyle;
-  title: string;
-  action?: React.MouseEventHandler<HTMLButtonElement>;
-};
+  style: ButtonStyle
+  title: string
+  action?: React.MouseEventHandler<HTMLButtonElement>
+}
 
 const Button = ({ style, title, action }: ButtonStyleType) => {
   switch (style) {
@@ -19,7 +19,7 @@ const Button = ({ style, title, action }: ButtonStyleType) => {
         <button type="submit" className={clsx(s.btn, s['btn--purple'])}>
           {title}
         </button>
-      );
+      )
 
     case ButtonStyle.White:
       return (
@@ -30,11 +30,11 @@ const Button = ({ style, title, action }: ButtonStyleType) => {
         >
           {title}
         </button>
-      );
+      )
 
     default:
-      return <div>Smth wrong...</div>;
+      return <div>Smth wrong...</div>
   }
-};
+}
 
-export default Button;
+export default Button

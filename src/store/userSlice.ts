@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const userInitialState = {
   login: false,
@@ -6,9 +6,9 @@ const userInitialState = {
   token: '',
   userName: '',
   email: '',
-};
+}
 
-export type UserStateType = typeof userInitialState;
+export type UserStateType = typeof userInitialState
 
 const userSlice = createSlice({
   name: 'user',
@@ -21,14 +21,14 @@ const userSlice = createSlice({
         token: action.payload.token,
         userName: action.payload.userName,
         email: action.payload.email,
-      };
+      }
     },
     userLogout() {
-      return userInitialState;
+      return userInitialState
     },
   },
-});
+})
 
-export const { userLogin, userLogout } = userSlice.actions;
+export const { userLogin, userLogout } = userSlice.actions
 
-export default userSlice.reducer;
+export default userSlice.reducer
