@@ -1,20 +1,20 @@
 .searchBtn {
-	flex-shrink: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 19px;
-	border: 1px solid #fff;
-	text-align: center;
-	padding: 7px 22px 10px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 19px;
+  border: 1px solid #fff;
+  text-align: center;
+  padding: 7px 22px 10px;
 
-	&:hover {
-		border-color: var(--hover-color);
-		color: var(--hover-color);
-	}
+  &:hover {
+    border-color: var(--hover-color);
+    color: var(--hover-color);
+  }
 
-	&:active {
-		border-color: var(--active-color);
-		color: var(--active-color);
-	}
+  &:active {
+    border-color: var(--active-color);
+    color: var(--active-color);
+  }
 }

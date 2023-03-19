@@ -51,7 +51,7 @@ const LoginScreen = () => {
               minLength: 4,
               maxLength: 20,
               pattern:
-                /^[A-Za-z0-9'.']{2,40}@[A-Za-z0-9]{2,40}.[A-Za-z0-9]{2,7}$/,
+                /^[A-Za-z0-9.]{2,40}@[A-Za-z0-9]{2,40}.[A-Za-z0-9]{2,7}$/,
             })}
           />
           <input

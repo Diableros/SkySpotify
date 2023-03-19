@@ -1,41 +1,41 @@
 .control {
-	&Panel {
-		display: flex;
-		min-width: 260px;
-		height: 100%;
-		justify-content: space-evenly;
-		align-items: center;
-	}
+  &Panel {
+    display: flex;
+    min-width: 260px;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 
-	&Button {
-		width: 30px;
-		height: 30px;
-		border: none;
-		background-color: transparent;
-		cursor: pointer;
-		border: 50%;
-		padding: 5px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		transition: filter 0.1s;
+  &Button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border: 50%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: filter 0.1s;
 
-		&:hover {
-			filter: drop-shadow(0 0 5px #fff);
-		}
+    &:hover {
+      filter: drop-shadow(0 0 5px #fff);
+    }
 
-		&:active {
-			filter: drop-shadow(0 0 10px #fff);
-		}
-	}
+    &:active {
+      filter: drop-shadow(0 0 10px #fff);
+    }
+  }
 
-	&Svg {
-		width: 15px;
-		height: 15px;
+  &Svg {
+    width: 15px;
+    height: 15px;
 
-		&Big {
-			width: 20px;
-			height: 20px;
-		}
-	}
+    &Big {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }

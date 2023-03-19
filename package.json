@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lintFix": "eslint ./src/**/*.ts --fix && eslint ./src/**/*.tsx --fix",
     "format": "prettier --write ./src/",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "precommit": "pnpm run lintFix && pnpm run format"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",

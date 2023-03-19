@@ -21,6 +21,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'jsx-a11y/click-events-have-key-events': 0,
+    'react/require-default-props': 0,
     'react/react-in-jsx-scope': 0,
     'react/jsx-props-no-spreading': 0,
     'react/function-component-definition': [

@@ -7,7 +7,7 @@ const useSongsQuery = () => {
     queryKey: ['songs', 'all'],
     onError: (err) => {
       if (err instanceof Error) {
-        console.log(err.message);
+        // console.log(err.message);
       }
     },
   });

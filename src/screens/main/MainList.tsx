@@ -3,7 +3,7 @@ import useSongsQuery from '@/hooks/useSongsQuery';
 import s from './MainList.module.scss';
 import sprite from '@/img/sprite.svg';
 import cover from '@/img/blank_cover.png';
-import { formatTrackTime } from '@/helpers/formatTrackTime';
+import formatTrackTime from '@/helpers/formatTrackTime';
 
 const MainScreen = () => {
   const { data, isLoading, isError } = useSongsQuery();

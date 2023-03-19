@@ -1,26 +1,25 @@
 .header {
-	height: 258px;
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	padding: 50px 1rem 40px 1rem;
-	gap: 45px;
+  height: 258px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 50px 1rem 40px 1rem;
+  gap: 45px;
 }
 
 .title {
-	font-size: 4rem;
+  font-size: 4rem;
 }
 
 .sortBox {
-	height: 39px;
-	display: flex;
-	gap: 10px;
-	align-items: center;
+  height: 39px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 
-	&text {
-		margin-right: 5px;
-		flex: none;
-	}
-
+  &text {
+    margin-right: 5px;
+    flex: none;
+  }
 }

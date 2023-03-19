@@ -1,19 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const interfaceInitialState = {
-	showMenu: false,
+  showMenu: false,
 };
 
 export type InterfaceStateType = typeof interfaceInitialState;
 
 const interfaceSlice = createSlice({
-	name: 'interface',
-	initialState: interfaceInitialState,
-	reducers: {
-		toggleShowMenu(state) {
-			state.showMenu = !state.showMenu;
-		},
-	},
+  name: 'interface',
+  initialState: interfaceInitialState,
+  reducers: {
+    toggleShowMenu(state) {
+      // eslint-disable-next-line
+      state.showMenu = !state.showMenu;
+    },
+  },
 });
 
 export const { toggleShowMenu } = interfaceSlice.actions;
