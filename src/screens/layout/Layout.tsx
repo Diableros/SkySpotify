@@ -1,11 +1,10 @@
-import * as React from 'react';
-import Footer from '@/screens/shared/playerBar/PlayerBar';
-import Search from '@/screens/shared/search/Search';
-import Menu from '@/screens/shared/menu/Menu';
-import s from './Layout.module.scss';
-import CollectionsNav from '@/screens/shared/collectionsNav/CollectionsNav';
-import MainList from '@/screens/main/components/mainHeader/MainHeader';
-import User from '../shared/user/User';
+import * as React from 'react'
+import PlayerBar from '@/screens/components/PlayerBar/PlayerBar'
+import Search from '@/screens/components/Search/Search'
+import Menu from '@/screens/components/Menu/Menu'
+import s from './Layout.module.scss'
+import CollectionsNav from '@/screens/components/CollectionsNav/CollectionsNav'
+import User from '../components/User/User'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,7 +13,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <Menu />
         <section className={s.layoutTopMiddle}>
           <Search />
-          <MainList />
           {children}
         </section>
         <section className={s.layoutTopRight}>
@@ -22,9 +20,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <CollectionsNav />
         </section>
       </div>
-      <Footer />
+      <PlayerBar />
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

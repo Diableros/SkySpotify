@@ -1,0 +1,57 @@
+.btn {
+  width: 278px;
+  padding: 15px 0;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 1.125rem;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(98%);
+  }
+
+  &:disabled {
+    filter: blur(1px);
+    color: #000;
+    background-color: #f4f5f6;
+    border: none;
+    cursor: default;
+
+    &:hover {
+      background-color: #f4f5f6;
+    }
+
+    &:active {
+      background-color: #f4f5f6;
+      transform: scale(1);
+    }
+  }
+
+  &--purple {
+    background-color: #580ea2;
+    color: #fff;
+
+    &:hover {
+      background-color: #3f007d;
+    }
+
+    &:active {
+      background-color: #271a58;
+    }
+  }
+
+  &--white {
+    color: #000;
+    border: 1px solid #d0cece;
+    background-color: #fff;
+
+    &:hover {
+      background-color: #f4f5f6;
+    }
+
+    &:active {
+      background-color: #d9d9d9;
+    }
+  }
+}

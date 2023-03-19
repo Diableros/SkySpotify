@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from 'react'
 
 const CollectionsScreen = () => {
-	return <div>CollectionsScreen</div>;
-};
+  return <div>CollectionsScreen</div>
+}
 
-export default CollectionsScreen;
+export default CollectionsScreen

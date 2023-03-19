@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import CollectionsScreen from '@/screens/collections/CollectionsScreen';
-import Layout from '@/screens/layout/Layout';
-import LoginScreen from '@/screens/login/LoginScreen';
-import MainScreen from '@/screens/main/MainList';
-import NotFoundScreen from '@/screens/not-found/NotFoundScreen';
-import { useAppSelector } from '@/hooks/reduxHooks';
+import * as React from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import CollectionsScreen from '@/screens/Collections/CollectionsScreen'
+import Layout from '@/screens/Layout/Layout'
+import LoginScreen from '@/screens/Login/LoginScreen'
+import MainScreen from '@/screens/Main/TrackList'
+import NotFoundScreen from '@/screens/NotFound/NotFoundScreen'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const Router = ({ children }: { children: React.ReactNode }) => {
-  const userLogin = useAppSelector((state) => state.user.login);
+  const userLogin = useAppSelector((state) => state.user.login)
 
   // костыль на костыле, буду переделывать
   const router = createBrowserRouter([
@@ -42,9 +42,9 @@ const Router = ({ children }: { children: React.ReactNode }) => {
       ),
     },
     { path: '/login', element: <LoginScreen /> },
-  ]);
+  ])
 
-  return <RouterProvider router={router} />;
-};
+  return <RouterProvider router={router} />
+}
 
-export default Router;
+export default Router

@@ -1,4 +1,6 @@
-import s from './MainHeader.module.scss';
+import HeaderButton, { ButtonType } from './HeaderButton/HeaderButton'
+import s from './MainHeader.module.scss'
+// import  from './HeaderButton/HeaderButton';
 
 const MainHeader = () => {
   return (
@@ -6,12 +8,12 @@ const MainHeader = () => {
       <h1 className={s.title}>Треки</h1>
       <div className={s.sortBox}>
         <p className={s.sortBoxtext}>Искать по:</p>
-        <button className={s.sortBoxbutton}>исполнителю</button>
-        <button className={s.sortBoxbutton}>году выпуска</button>
-        <button className={s.sortBoxbutton}>жанру</button>
+        <HeaderButton type={ButtonType.Author} />
+        <HeaderButton type={ButtonType.Year} />
+        <HeaderButton type={ButtonType.Genre} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MainHeader;
+export default MainHeader
