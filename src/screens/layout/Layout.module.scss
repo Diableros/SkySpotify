@@ -5,13 +5,19 @@
 
   &Middle {
     width: 100%;
-    min-width: 520px;
+    min-width: 900px;
     height: 100%;
     display: flex;
     flex-direction: column;
+    padding-left: 244px;
+    padding-bottom: 73px;
   }
 
   &Right {
-    height: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 1rem 140px 1rem;
   }
 }
