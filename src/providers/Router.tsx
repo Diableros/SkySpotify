@@ -1,34 +1,50 @@
-import * as React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import CollectionsScreen from 'screens/collections/CollectionsScreen';
-import LoginScreen from 'screens/login/LoginScreen';
-import MainScreen from 'screens/main/MainScreen';
-import NotFoundScreen from 'screens/not-found/NotFoundScreen';
+import * as React from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import CollectionsScreen from '@/screens/Collections/CollectionsScreen'
+import Layout from '@/screens/Layout/Layout'
+import LoginScreen from '@/screens/Login/LoginScreen'
+import MainScreen from '@/screens/Main/TrackList'
+import NotFoundScreen from '@/screens/NotFound/NotFoundScreen'
+import { useAppSelector } from '@/hooks/reduxHooks'
 
 const Router = ({ children }: { children: React.ReactNode }) => {
-	const router = createBrowserRouter([
-		{
-			path: '/',
-			element: children,
-			children: [
-				{
-					path: '/',
-					element: <LoginScreen />,
-				},
-				{
-					path: 'main',
-					element: <MainScreen />,
-				},
-				{
-					path: 'collections',
-					element: <CollectionsScreen />,
-				},
-			],
-			errorElement: <NotFoundScreen />,
-		},
-	]);
+  const userLogin = useAppSelector((state) => state.user.login)
 
-	return <RouterProvider router={router} />;
-};
+  // костыль на костыле, буду переделывать
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: children,
+      children: [
+        {
+          path: '/',
+          element: (
+            <Layout>
+              <MainScreen />
+            </Layout>
+          ),
+        },
+        {
+          path: 'collections',
+          element: (
+            <Layout>
+              <CollectionsScreen />
+            </Layout>
+          ),
+        },
+      ],
+      errorElement: userLogin ? (
+        <Layout>
+          <NotFoundScreen />
+        </Layout>
+      ) : (
+        <NotFoundScreen />
+      ),
+    },
+    { path: '/login', element: <LoginScreen /> },
+  ])
 
-export default Router;
+  return <RouterProvider router={router} />
+}
+
+export default Router

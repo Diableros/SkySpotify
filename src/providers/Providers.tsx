@@ -1,8 +1,16 @@
-import * as React from 'react';
-import Router from './Router';
+import * as React from 'react'
+import RouterProvider from './Router'
+import QueryProvider from './Query'
+import ReduxProvider from './Redux'
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-	return <Router>{children}</Router>;
-};
+  return (
+    <ReduxProvider>
+      <RouterProvider>
+        <QueryProvider>{children}</QueryProvider>
+      </RouterProvider>
+    </ReduxProvider>
+  )
+}
 
-export default Providers;
+export default Providers

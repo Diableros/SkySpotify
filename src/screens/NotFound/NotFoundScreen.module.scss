@@ -1,0 +1,28 @@
+.notFound {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--more-dark);
+  gap: 2rem;
+
+  &Title {
+    font-size: 10.5rem;
+    line-height: 8rem;
+  }
+
+  &SubTitle {
+    font-size: 40px;
+    height: 2rem;
+  }
+
+  &Text {
+    text-align: center;
+    line-height: 1.5rem;
+    width: 17.75rem;
+    font-size: 1.125rem;
+    color: var(--middle-dark);
+  }
+}
