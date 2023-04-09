@@ -1,15 +1,17 @@
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import { toggleShowMenu } from '@/store/interfaceSlice'
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks'
 import LogoutButton from '../LogoutButton/LogoutButton'
 import s from './Menu.module.scss'
 import logo from '@/img/logo_white.svg'
 import sprite from '@/img/sprite.svg'
 
 const Menu = () => {
-  const dispatch = useAppDispatch()
-  const showMenu = useAppSelector((state) => state.interface.showMenu)
+  const [isMenuShow, setIsMenuShow] = React.useState<boolean>(false)
+
+  const toggleMenuShow = () => {
+    setIsMenuShow((prevShowMenuState) => !prevShowMenuState)
+  }
 
   return (
     <nav className={s.menuBox}>
@@ -20,11 +22,11 @@ const Menu = () => {
         tabIndex={0}
         role="button"
         className={s.burger}
-        onClick={() => dispatch(toggleShowMenu())}
+        onClick={toggleMenuShow}
       >
         <span />
       </div>
-      <div className={clsx(s.slider, showMenu && s.sliderShow)}>
+      <div className={clsx(s.slider, isMenuShow && s.sliderShow)}>
         <Link to="/">Главная</Link>
         <Link to="/favorites">Мои треки</Link>
         <LogoutButton />

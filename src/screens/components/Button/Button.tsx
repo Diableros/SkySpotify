@@ -9,7 +9,7 @@ export enum ButtonStyle {
 type ButtonStyleType = {
   style: ButtonStyle
   title: string
-  action?: React.MouseEventHandler<HTMLButtonElement>
+  action: () => void
 }
 
 const Button = ({ style, title, action }: ButtonStyleType) => {
