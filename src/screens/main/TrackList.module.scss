@@ -3,7 +3,7 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  padding: 0 1rem;
+  padding: 0 0.75rem 0 0.5rem;
   flex-shrink: 1;
 
   &Header {
@@ -55,10 +55,10 @@
     &Col4 {
       display: flex;
       gap: 0.75rem;
-      justify-content: flex-end;
+      justify-content: center;
       flex: 0.5;
       color: var(--dark-gray);
-      padding-right: 0.5rem;
+      padding-right: 0.75rem;
     }
 
     &:last-child {

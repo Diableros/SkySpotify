@@ -5,6 +5,7 @@ import sprite from '@/img/sprite.svg'
 import cover from '@/img/blank_cover.png'
 import formatTrackTime from '@/helpers/formatTrackTime'
 import MainHeader from './components/MainHeader/MainHeader'
+import Skeleton from './components/Skeleton'
 
 const TrackList = () => {
   const { data, isLoading, isError } = useSongsQuery()
@@ -46,7 +47,7 @@ const TrackList = () => {
             </li>
           ))
         ) : (
-          <p>{!isError ? 'Loading...' : 'Query error...'}</p>
+          <Skeleton qty={7} />
         )}
       </ul>
     </>

@@ -4,14 +4,6 @@ type LoginFieldsType = {
   passwordConfirm?: string
 }
 
-type UserDataType = {
-  id: id
-  username: string
-  first_name: string
-  last_name: string
-  email: string
-}
-
 type SongType = {
   id: number
   name: string

@@ -1,17 +1,34 @@
 import * as React from 'react'
-import s from './HeaderButton.module.scss'
+import { ButtonType } from './constants'
+import * as S from './HeaderButton.style'
 
-export enum ButtonType {
-  Author = 'исполнителю',
-  Year = 'году выпуска',
-  Genre = 'жанру',
+type PropsType = {
+  variant: ButtonType
+  isActive: boolean
+  onClick: () => void
 }
 
-const HeaderButton = ({ type }: { type: ButtonType }) => {
+const mockData = [
+  'Michael Jackson',
+  'Frank Sinatra',
+  'Calvin Harris',
+  'Zhu',
+  'Arctic Monkeys',
+  'Michael Jackson',
+  'Frank Sinatra',
+  'Calvin Harris',
+  'Zhu',
+  'Arctic Monkeys',
+]
+
+const HeaderButton = ({ variant, isActive, onClick }: PropsType) => {
   return (
-    <button className={s.searchBtn} type="button">
-      {type}
-    </button>
+    <S.HeaderButtonBox>
+      <S.HeaderButton type="button" onClick={onClick} isActive={isActive}>
+        {variant}
+      </S.HeaderButton>
+      {isActive ? <S.HeaderButtonSelect variant={variant} /> : null}
+    </S.HeaderButtonBox>
   )
 }
 
