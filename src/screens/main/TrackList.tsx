@@ -12,7 +12,7 @@ const TrackList = () => {
   return (
     <>
       <MainHeader />
-      <ul className={s.trackList}>
+      <ul className={clsx(s.trackList, 'styled-scroll-bar')}>
         <li className={clsx(s.trackListRow, s.trackListHeader)}>
           <div className={s.trackListRowCol1}>Трек</div>
           <div className={s.trackListRowCol2}>Исполнитель</div>
