@@ -13,7 +13,7 @@
   --more-dark: #1e1e1e;
   --hover-color: #d9b6ff;
   --active-color: #ad61ff;
-  --scrollbar-bg-color: #4b4949
+  --scrollbar-bg-color: #4b4949;
 }
 
 html {
@@ -33,11 +33,9 @@ body {
   align-items: center;
   max-height: 100vh;
   min-height: 900px;
-
 }
 
 .styled-scroll-bar {
-  
   &::-webkit-scrollbar {
     width: 4px;
     background: var(--scrollbar-bg-color);
@@ -47,7 +45,6 @@ body {
   &::-webkit-scrollbar-thumb {
     width: 4px;
     border-radius: 2px;
-
     background: #ffffff;
   }
 }

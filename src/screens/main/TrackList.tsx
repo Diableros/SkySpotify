@@ -9,20 +9,24 @@ import MainHeader from './components/MainHeader/MainHeader'
 const TrackList = () => {
   const { data, isLoading, isError } = useSongsQuery()
 
+  const tableHeaderRow = (
+    <div className={s.trackListHeader}>
+      <div className={s.trackListRowCol1}>Трек</div>
+      <div className={s.trackListRowCol2}>Исполнитель</div>
+      <div className={s.trackListRowCol3}>Альбом</div>
+      <div className={s.trackListRowCol4}>
+        <svg className={s.trackListHeaderSvg}>
+          <use xlinkHref={`${sprite}#icon-watch`} />
+        </svg>
+      </div>
+    </div>
+  )
+
   return (
     <>
       <MainHeader />
+      {tableHeaderRow}
       <ul className={clsx(s.trackList, 'styled-scroll-bar')}>
-        <li className={clsx(s.trackListRow, s.trackListHeader)}>
-          <div className={s.trackListRowCol1}>Трек</div>
-          <div className={s.trackListRowCol2}>Исполнитель</div>
-          <div className={s.trackListRowCol3}>Альбом</div>
-          <div className={s.trackListRowCol4}>
-            <svg className={s.trackListHeaderSvg}>
-              <use xlinkHref={`${sprite}#icon-watch`} />
-            </svg>
-          </div>
-        </li>
         {data && !isLoading ? (
           data.map((elem) => (
             <li key={elem.id} className={s.trackListRow}>
