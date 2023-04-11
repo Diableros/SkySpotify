@@ -1,6 +1,7 @@
 import { FieldErrors } from 'react-hook-form/dist/types'
 import sb from './SnackBox.module.scss'
 import s from './Snack.module.scss'
+import { LoginFieldsType } from '@/screens/Login/LoginScreen'
 
 type SnackPropsType = {
   type: keyof typeof s

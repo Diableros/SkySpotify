@@ -1,5 +1,6 @@
 import ky from 'ky'
 import sleep from '@/helpers/sleep'
+import { SongType } from '@/types'
 
 const BASE_API_URL = 'https://painassasin.online/'
 

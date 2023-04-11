@@ -13,21 +13,19 @@ const MainHeader = () => {
       <h1 className={s.title}>Треки</h1>
       <div className={s.sortBox}>
         <p className={s.sortBoxtext}>Искать по:</p>
-        <HeaderButton
-          variant={ButtonType.Author}
-          isActive={activeButton === ButtonType.Author}
-          onClick={() => setActiveButton(ButtonType.Author)}
-        />
-        <HeaderButton
-          variant={ButtonType.Year}
-          isActive={activeButton === ButtonType.Year}
-          onClick={() => setActiveButton(ButtonType.Year)}
-        />
-        <HeaderButton
-          variant={ButtonType.Genre}
-          isActive={activeButton === ButtonType.Genre}
-          onClick={() => setActiveButton(ButtonType.Genre)}
-        />
+        {[...Object.keys(ButtonType)].map((button) => {
+          // не придумал как сделать чтоб ТС не ругался на 23й :(
+          const currentButton = button as ButtonType
+
+          return (
+            <HeaderButton
+              key={currentButton}
+              variant={ButtonType[currentButton]}
+              isActive={activeButton === currentButton}
+              onClick={() => setActiveButton(currentButton)}
+            />
+          )
+        })}
       </div>
     </div>
   )

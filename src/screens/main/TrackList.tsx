@@ -47,7 +47,7 @@ const TrackList = () => {
             </li>
           ))
         ) : (
-          <Skeleton qty={7} />
+          <Skeleton quantity={7} />
         )}
       </ul>
     </>

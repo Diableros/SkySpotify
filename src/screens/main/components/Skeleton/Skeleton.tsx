@@ -1,11 +1,11 @@
 import * as S from './Skeleton.style'
 
 type PropsType = {
-  qty: number
+  quantity: number
 }
 
-const Skeleton = ({ qty }: PropsType) => {
-  const skeletonArr = new Array(qty).fill(1)
+const Skeleton = ({ quantity }: PropsType) => {
+  const skeletonArr = new Array(quantity).fill(1)
 
   return (
     <>
