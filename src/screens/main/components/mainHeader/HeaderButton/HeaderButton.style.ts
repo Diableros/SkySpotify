@@ -14,6 +14,16 @@ const activeStyle = `
   color: var(--active-color);
 `
 
+const activeHoverStyle = `
+  border-color: var(--active-color);
+  color: var(--active-color);
+`
+
+const hoverStyle = `
+  border-color: var(--hover-color);
+  color: var(--hover-color);
+`
+
 export const HeaderButton = styled.button<HeaderButtonType>`
   flex-shrink: 0;
   display: flex;
@@ -27,8 +37,7 @@ export const HeaderButton = styled.button<HeaderButtonType>`
   ${({ isActive }) => (isActive ? activeStyle : '')}
 
   &:hover {
-    border-color: var(--hover-color);
-    color: var(--hover-color);
+    ${({ isActive }) => (isActive ? activeHoverStyle : hoverStyle)}
   }
 
   &:active {

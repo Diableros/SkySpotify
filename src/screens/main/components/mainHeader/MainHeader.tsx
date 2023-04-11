@@ -23,6 +23,7 @@ const MainHeader = () => {
               variant={ButtonType[currentButton]}
               isActive={activeButton === currentButton}
               onClick={() => setActiveButton(currentButton)}
+              resetButtons={() => setActiveButton(null)}
             />
           )
         })}

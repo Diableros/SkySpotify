@@ -6,6 +6,7 @@ type PropsType = {
   variant: ButtonType
   isActive: boolean
   onClick: () => void
+  resetButtons: () => void
 }
 
 const mockData = [
@@ -21,13 +22,23 @@ const mockData = [
   'Arctic Monkeys',
 ]
 
-const HeaderButton = ({ variant, isActive, onClick }: PropsType) => {
+const HeaderButton = ({
+  variant,
+  isActive,
+  onClick,
+  resetButtons,
+}: PropsType) => {
   return (
     <S.HeaderButtonBox>
       <S.HeaderButton type="button" onClick={onClick} isActive={isActive}>
         {variant}
       </S.HeaderButton>
-      {isActive ? <S.HeaderButtonSelect variant={variant} /> : null}
+      {isActive ? (
+        <S.HeaderButtonSelect
+          variant={variant}
+          onMouseLeave={() => resetButtons()}
+        />
+      ) : null}
     </S.HeaderButtonBox>
   )
 }
