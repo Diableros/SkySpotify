@@ -8,13 +8,13 @@ const userInitialState = {
   email: '',
 }
 
-export type UserStateType = typeof userInitialState
+export type UserDataType = typeof userInitialState
 
 const userSlice = createSlice({
   name: 'user',
   initialState: userInitialState,
   reducers: {
-    userLogin(_, action: PayloadAction<UserStateType>) {
+    userLogin(_, action: PayloadAction<UserDataType>) {
       return {
         ...action.payload,
         login: true,

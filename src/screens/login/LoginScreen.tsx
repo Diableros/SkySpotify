@@ -9,6 +9,12 @@ import { userLogin } from '@/store/userSlice'
 import { useAppDispatch } from '@/hooks/reduxHooks'
 import Button, { ButtonStyle } from '../components/Button/Button'
 
+export type LoginFieldsType = {
+  email: string
+  password: string
+  passwordConfirm?: string
+}
+
 const LoginScreen = () => {
   const [isRegister, setIsRegister] = React.useState<boolean>(false)
   const dispatch = useAppDispatch()
