@@ -2,11 +2,16 @@ import * as React from 'react'
 import HeaderButton from './HeaderButton/HeaderButton'
 import { ButtonType } from './HeaderButton/constants'
 import s from './MainHeader.module.scss'
+import { useAppSelector } from '@/hooks/reduxHooks'
+import { RootStateType } from '@/store'
+import getSearchOptionsList from '@/helpers/getSearchOptionsList'
 
 const MainHeader = () => {
   const [activeButton, setActiveButton] = React.useState<ButtonType | null>(
     null
   )
+
+  const trackList = useAppSelector((state: RootStateType) => state.app)
 
   return (
     <div className={s.header}>
@@ -24,6 +29,7 @@ const MainHeader = () => {
               isActive={activeButton === currentButton}
               onClick={() => setActiveButton(currentButton)}
               resetButtons={() => setActiveButton(null)}
+              optionsList={getSearchOptionsList(trackList, currentButton)}
             />
           )
         })}

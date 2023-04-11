@@ -7,26 +7,15 @@ type PropsType = {
   isActive: boolean
   onClick: () => void
   resetButtons: () => void
+  optionsList: string[] | null
 }
-
-const mockData = [
-  'Michael Jackson',
-  'Frank Sinatra',
-  'Calvin Harris',
-  'Zhu',
-  'Arctic Monkeys',
-  'Michael Jackson',
-  'Frank Sinatra',
-  'Calvin Harris',
-  'Zhu',
-  'Arctic Monkeys',
-]
 
 const HeaderButton = ({
   variant,
   isActive,
   onClick,
   resetButtons,
+  optionsList,
 }: PropsType) => {
   return (
     <S.HeaderButtonBox>
@@ -37,7 +26,10 @@ const HeaderButton = ({
         <S.HeaderButtonSelect
           variant={variant}
           onMouseLeave={() => resetButtons()}
-        />
+        >
+          {optionsList &&
+            optionsList.map((option) => <div key={option}>{option}</div>)}
+        </S.HeaderButtonSelect>
       ) : null}
     </S.HeaderButtonBox>
   )
