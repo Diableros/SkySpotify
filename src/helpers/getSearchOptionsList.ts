@@ -1,24 +1,23 @@
-import ButtonType from '@/screens/Main/components/MainHeader/HeaderButton/constants'
+import ButtonType, {
+  OPTIONS_NOT_FOUND,
+} from '@/screens/Main/components/MainHeader/HeaderButton/constants'
 import { SongType } from '@/types'
 
-const getUniqOptionsArr = (data: SongType[], field: string): string[] => {
-  if (data.length) {
-    const optionsSet = new Set<string>()
+// как то бы связать типы кнопок и названия полей из объекта трека
+type FieldType = keyof Pick<SongType, 'author' | 'release_date' | 'genre'>
 
-    data.forEach((elem) => {
-      optionsSet.add(elem[field])
-    })
+const getUniqOptionsArr = (data: SongType[], field: FieldType): string[] => {
+  const optionsSet = new Set<string>()
 
-    const optionsArray = Array.from(optionsSet).sort((a, b) =>
-      a.localeCompare(b)
-    )
+  data.forEach((elem) => {
+    optionsSet.add(elem[field])
+  })
 
-    console.log('data from helper', field, optionsArray)
+  const optionsArray = Array.from(optionsSet).sort((a, b) => a.localeCompare(b))
 
-    return optionsArray
-  }
+  console.log('data from helper', field, optionsArray)
 
-  return ['Options not found']
+  return optionsArray
 }
 
 const getSearchOptionsList = (
@@ -27,7 +26,7 @@ const getSearchOptionsList = (
 ): string[] => {
   switch (searchType) {
     // case ButtonType.Author: - почему так не работает?!
-    case 'Author':
+    case ButtonType.Author:
       return getUniqOptionsArr(data, 'author')
 
     case ButtonType.Year:
@@ -37,8 +36,8 @@ const getSearchOptionsList = (
       return getUniqOptionsArr(data, 'genre')
 
     default:
-      console.log('DEFAULT CASE', searchType)
-      return ['Опции не найдены']
+      console.log('DEFAULT CASE', typeof searchType, searchType)
+      return [OPTIONS_NOT_FOUND]
   }
 }
 

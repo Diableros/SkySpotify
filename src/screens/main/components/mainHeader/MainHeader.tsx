@@ -11,25 +11,28 @@ const MainHeader = () => {
     null
   )
 
-  const trackList = useAppSelector((state: RootStateType) => state.app)
+  const appState = useAppSelector((state: RootStateType) => state.app)
 
   return (
     <div className={s.header}>
       <h1 className={s.title}>Треки</h1>
       <div className={s.sortBox}>
         <p className={s.sortBoxtext}>Искать по:</p>
-        {[...Object.keys(ButtonType)].map((button) => {
+        {[...Object.keys(ButtonType)].map((key) => {
           // не придумал как сделать чтоб ТС не ругался на 23й :(
-          const currentButton = button as ButtonType
+          const currentButton = key as ButtonType
 
           return (
             <HeaderButton
               key={currentButton}
-              variant={ButtonType[currentButton]}
+              name={ButtonType[currentButton]}
               isActive={activeButton === currentButton}
               onClick={() => setActiveButton(currentButton)}
               resetButtons={() => setActiveButton(null)}
-              optionsList={getSearchOptionsList(trackList, currentButton)}
+              optionsList={getSearchOptionsList(
+                appState.trackList,
+                currentButton
+              )}
             />
           )
         })}

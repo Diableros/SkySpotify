@@ -5,10 +5,6 @@ type HeaderButtonType = {
   isActive: boolean
 }
 
-type HeaderButtonSelectType = {
-  variant: ButtonType
-}
-
 const activeStyle = `
   border-color: var(--active-color);
   color: var(--active-color);
@@ -49,7 +45,7 @@ export const HeaderButtonBox = styled.div`
   position: relative;
 `
 
-export const HeaderButtonSelect = styled.ul<HeaderButtonSelectType>`
+export const HeaderButtonSelect = styled.ul`
   position: absolute;
 
   width: 248px;
