@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { SongType } from '@/types'
 
 export type AppStateType = {
-  trackList: SongType[]
+  trackList: SongType[] | undefined
 }
 
-const appInitialState = {
+const appInitialState: AppStateType = {
   trackList: [],
 }
 

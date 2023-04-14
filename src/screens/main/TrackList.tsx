@@ -15,8 +15,7 @@ const TrackList = () => {
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
-    dispatch(setTrackStore(data))
-    // console.log('Hello from useEffect', data)
+    dispatch(setTrackStore({ trackList: data }))
   }, [data, dispatch])
 
   const tableHeaderRow = (

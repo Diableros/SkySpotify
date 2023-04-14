@@ -1,3 +1,4 @@
+import { OPTIONS_NOT_FOUND } from '../../constants'
 import * as S from './HeaderButton.style'
 
 type PropsType = {
@@ -13,7 +14,7 @@ const HeaderButton = ({
   isActive,
   onClick,
   resetButtons,
-  optionsList = ['Опции не найдены'],
+  optionsList = [OPTIONS_NOT_FOUND],
 }: PropsType) => {
   return (
     <S.HeaderButtonBox>

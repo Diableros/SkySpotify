@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { ButtonType } from './constants'
 
 type HeaderButtonType = {
   isActive: boolean
