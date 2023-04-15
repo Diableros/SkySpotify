@@ -89,4 +89,8 @@ export const HeaderButtonSelectItem = styled.li`
     color: var(--hover-color);
     text-decoration: underline;
   }
+
+  &:active {
+    color: var(--active-color);
+  }
 `
