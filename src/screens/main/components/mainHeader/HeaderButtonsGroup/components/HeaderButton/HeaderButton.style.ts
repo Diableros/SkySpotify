@@ -1,17 +1,22 @@
 import styled from 'styled-components'
-import { ButtonType } from './constants'
 
 type HeaderButtonType = {
   isActive: boolean
 }
 
-type HeaderButtonSelectType = {
-  variant: ButtonType
-}
-
 const activeStyle = `
   border-color: var(--active-color);
   color: var(--active-color);
+`
+
+const activeHoverStyle = `
+  border-color: var(--active-color);
+  color: var(--active-color);
+`
+
+const hoverStyle = `
+  border-color: var(--hover-color);
+  color: var(--hover-color);
 `
 
 export const HeaderButton = styled.button<HeaderButtonType>`
@@ -27,8 +32,7 @@ export const HeaderButton = styled.button<HeaderButtonType>`
   ${({ isActive }) => (isActive ? activeStyle : '')}
 
   &:hover {
-    border-color: var(--hover-color);
-    color: var(--hover-color);
+    ${({ isActive }) => (isActive ? activeHoverStyle : hoverStyle)}
   }
 
   &:active {
@@ -40,7 +44,7 @@ export const HeaderButtonBox = styled.div`
   position: relative;
 `
 
-export const HeaderButtonSelect = styled.ul<HeaderButtonSelectType>`
+export const HeaderButtonSelect = styled.div`
   position: absolute;
 
   width: 248px;
@@ -52,12 +56,16 @@ export const HeaderButtonSelect = styled.ul<HeaderButtonSelectType>`
   border-radius: 12px;
   padding: 34px;
 
+  background-color: var(--search-select-bg-color);
+`
+export const HeaderButtonSelectItemsBox = styled.ul`
+  height: 100%;
+  position: relative;
   display: flex;
   gap: 28px;
 
   flex-direction: column;
-
-  background-color: var(--search-select-bg-color);
+  overflow-y: auto;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -75,4 +83,14 @@ export const HeaderButtonSelect = styled.ul<HeaderButtonSelectType>`
 export const HeaderButtonSelectItem = styled.li`
   font-size: 20px;
   line-height: 24px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: var(--active-color);
+  }
 `

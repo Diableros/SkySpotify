@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { SongType } from '@/types'
 
 export type AppStateType = {
-  trackStore: SongType[]
+  trackList: SongType[] | undefined
 }
 
-const appInitialState = {
-  trackStore: [],
+const appInitialState: AppStateType = {
+  trackList: [],
 }
 
 const appSlice = createSlice({
@@ -13,9 +14,7 @@ const appSlice = createSlice({
   initialState: appInitialState,
   reducers: {
     setTrackStore(_, action: PayloadAction<AppStateType>) {
-      return {
-        ...action.payload,
-      }
+      return action.payload
     },
   },
 })

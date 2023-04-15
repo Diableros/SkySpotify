@@ -1,3 +1,4 @@
+import * as React from 'react'
 import clsx from 'clsx'
 import useSongsQuery from '@/hooks/useSongsQuery'
 import s from './TrackList.module.scss'
@@ -6,9 +7,16 @@ import cover from '@/img/blank_cover.png'
 import formatTrackTime from '@/helpers/formatTrackTime'
 import MainHeader from './components/MainHeader/MainHeader'
 import Skeleton from './components/Skeleton'
+import { useAppDispatch } from '@/hooks/reduxHooks'
+import { setTrackStore } from '@/store/appSlice'
 
 const TrackList = () => {
   const { data, isLoading, isError } = useSongsQuery()
+  const dispatch = useAppDispatch()
+
+  React.useEffect(() => {
+    dispatch(setTrackStore({ trackList: data }))
+  }, [data, dispatch])
 
   const tableHeaderRow = (
     <div className={s.trackListHeader}>
