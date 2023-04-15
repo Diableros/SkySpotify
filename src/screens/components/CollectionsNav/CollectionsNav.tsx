@@ -7,13 +7,13 @@ import s from './CollectionsNav.module.scss'
 const CollectionsNav = () => {
   return (
     <div className={s.collectionsNavBox}>
-      <Link to="/">
+      <Link to="/collections?play_list=1">
         <img src={img1} alt="Playlist of the day" />
       </Link>
-      <Link to="/">
+      <Link to="/collections?play_list=2">
         <img src={img2} alt="100 dance hits" />
       </Link>
-      <Link to="/">
+      <Link to="/collections?play_list=3">
         <img src={img3} alt="Indi charge" />
       </Link>
     </div>

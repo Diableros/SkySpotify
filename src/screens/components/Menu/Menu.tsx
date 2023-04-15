@@ -28,7 +28,8 @@ const Menu = () => {
       </div>
       <div className={clsx(s.slider, isMenuShow && s.sliderShow)}>
         <Link to="/">Главная</Link>
-        <Link to="/favorites">Мои треки</Link>
+        <Link to="/collections?play_list=my_tracks">Мои треки</Link>
+        <Link to="/test404">Page 404 test</Link>
         <LogoutButton />
         <svg className={s.themeSvg}>
           <use xlinkHref={`${sprite}#icon-theme`} />

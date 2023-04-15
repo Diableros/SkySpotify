@@ -14,23 +14,15 @@ const Router = ({ children }: { children: React.ReactNode }) => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: children,
+      element: <Layout>{children}</Layout>,
       children: [
         {
-          path: '/',
-          element: (
-            <Layout>
-              <MainScreen />
-            </Layout>
-          ),
+          index: true,
+          element: <MainScreen />,
         },
         {
           path: 'collections',
-          element: (
-            <Layout>
-              <CollectionsScreen />
-            </Layout>
-          ),
+          element: <CollectionsScreen />,
         },
       ],
       errorElement: userLogin ? (

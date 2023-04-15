@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const userInitialState = {
-  login: true,
+  login: false,
   id: 0,
   token: '',
   userName: '',

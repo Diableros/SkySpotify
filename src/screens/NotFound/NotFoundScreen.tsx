@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import Button, { ButtonStyle } from '@/screens/components/Button/Button'
 import s from './NotFoundScreen.module.scss'

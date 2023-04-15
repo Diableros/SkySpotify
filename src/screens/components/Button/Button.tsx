@@ -16,7 +16,11 @@ const Button = ({ style, title, action }: ButtonStyleType) => {
   switch (style) {
     case ButtonStyle.Purple:
       return (
-        <button type="submit" className={clsx(s.btn, s['btn--purple'])}>
+        <button
+          type="submit"
+          className={clsx(s.btn, s['btn--purple'])}
+          onClick={action}
+        >
           {title}
         </button>
       )
