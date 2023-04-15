@@ -23,9 +23,13 @@ const HeaderButton = ({
       </S.HeaderButton>
       {isActive ? (
         <S.HeaderButtonSelect onMouseLeave={() => resetButtons()}>
-          {optionsList.map((option) => (
-            <div key={option}>{option}</div>
-          ))}
+          <S.HeaderButtonSelectItemsBox>
+            {optionsList.map((option) => (
+              <S.HeaderButtonSelectItem key={option}>
+                {option}
+              </S.HeaderButtonSelectItem>
+            ))}
+          </S.HeaderButtonSelectItemsBox>
         </S.HeaderButtonSelect>
       ) : null}
     </S.HeaderButtonBox>

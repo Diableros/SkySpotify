@@ -44,7 +44,7 @@ export const HeaderButtonBox = styled.div`
   position: relative;
 `
 
-export const HeaderButtonSelect = styled.ul`
+export const HeaderButtonSelect = styled.div`
   position: absolute;
 
   width: 248px;
@@ -56,12 +56,16 @@ export const HeaderButtonSelect = styled.ul`
   border-radius: 12px;
   padding: 34px;
 
+  background-color: var(--search-select-bg-color);
+`
+export const HeaderButtonSelectItemsBox = styled.ul`
+  height: 100%;
+  position: relative;
   display: flex;
   gap: 28px;
 
   flex-direction: column;
-
-  background-color: var(--search-select-bg-color);
+  overflow-y: auto;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -79,4 +83,10 @@ export const HeaderButtonSelect = styled.ul`
 export const HeaderButtonSelectItem = styled.li`
   font-size: 20px;
   line-height: 24px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+  }
 `

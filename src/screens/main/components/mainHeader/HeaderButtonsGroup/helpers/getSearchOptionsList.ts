@@ -1,40 +1,28 @@
-import { ButtonType, OPTIONS_NOT_FOUND, TRACKS_LOADING } from '../constants'
+import { SearchButtonsType } from '../type'
+import { TRACKS_NO_DATA } from '../constants'
 import { SongType } from '@/types'
 
-type FieldType = keyof Pick<SongType, 'author' | 'release_date' | 'genre'>
+const getSearchOptionsList = (
+  searchField: SearchButtonsType,
+  trackList?: SongType[] | undefined
+): string[] => {
+  if (!trackList?.length) return [TRACKS_NO_DATA]
 
-const getUniqOptionsArr = (data: SongType[], field: FieldType): string[] => {
-  const optionsSet = new Set<string>()
+  const optionsSet = new Set<string>(
+    trackList.map((listItem) => {
+      if (searchField === 'release_date') {
+        const currentItemDate = new Date(listItem[searchField])
 
-  data.forEach((elem) => {
-    optionsSet.add(elem[field])
-  })
+        return String(currentItemDate.getFullYear())
+      }
 
-  const optionsArray = Array.from(optionsSet).sort((a, b) => a.localeCompare(b))
+      return listItem[searchField]
+    })
+  )
+
+  const optionsArray = Array.from(optionsSet).sort()
 
   return optionsArray
-}
-
-const getSearchOptionsList = (
-  trackList: SongType[] | undefined,
-  searchType: string
-): string[] => {
-  if (!trackList) return [TRACKS_LOADING]
-
-  switch (searchType) {
-    // case ButtonType.Author: - почему так не работает?!
-    case ButtonType.Author:
-      return getUniqOptionsArr(trackList, 'author')
-
-    case ButtonType.Year:
-      return getUniqOptionsArr(trackList, 'release_date')
-
-    case ButtonType.Genre:
-      return getUniqOptionsArr(trackList, 'genre')
-
-    default:
-      return [OPTIONS_NOT_FOUND]
-  }
 }
 
 export default getSearchOptionsList

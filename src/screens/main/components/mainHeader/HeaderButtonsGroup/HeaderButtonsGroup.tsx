@@ -1,32 +1,35 @@
 import * as React from 'react'
 import HeaderButton from './components/HeaderButton'
-import { ButtonType } from './constants'
+import { ButtonsEnum } from './constants'
 import { useAppSelector } from '@/hooks/reduxHooks'
 import { RootStateType } from '@/store'
 import getSearchOptionsList from './helpers/getSearchOptionsList'
+import { SearchButtonsType } from './type'
 
 const HeaderButtonsGroup = () => {
-  const [activeButton, setActiveButton] = React.useState<ButtonType | null>(
-    null
-  )
+  const [activeButton, setActiveButton] =
+    React.useState<SearchButtonsType | null>(null)
 
   const { trackList } = useAppSelector((state: RootStateType) => state.app)
 
-  return [...Object.keys(ButtonType)].map((key) => {
-    // не придумал как сделать чтоб ТС не ругался на 22й :(
-    const currentButton = key as ButtonType
+  return (
+    <>
+      {[...Object.keys(ButtonsEnum)].map((key) => {
+        const currentButton = key as SearchButtonsType
 
-    return (
-      <HeaderButton
-        key={currentButton}
-        name={ButtonType[currentButton]}
-        isActive={activeButton === currentButton}
-        onClick={() => setActiveButton(currentButton)}
-        resetButtons={() => setActiveButton(null)}
-        optionsList={getSearchOptionsList(trackList, currentButton)}
-      />
-    )
-  })
+        return (
+          <HeaderButton
+            key={currentButton}
+            name={ButtonsEnum[currentButton]}
+            isActive={activeButton === currentButton}
+            onClick={() => setActiveButton(currentButton)}
+            resetButtons={() => setActiveButton(null)}
+            optionsList={getSearchOptionsList(currentButton, trackList)}
+          />
+        )
+      })}
+    </>
+  )
 }
 
 export default HeaderButtonsGroup
