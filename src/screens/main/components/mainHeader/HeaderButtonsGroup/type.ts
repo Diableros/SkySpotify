@@ -1,3 +1,5 @@
-import { ButtonsEnum } from './constants'
+import { Button, SearchField } from './enum'
 
-export type SearchButtonsType = keyof typeof ButtonsEnum
+export type ButtonType = {
+  [key in Button]: { title: string; searchField: SearchField }
+}
