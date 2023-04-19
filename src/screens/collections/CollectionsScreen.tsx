@@ -1,13 +1,13 @@
-import { useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import * as S from './CollectionsScreen.style'
 
 const CollectionsScreen = () => {
-  const [searchParams] = useSearchParams()
+  const { playlist } = useParams()
 
   return (
     <S.CollectionsScreen>
       Text from CollectionsScreen &quot;
-      {searchParams && searchParams.get('play_list')}&quot;
+      {playlist}&quot;
     </S.CollectionsScreen>
   )
 }
