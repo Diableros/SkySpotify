@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom/client'
-import Providers from '@/providers/Providers'
+import Providers from '@/providers'
 import App from '@/App'
 import '@/global_style/index.scss'
 
