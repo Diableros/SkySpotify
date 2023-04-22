@@ -4,24 +4,22 @@ import { useAppDispatch } from './reduxHooks'
 import { useAppStore } from './useAppStore'
 import { setCurrentTrack } from '@/store/appSlice'
 
+const LOCAL_STORAGE_FIELD = 'currentTrack'
+
 const useCurrentTrack = () => {
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
-    useLocalStorage<TrackType | undefined>('currentTrack')
-  const currentTrackInStore = useAppStore('currentTrack') as TrackType
+    useLocalStorage<TrackType>(LOCAL_STORAGE_FIELD)
+  const currentTrackInStore = useAppStore(LOCAL_STORAGE_FIELD)
   const dispatch = useAppDispatch()
-  let currentTrack
 
-  if (!currentTrackInLocalStorage && currentTrackInStore) {
-    setCurrentTrackInLocalStorage(currentTrackInStore)
-    currentTrack = currentTrackInStore
-  }
-
-  if (currentTrackInLocalStorage && !currentTrackInStore) {
+  if (
+    currentTrackInLocalStorage &&
+    currentTrackInLocalStorage !== currentTrackInStore
+  ) {
     dispatch(setCurrentTrack(currentTrackInLocalStorage))
-    currentTrack = currentTrackInLocalStorage
   }
 
-  return [currentTrack, setCurrentTrackInLocalStorage]
+  return setCurrentTrackInLocalStorage
 }
 
 export default useCurrentTrack
