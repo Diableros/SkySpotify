@@ -1,15 +1,15 @@
 import * as React from 'react'
-import s from './SongBox.module.scss'
+import s from './TrackBox.module.scss'
 import cover from '@/img/blank_cover.png'
 import sprite from '@/img/sprite.svg'
 
-const SongBox = () => {
+const TrackBox = () => {
   return (
-    <div className={s.songBox}>
+    <div className={s.TrackBox}>
       <img className={s.cover} src={cover} alt="Album cover" />
-      <div className={s.songInfo}>
-        <div className={s.songInfoTitle}>Chase</div>
-        <div className={s.songInfoAutor}>Alexander Nakarada</div>
+      <div className={s.TrackInfo}>
+        <div className={s.TrackInfoTitle}>Chase</div>
+        <div className={s.TrackInfoAutor}>Alexander Nakarada</div>
       </div>
       <div className={s.reactionsBox}>
         <button type="button" className={s.reactionsButton}>
@@ -27,4 +27,4 @@ const SongBox = () => {
   )
 }
 
-export default SongBox
+export default TrackBox

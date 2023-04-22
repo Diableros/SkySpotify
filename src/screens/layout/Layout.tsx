@@ -5,11 +5,10 @@ import Menu from '@/screens/components/Menu/Menu'
 import s from './Layout.module.scss'
 import CollectionsNav from '@/screens/components/CollectionsNav/CollectionsNav'
 import User from '../components/User/User'
-import { useAppSelector } from '@/hooks/reduxHooks'
-import { RootStateType } from '@/store'
+import useUserStore from '@/hooks/useUserStore'
 
 const Layout = () => {
-  const userLogin = useAppSelector((state: RootStateType) => state.user.login)
+  const isLogin = useUserStore('login')
 
   return (
     <>
@@ -17,7 +16,7 @@ const Layout = () => {
         <Menu />
         <section className={s.layoutTopMiddle}>
           <Search />
-          {userLogin ? <Outlet /> : <Navigate to="/login" />}
+          {isLogin ? <Outlet /> : <Navigate to="/login" />}
         </section>
         <section className={s.layoutTopRight}>
           <User />

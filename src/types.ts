@@ -1,6 +1,6 @@
 import { UserDataType } from '@/store/userSlice'
 
-export type SongType = {
+export type TrackType = {
   id: number
   name: string
   author: string

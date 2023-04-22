@@ -9,5 +9,5 @@ export enum LinkPath {
   Collection2 = '/collections/2',
   Collection3 = '/collections/3',
   Favorites = '/collections/my_tracks',
-  Test404 = '/404',
+  Test404 = '/abracadabra',
 }

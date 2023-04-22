@@ -1,10 +1,10 @@
 import { TRACKS_NO_DATA } from '../constants'
-import { SongType } from '@/types'
+import { TrackType } from '@/types'
 import { SearchField } from '../enum'
 
 const getSearchOptionsList = (
   searchField: SearchField,
-  trackList?: SongType[]
+  trackList?: TrackType[]
 ): string[] => {
   if (!trackList?.length) return [TRACKS_NO_DATA]
 

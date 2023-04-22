@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import req from '@/request/KyRequest'
 
-const useSongsQuery = () => {
+const useTracksQuery = () => {
   return useQuery({
     queryFn: () => req(),
     queryKey: ['fullTrackList'],
@@ -13,4 +13,4 @@ const useSongsQuery = () => {
   })
 }
 
-export default useSongsQuery
+export default useTracksQuery
