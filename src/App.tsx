@@ -1,7 +1,7 @@
-import MainScreen from '@/screens/Main/TrackList'
+import TrackList from '@/screens/TrackList'
 
 const App = () => {
-  return <MainScreen />
+  return <TrackList />
 }
 
 export default App
