@@ -12,3 +12,12 @@ export type TrackType = {
   track_file: string
   stared_user: UserDataType
 }
+
+export type ControlsType = {
+  play: () => Promise<void> | undefined
+  pause: () => void
+  seek: (time: number) => void
+  volume: (volume: number) => void
+  mute: () => void
+  unmute: () => void
+}

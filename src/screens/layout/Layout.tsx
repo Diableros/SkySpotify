@@ -6,9 +6,12 @@ import s from './Layout.module.scss'
 import CollectionsNav from '@/screens/components/CollectionsNav/CollectionsNav'
 import User from '../components/User/User'
 import useUserStore from '@/hooks/useUserStore'
+import useAppStore from '@/hooks/useAppStore'
+import { TrackType } from '@/types'
 
 const Layout = () => {
   const isLogin = useUserStore('login')
+  const currentTrack = useAppStore('currentTrack') as TrackType | undefined
 
   return (
     <>
@@ -23,7 +26,7 @@ const Layout = () => {
           <CollectionsNav />
         </section>
       </div>
-      <PlayerBar />
+      {currentTrack ? <PlayerBar currentTrack={currentTrack} /> : null}
     </>
   )
 }

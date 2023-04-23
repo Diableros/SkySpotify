@@ -1,3 +1,4 @@
+import * as React from 'react'
 import clsx from 'clsx'
 import { useLocalStorage } from 'react-use'
 import useTracksQuery from '@/hooks/useTracksQuery'
@@ -15,6 +16,7 @@ import { setCurrentTrack } from '@/store/appSlice'
 const LOCAL_STORAGE_FIELD = 'currentTrack'
 
 const TrackList = () => {
+  // console.log('Tracklist render')
   const { data, isLoading, isError } = useTracksQuery()
 
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
@@ -22,12 +24,14 @@ const TrackList = () => {
   const currentTrackInStore = useAppStore(LOCAL_STORAGE_FIELD)
   const dispatch = useAppDispatch()
 
-  if (
-    currentTrackInLocalStorage &&
-    currentTrackInLocalStorage !== currentTrackInStore
-  ) {
-    dispatch(setCurrentTrack(currentTrackInLocalStorage))
-  }
+  React.useEffect(() => {
+    if (
+      currentTrackInLocalStorage &&
+      currentTrackInLocalStorage !== currentTrackInStore
+    ) {
+      dispatch(setCurrentTrack(currentTrackInLocalStorage))
+    }
+  }, [currentTrackInLocalStorage, currentTrackInStore, dispatch])
 
   const errorMessage = (
     <S.ErrorWrapper>
