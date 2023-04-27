@@ -1,7 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import req from '@/request/KyRequest'
+import { useAppDispatch } from './reduxHooks'
+import { setTrackStore } from '@/store/appSlice'
 
-const useSongsQuery = () => {
+const useTracksQuery = () => {
+  const dispatch = useAppDispatch()
+
   return useQuery({
     queryFn: () => req(),
     queryKey: ['fullTrackList'],
@@ -10,7 +14,10 @@ const useSongsQuery = () => {
         // console.log(err.message);
       }
     },
+    onSuccess: (trackList) => {
+      dispatch(setTrackStore(trackList))
+    },
   })
 }
 
-export default useSongsQuery
+export default useTracksQuery

@@ -1,10 +1,10 @@
 import * as S from './Skeleton.style'
 
 type PropsType = {
-  quantity: number
+  quantity?: number
 }
 
-const Skeleton = ({ quantity }: PropsType) => {
+const Skeleton = ({ quantity = 7 }: PropsType) => {
   const skeletonArr = new Array(quantity).fill(1)
 
   return (

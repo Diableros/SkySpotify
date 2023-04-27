@@ -5,11 +5,13 @@ import Menu from '@/screens/components/Menu/Menu'
 import s from './Layout.module.scss'
 import CollectionsNav from '@/screens/components/CollectionsNav/CollectionsNav'
 import User from '../components/User/User'
-import { useAppSelector } from '@/hooks/reduxHooks'
-import { RootStateType } from '@/store'
+import useUserStore from '@/hooks/useUserStore'
+import useAppStore from '@/hooks/useAppStore'
+import { TrackType } from '@/types'
 
 const Layout = () => {
-  const userLogin = useAppSelector((state: RootStateType) => state.user.login)
+  const isLogin = useUserStore('login')
+  const currentTrack = useAppStore('currentTrack') as TrackType | undefined
 
   return (
     <>
@@ -17,14 +19,14 @@ const Layout = () => {
         <Menu />
         <section className={s.layoutTopMiddle}>
           <Search />
-          {userLogin ? <Outlet /> : <Navigate to="/login" />}
+          {isLogin ? <Outlet /> : <Navigate to="/login" />}
         </section>
         <section className={s.layoutTopRight}>
           <User />
           <CollectionsNav />
         </section>
       </div>
-      <PlayerBar />
+      {currentTrack ? <PlayerBar currentTrack={currentTrack} /> : null}
     </>
   )
 }

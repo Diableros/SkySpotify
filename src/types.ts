@@ -1,6 +1,6 @@
 import { UserDataType } from '@/store/userSlice'
 
-export type SongType = {
+export type TrackType = {
   id: number
   name: string
   author: string
@@ -11,4 +11,13 @@ export type SongType = {
   logo: null
   track_file: string
   stared_user: UserDataType
+}
+
+export type ControlsType = {
+  play: () => Promise<void> | undefined
+  pause: () => void
+  seek: (time: number) => void
+  volume: (volume: number) => void
+  mute: () => void
+  unmute: () => void
 }

@@ -5,7 +5,6 @@ import { useAppSelector } from '@/hooks/reduxHooks'
 import { RootStateType } from '@/store'
 import getSearchOptionsList from './helpers/getSearchOptionsList'
 import { ButtonType } from './type'
-import { Button } from './enum'
 
 const HeaderButtonsGroup = () => {
   const [activeButton, setActiveButton] = React.useState<
@@ -22,7 +21,7 @@ const HeaderButtonsGroup = () => {
         return (
           <HeaderButton
             key={currentButton}
-            name={Button[currentButton]}
+            name={searchButtons[currentButton].title}
             isActive={activeButton === currentButton}
             onClick={() => setActiveButton(currentButton)}
             resetButtons={() => setActiveButton(null)}

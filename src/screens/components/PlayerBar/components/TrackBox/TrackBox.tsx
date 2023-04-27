@@ -1,15 +1,20 @@
 import * as React from 'react'
-import s from './SongBox.module.scss'
+import s from './TrackBox.module.scss'
 import cover from '@/img/blank_cover.png'
 import sprite from '@/img/sprite.svg'
+import { TrackType } from '@/types'
 
-const SongBox = () => {
+type PropsType = {
+  currentTrack: TrackType
+}
+
+const TrackBox = ({ currentTrack: { name, author } }: PropsType) => {
   return (
-    <div className={s.songBox}>
+    <div className={s.TrackBox}>
       <img className={s.cover} src={cover} alt="Album cover" />
-      <div className={s.songInfo}>
-        <div className={s.songInfoTitle}>Chase</div>
-        <div className={s.songInfoAutor}>Alexander Nakarada</div>
+      <div className={s.TrackInfo}>
+        <div className={s.TrackInfoTitle}>{name}</div>
+        <div className={s.TrackInfoAutor}>{author}</div>
       </div>
       <div className={s.reactionsBox}>
         <button type="button" className={s.reactionsButton}>
@@ -27,4 +32,4 @@ const SongBox = () => {
   )
 }
 
-export default SongBox
+export default TrackBox
