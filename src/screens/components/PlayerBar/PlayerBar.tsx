@@ -16,7 +16,7 @@ type PropsType = {
 const PlayerBar = ({ currentTrack }: PropsType) => {
   const [audio, state, controls] = useAudio({
     src: currentTrack.track_file,
-    autoPlay: true,
+    autoPlay: false,
   })
 
   // const stateInfo = (

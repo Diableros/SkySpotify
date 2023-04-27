@@ -25,7 +25,8 @@ export const HeaderButton = styled.button<HeaderButtonType>`
   justify-content: center;
   align-items: center;
   border-radius: 19px;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
+  border: 1px solid ${({ theme }) => theme.color};
   text-align: center;
   padding: 7px 22px 10px;
 

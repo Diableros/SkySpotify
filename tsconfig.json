@@ -26,6 +26,14 @@
       }
     ]
   },
-  "include": [".eslintrc.cjs", "src", "./vite.config.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/*.d.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/__test__/**/*.(test|spec).(ts|tsx)",
+    "*.config.ts",
+    "./src/**/*"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
