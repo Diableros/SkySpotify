@@ -11,23 +11,6 @@
   z-index: 5;
 }
 
-.slider {
-  position: relative;
-  width: 244px;
-  height: 100%;
-  background-color: var(--menu-dark);
-  display: flex;
-  flex-direction: column;
-  padding: 152px 36px;
-  gap: 32px;
-  left: -100%;
-  transition: left 0.3s ease-in-out;
-
-  &Show {
-    left: 0;
-  }
-}
-
 .themeSvg {
   width: 39px;
   height: 39px;

@@ -18,7 +18,7 @@ const lightTheme: ThemeType = {
   hover: '#ad61ff',
   active: '#d9b6ff',
   bgMain: '#fff',
-  bgMenu: '#1c1c1c',
+  bgMenu: '#F6F5F3',
   bgDropList: '#313131',
   bgDropListSlider: '#4b4949',
 }

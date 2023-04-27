@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+type SliderType = {
+  isMenuShow: boolean
+}
+
 export const Burger = styled.div`
   display: block;
   position: absolute;
@@ -49,6 +53,29 @@ export const Burger = styled.div`
     height: 1px;
     background-color: ${({ theme }) => theme.textMain};
     z-index: 5;
+  }
+`
+
+export const Slider = styled.div<SliderType>`
+  position: relative;
+  width: 244px;
+  height: 100%;
+  background-color: ${({ theme }) => theme.bgMenu};
+  display: flex;
+  flex-direction: column;
+  padding: 152px 36px;
+  gap: 32px;
+  left: -100%;
+  transition: left 0.3s ease-in-out;
+  ${({ isMenuShow }) => (isMenuShow ? `left: 0;` : null)}
+
+  & > * {
+    &:hover {
+      color: ${({ theme }) => theme.hover};
+    }
+    &:active {
+      color: ${({ theme }) => theme.active};
+    }
   }
 `
 
