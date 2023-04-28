@@ -6,6 +6,7 @@ enum GetIcon {
   Volume = 'volume',
   Mute = 'mute',
   Dislike = 'dislike',
+  Pause = 'pause',
   Prev = 'prev',
   Play = 'play',
   Next = 'next',

@@ -1,10 +1,10 @@
-import * as React from 'react'
 import type { Dispatch, SetStateAction } from 'react'
 import { TrackType } from '@/types'
-import sprite from '@/img/sprite.svg'
 import cover from '@/img/blank_cover.png'
 import formatTrackTime from '@/helpers/formatTrackTime'
-import s from '../../TrackList.module.scss'
+import * as S from '../../TrackList.style'
+import GetIcon from '@/screens/components/Icon/enum'
+import Icon from '@/screens/components/Icon'
 
 type PropsType = {
   trackData: TrackType
@@ -14,21 +14,18 @@ type PropsType = {
 const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <li onClick={() => setCurrentTrack(trackData)} className={s.trackListRow}>
-      <div className={s.trackListRowCol1}>
+    <S.Row onClick={() => setCurrentTrack(trackData)}>
+      <S.Col1>
         <img src={cover} alt="Album cover" />
         {trackData.name}
-      </div>
-      <div className={s.trackListRowCol2}>{trackData.author}</div>
-      <div className={s.trackListRowCol3}>{trackData.album}</div>
-      <div className={s.trackListRowCol4}>
-        <svg className={s.like}>
-          <use xlinkHref={`${sprite}#icon-like`} />
-        </svg>
-
+      </S.Col1>
+      <S.Col2>{trackData.author}</S.Col2>
+      <S.Col3>{trackData.album}</S.Col3>
+      <S.Col4>
+        <Icon icon={GetIcon.Like} size={15} />
         {formatTrackTime(trackData.duration_in_seconds)}
-      </div>
-    </li>
+      </S.Col4>
+    </S.Row>
   )
 }
 

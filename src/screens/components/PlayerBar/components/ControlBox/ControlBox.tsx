@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { HTMLMediaState } from 'react-use/lib/factory/createHTMLMediaHook'
-import s from './ControlBox.module.scss'
-import sprite from '@/img/sprite.svg'
+import * as S from './ControlBox.style'
 import { ControlsType } from '@/types'
+import Icon from '@/screens/components/Icon'
+import GetIcon from '@/screens/components/Icon/enum'
 
 const ControlBox = ({
   controls: { play, pause },
@@ -26,43 +27,33 @@ const ControlBox = ({
   React.useEffect(() => setIsPlaying(!paused), [paused])
 
   return (
-    <div className={s.controlPanel}>
-      <button type="button" className={s.controlButton}>
-        <svg className={s.controlSvg}>
-          <use xlinkHref={`${sprite}#icon-prev`} />
-        </svg>
-      </button>
+    <S.ControlPanel>
+      <S.ControlButton type="button">
+        <Icon icon={GetIcon.Prev} size={20} />
+      </S.ControlButton>
 
-      <button type="button" className={s.controlButton}>
-        {isPlaying ? (
-          <svg className={s.controlSvgBig} onClick={handlePause}>
-            <use xlinkHref={`${sprite}#icon-pause`} />
-          </svg>
-        ) : (
-          <svg className={s.controlSvgBig} onClick={handlePlay}>
-            <use xlinkHref={`${sprite}#icon-play`} />
-          </svg>
-        )}
-      </button>
+      {isPlaying ? (
+        <S.ControlButton type="button" onClick={handlePause}>
+          <Icon icon={GetIcon.Pause} size={24} />
+        </S.ControlButton>
+      ) : (
+        <S.ControlButton type="button" onClick={handlePlay}>
+          <Icon icon={GetIcon.Play} size={20} />
+        </S.ControlButton>
+      )}
 
-      <button type="button" className={s.controlButton}>
-        <svg className={s.controlSvg}>
-          <use xlinkHref={`${sprite}#icon-next`} />
-        </svg>
-      </button>
+      <S.ControlButton type="button">
+        <Icon icon={GetIcon.Next} size={20} />
+      </S.ControlButton>
 
-      <button type="button" className={s.controlButton}>
-        <svg className={s.controlSvg}>
-          <use xlinkHref={`${sprite}#icon-loop`} />
-        </svg>
-      </button>
+      <S.ControlButtonSecondary type="button">
+        <Icon icon={GetIcon.Loop} size={16} />
+      </S.ControlButtonSecondary>
 
-      <button type="button" className={s.controlButton}>
-        <svg className={s.controlSvg}>
-          <use xlinkHref={`${sprite}#icon-shuffle`} />
-        </svg>
-      </button>
-    </div>
+      <S.ControlButtonSecondary type="button">
+        <Icon icon={GetIcon.Shuffle} size={16} />
+      </S.ControlButtonSecondary>
+    </S.ControlPanel>
   )
 }
 

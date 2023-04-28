@@ -1,19 +1,17 @@
-import * as React from 'react'
-import s from '../../TrackList.module.scss'
-import sprite from '@/img/sprite.svg'
+import * as S from '../../TrackList.style'
+import Icon from '@/screens/components/Icon'
+import GetIcon from '@/screens/components/Icon/enum'
 
 const TableHeaderRow = () => {
   return (
-    <div className={s.trackListHeader}>
-      <div className={s.trackListRowCol1}>Трек</div>
-      <div className={s.trackListRowCol2}>Исполнитель</div>
-      <div className={s.trackListRowCol3}>Альбом</div>
-      <div className={s.trackListRowCol4}>
-        <svg className={s.trackListHeaderSvg}>
-          <use xlinkHref={`${sprite}#icon-watch`} />
-        </svg>
-      </div>
-    </div>
+    <S.Header>
+      <S.Col1>Трек</S.Col1>
+      <S.Col2>Исполнитель</S.Col2>
+      <S.Col3>Альбом</S.Col3>
+      <S.Col4>
+        <Icon icon={GetIcon.Watch} color="inherit" size={18} active={false} />
+      </S.Col4>
+    </S.Header>
   )
 }
 

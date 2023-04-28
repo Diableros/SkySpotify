@@ -72,6 +72,7 @@ export const Slider = styled.div<SliderType>`
   & > * {
     &:hover {
       color: ${({ theme }) => theme.hover};
+      transition: color 0.15s;
     }
     &:active {
       color: ${({ theme }) => theme.active};

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 import { darkTheme } from '@/theme'
 
 const GlobalStyle = createGlobalStyle`
@@ -26,19 +26,19 @@ const GlobalStyle = createGlobalStyle`
 		min-height: 900px;
 	}
 `
-export const scrollBarStyles = `
-	&::-webkit-scrollbar {
-		width: 4px;
-		background: var(--scrollbar-bg-color);
-		border-radius: 2px;
-	}
+export const scrollBarStyles = css`
+  &::-webkit-scrollbar {
+    width: 4px;
+    background: ${({ theme }) => theme.bgDropListSlider};
+    border-radius: 2px;
+  }
 
-	&::-webkit-scrollbar-thumb {
-		width: 4px;
-		border-radius: 2px;
-		background: #ffffff;
-	}
-
+  &::-webkit-scrollbar-thumb {
+    width: 4px;
+    border-radius: 2px;
+    background: ${({ theme }) => theme.textMain};
+    cursor: pointer;
+  }
 `
 
 export default GlobalStyle

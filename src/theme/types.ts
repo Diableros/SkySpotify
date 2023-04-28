@@ -7,4 +7,5 @@ export type ThemeType = {
   bgMenu: string
   bgDropList: string
   bgDropListSlider: string
+  bgTrackHover: string
 }

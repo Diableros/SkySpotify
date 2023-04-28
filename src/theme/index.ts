@@ -10,17 +10,19 @@ export const darkTheme: ThemeType = {
   bgMenu: '#1c1c1c',
   bgDropList: '#313131',
   bgDropListSlider: '#4b4949',
+  bgTrackHover: '#fff02',
 }
 
 const lightTheme: ThemeType = {
   textMain: '#181818',
-  textSecondry: '##4e4e4e',
+  textSecondry: '#b1b1b1',
   hover: '#ad61ff',
   active: '#d9b6ff',
   bgMain: '#fff',
   bgMenu: '#F6F5F3',
-  bgDropList: '#313131',
-  bgDropListSlider: '#4b4949',
+  bgDropList: '#eee',
+  bgDropListSlider: '#e2e2e2',
+  bgTrackHover: '#00002',
 }
 
 const theme: Record<Theme, ThemeType> = {

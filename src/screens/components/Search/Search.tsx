@@ -1,19 +1,13 @@
-import s from './Search.module.scss'
-import sprite from '@/img/sprite.svg'
+import Icon from '../Icon'
+import GetIcon from '../Icon/enum'
+import * as S from './Search.style'
 
 const Search = () => {
   return (
-    <div className={s.searchBox}>
-      <svg className={s.searchSvg}>
-        <use xlinkHref={`${sprite}#icon-search`} />
-      </svg>
-      <input
-        className={s.search}
-        type="search"
-        name="search"
-        placeholder="Поиск"
-      />
-    </div>
+    <S.SearchBox>
+      <Icon icon={GetIcon.Search} size={19} active={false} />
+      <S.SearchInput type="search" name="search" placeholder="Поиск" />
+    </S.SearchBox>
   )
 }
 

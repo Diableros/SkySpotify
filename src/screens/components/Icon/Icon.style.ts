@@ -5,6 +5,7 @@ type PropsType = {
   width?: number
   height?: number
   active?: boolean
+  color?: string
 }
 
 const activeCss = css`
@@ -31,7 +32,7 @@ export const IconWrapper = styled.div<PropsType>`
   ${({ width }) => (width ? `width: ${width}px` : null)};
   ${({ height }) => (height ? `height: ${height}px` : null)};
 
-  color: ${({ theme, color }) => (!color ? theme.textMain : color)};
+  color: ${({ theme, color }) => (!color ? `inherit` : color)};
 
   ${({ active }) => (active ? activeCss : null)};
 
