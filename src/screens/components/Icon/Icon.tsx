@@ -1,14 +1,15 @@
 import * as S from './Icon.style'
 import sprite from '@/img/sprite.svg'
-import GetIcon from './enum'
+import IconSprite from './enum'
 
 type PropsType = {
-  icon: GetIcon
+  icon: IconSprite
   size?: number
   width?: number
   height?: number
+  roundCrop?: boolean
   color?: string
-  active?: boolean
+  inActive?: boolean
   onClick?: () => void
 }
 
@@ -17,18 +18,20 @@ const Icon = ({
   size,
   width,
   height,
+  roundCrop = false,
   color,
   onClick,
-  active = true,
+  inActive = false,
 }: PropsType) => {
   return (
     <S.IconWrapper
       size={size}
       width={width}
       height={height}
+      roundCrop={roundCrop}
       color={color}
       onClick={onClick}
-      active={active}
+      inActive={inActive}
     >
       <svg>
         <use xlinkHref={`${sprite}#icon-${icon}`} />

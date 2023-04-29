@@ -62,7 +62,7 @@ export const HeaderButtonSelect = styled.div`
 `
 export const HeaderButtonSelectItemsBox = styled.ul`
   height: 100%;
-  position: relative;
+  width: 100%;
   display: flex;
   gap: 28px;
 

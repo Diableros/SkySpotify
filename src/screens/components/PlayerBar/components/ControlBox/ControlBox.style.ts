@@ -21,13 +21,13 @@ export const ControlButton = styled.button`
   align-items: center;
   transition: filter 0.1s;
 
-  &:hover {
+  /* &:hover {
     filter: drop-shadow(0 0 5px #fff);
   }
 
   &:active {
     filter: drop-shadow(0 0 10px #fff);
-  }
+  } */
 `
 export const ControlButtonSecondary = styled(ControlButton)`
   color: ${({ theme }) => theme.textSecondry};

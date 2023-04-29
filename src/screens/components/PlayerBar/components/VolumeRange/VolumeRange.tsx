@@ -1,8 +1,9 @@
 import * as React from 'react'
-import s from './VolumeRange.module.scss'
+import * as S from './VolumeRange.style'
 import './range.scss'
-import sprite from '@/img/sprite.svg'
 import { ControlsType } from '@/types'
+import IconSprite from '@/screens/components/Icon/enum'
+import Icon from '@/screens/components/Icon'
 
 const INITIAL_VOLUME_LEVEL = 50
 const PERCENT = 100
@@ -41,17 +42,13 @@ const VolumeRange = ({
   }
 
   return (
-    <div className={s.volumeBox}>
+    <S.VolumeBox>
       {!isMute ? (
-        <svg className={s.volumeBoxSvg} onClick={handleSetMute}>
-          <use xlinkHref={`${sprite}#icon-volume`} />
-        </svg>
+        <Icon icon={IconSprite.Volume} onClick={handleSetMute} size={20} />
       ) : (
-        <svg className={s.volumeBoxSvg} onClick={handleSetUnMute}>
-          <use xlinkHref={`${sprite}#icon-mute`} />
-        </svg>
+        <Icon icon={IconSprite.Mute} onClick={handleSetUnMute} size={20} />
       )}
-      <input
+      <S.Slider
         type="range"
         min="0"
         max="100"
@@ -60,7 +57,7 @@ const VolumeRange = ({
         onChange={handlerVolumeChange}
         defaultValue={INITIAL_VOLUME_LEVEL}
       />
-    </div>
+    </S.VolumeBox>
   )
 }
 

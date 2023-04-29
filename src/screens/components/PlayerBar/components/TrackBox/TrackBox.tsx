@@ -1,8 +1,9 @@
 import * as React from 'react'
 import s from './TrackBox.module.scss'
 import cover from '@/img/blank_cover.png'
-import sprite from '@/img/sprite.svg'
 import { TrackType } from '@/types'
+import Icon from '@/screens/components/Icon'
+import IconSprite from '@/screens/components/Icon/enum'
 
 type PropsType = {
   currentTrack: TrackType
@@ -11,22 +12,14 @@ type PropsType = {
 const TrackBox = ({ currentTrack: { name, author } }: PropsType) => {
   return (
     <div className={s.TrackBox}>
+      <div className={s.reactionsBox}>
+        <Icon icon={IconSprite.Like} size={24} />
+        <Icon icon={IconSprite.Dislike} size={24} />
+      </div>
       <img className={s.cover} src={cover} alt="Album cover" />
       <div className={s.TrackInfo}>
         <div className={s.TrackInfoTitle}>{name}</div>
         <div className={s.TrackInfoAutor}>{author}</div>
-      </div>
-      <div className={s.reactionsBox}>
-        <button type="button" className={s.reactionsButton}>
-          <svg className={s.reactionsSvg}>
-            <use xlinkHref={`${sprite}#icon-like`} />
-          </svg>
-        </button>
-        <button type="button" className={s.reactionsButton}>
-          <svg className={s.reactionsSvgBig}>
-            <use xlinkHref={`${sprite}#icon-dislike`} />
-          </svg>
-        </button>
       </div>
     </div>
   )

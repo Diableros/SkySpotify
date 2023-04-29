@@ -1,6 +1,6 @@
 import * as S from '../../TrackList.style'
 import Icon from '@/screens/components/Icon'
-import GetIcon from '@/screens/components/Icon/enum'
+import IconSprite from '@/screens/components/Icon/enum'
 
 const TableHeaderRow = () => {
   return (
@@ -9,7 +9,7 @@ const TableHeaderRow = () => {
       <S.Col2>Исполнитель</S.Col2>
       <S.Col3>Альбом</S.Col3>
       <S.Col4>
-        <Icon icon={GetIcon.Watch} color="inherit" size={18} active={false} />
+        <Icon icon={IconSprite.Watch} color="inherit" size={18} inActive />
       </S.Col4>
     </S.Header>
   )

@@ -1,4 +1,4 @@
-enum GetIcon {
+enum IconSprite {
   Search = 'search',
   Watch = 'watch',
   Like = 'like',
@@ -17,4 +17,4 @@ enum GetIcon {
   Avatar = 'avatar',
 }
 
-export default GetIcon
+export default IconSprite

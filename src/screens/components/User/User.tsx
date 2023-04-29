@@ -1,19 +1,18 @@
-import sprite from '@/img/sprite.svg'
-import s from './User.module.scss'
+import * as S from './User.style'
 import { useAppSelector } from '@/hooks/reduxHooks'
+import Icon from '../Icon'
+import IconSprite from '../Icon/enum'
 
 const User = () => {
-  const { userName } = useAppSelector((state) => state.user)
+  const {
+    user: { userName },
+  } = useAppSelector((state) => state)
 
   return (
-    <div className={s.user}>
-      <p className={s.userName}>{userName}</p>
-      <div className={s.userAvaBox}>
-        <svg className={s.userSvg}>
-          <use xlinkHref={`${sprite}#icon-avatar`} />
-        </svg>
-      </div>
-    </div>
+    <S.UserBox>
+      <S.UserName>{userName}</S.UserName>
+      <Icon icon={IconSprite.Avatar} size={60} roundCrop inActive />
+    </S.UserBox>
   )
 }
 

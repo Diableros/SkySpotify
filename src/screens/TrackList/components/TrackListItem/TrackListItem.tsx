@@ -3,7 +3,7 @@ import { TrackType } from '@/types'
 import cover from '@/img/blank_cover.png'
 import formatTrackTime from '@/helpers/formatTrackTime'
 import * as S from '../../TrackList.style'
-import GetIcon from '@/screens/components/Icon/enum'
+import IconSprite from '@/screens/components/Icon/enum'
 import Icon from '@/screens/components/Icon'
 
 type PropsType = {
@@ -22,7 +22,7 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
       <S.Col2>{trackData.author}</S.Col2>
       <S.Col3>{trackData.album}</S.Col3>
       <S.Col4>
-        <Icon icon={GetIcon.Like} size={15} />
+        <Icon icon={IconSprite.Like} size={20} inActive />
         {formatTrackTime(trackData.duration_in_seconds)}
       </S.Col4>
     </S.Row>

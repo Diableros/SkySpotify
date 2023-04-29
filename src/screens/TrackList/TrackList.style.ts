@@ -20,8 +20,6 @@ export const Header = styled.div`
   min-height: 40px;
   text-transform: uppercase;
   padding: 0 1rem;
-  box-shadow: ${({ theme }) => theme.bgMain} 0px 7px 7px;
-  z-index: 5;
 `
 
 export const Row = styled.li`

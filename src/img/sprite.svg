@@ -26,10 +26,14 @@
             </g>
         </g>
     </symbol>
-    <symbol id="icon-like" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M8.34372 2.1356H8.36529C9.29718 1.32164 11.7563 0.0456476 13.9565 1.64722C17.3111 4.0891 14.2458 9.37988 8.36529 12.8799H8.34372M8.34378 2.1356H8.32221C7.39032 1.32164 4.93121 0.0456476 2.73102 1.64722C-0.623552 4.0891 2.44172 9.37988 8.32221 12.8799H8.34378"
-            stroke="currentColor" />
+    <symbol id="icon-like" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+            <path
+                d="M9 11.2857L10.8 13L15 9M12 6.59097L11.8456 6.42726C9.86801 4.33053 6.59738 4.57698 4.91934 6.94915C3.42999 9.05459 3.78668 12.0335 5.725 13.6776L12 19L18.275 13.6776C20.2133 12.0335 20.57 9.05459 19.0807 6.94915C17.4026 4.57697 14.132 4.33053 12.1544 6.42726L12 6.59097Z"
+                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
     </symbol>
     <symbol id="icon-note" viewBox="0 0 20 19" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 16V1.9697L19 1V13" stroke="currentColor" />
@@ -59,27 +63,14 @@
             </g>
         </g>
     </symbol>
-    <symbol id="icon-dislike" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g filter="url(#filter0_d_6_62)">
-            <path d="M5 0.879883L19 13.3799" stroke="currentColor" />
+    <symbol id="icon-dislike" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
             <path
-                d="M12.3437 3.1356H12.3653C13.2972 2.32164 15.7563 1.04565 17.9565 2.64722C21.3111 5.0891 18.2458 10.3799 12.3653 13.8799H12.3437M12.3438 3.1356H12.3222C11.3903 2.32164 8.93121 1.04565 6.73102 2.64722C3.37645 5.0891 6.44172 10.3799 12.3222 13.8799H12.3438"
-                stroke="currentColor" />
+                d="M10 9.5L14 13.5M14 9.5L10 13.5M12 6.59097L11.8456 6.42726C9.86802 4.33054 6.5974 4.57698 4.91936 6.94915C3.43 9.05459 3.78669 12.0335 5.72501 13.6776L12 19L18.275 13.6776C20.2133 12.0335 20.57 9.05459 19.0807 6.94915C17.4026 4.57698 14.132 4.33054 12.1544 6.42726L12 6.59097Z"
+                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
         </g>
-        <defs>
-            <filter id="filter0_d_6_62" x="0.666992" y="0.506836" width="23.1768" height="21.873"
-                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha" />
-                <feOffset dy="4" />
-                <feGaussianBlur stdDeviation="2" />
-                <feComposite in2="hardAlpha" operator="out" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_6_62" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_6_62" result="shape" />
-            </filter>
-        </defs>
     </symbol>
     <symbol id="icon-prev" viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 2V12.5" stroke="currentColor" />
@@ -158,8 +149,14 @@
         <circle cx="19.5576" cy="20.375" r="19" stroke="currentColor" />
     </symbol>
 
-    <symbol id="icon-avatar" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z" />
+    <symbol id="icon-avatar" width="60px" height="60px" viewBox="0 0 16.00 16.00" xmlns="http://www.w3.org/2000/svg" fill="#000000"
+        transform="rotate(0)">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+            <path
+                d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"
+                fill="currentColor"></path>
+        </g>
     </symbol>
 </svg>

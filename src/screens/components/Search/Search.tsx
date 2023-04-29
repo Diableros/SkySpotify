@@ -1,11 +1,11 @@
 import Icon from '../Icon'
-import GetIcon from '../Icon/enum'
+import IconSprite from '../Icon/enum'
 import * as S from './Search.style'
 
 const Search = () => {
   return (
     <S.SearchBox>
-      <Icon icon={GetIcon.Search} size={19} active={false} />
+      <Icon icon={IconSprite.Search} size={19} inActive />
       <S.SearchInput type="search" name="search" placeholder="Поиск" />
     </S.SearchBox>
   )

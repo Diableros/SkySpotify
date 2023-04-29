@@ -3,7 +3,7 @@ import { HTMLMediaState } from 'react-use/lib/factory/createHTMLMediaHook'
 import * as S from './ControlBox.style'
 import { ControlsType } from '@/types'
 import Icon from '@/screens/components/Icon'
-import GetIcon from '@/screens/components/Icon/enum'
+import IconSprite from '@/screens/components/Icon/enum'
 
 const ControlBox = ({
   controls: { play, pause },
@@ -29,29 +29,29 @@ const ControlBox = ({
   return (
     <S.ControlPanel>
       <S.ControlButton type="button">
-        <Icon icon={GetIcon.Prev} size={20} />
+        <Icon icon={IconSprite.Prev} size={20} />
       </S.ControlButton>
 
       {isPlaying ? (
         <S.ControlButton type="button" onClick={handlePause}>
-          <Icon icon={GetIcon.Pause} size={24} />
+          <Icon icon={IconSprite.Pause} size={24} />
         </S.ControlButton>
       ) : (
         <S.ControlButton type="button" onClick={handlePlay}>
-          <Icon icon={GetIcon.Play} size={20} />
+          <Icon icon={IconSprite.Play} size={20} />
         </S.ControlButton>
       )}
 
       <S.ControlButton type="button">
-        <Icon icon={GetIcon.Next} size={20} />
+        <Icon icon={IconSprite.Next} size={20} />
       </S.ControlButton>
 
       <S.ControlButtonSecondary type="button">
-        <Icon icon={GetIcon.Loop} size={16} />
+        <Icon icon={IconSprite.Loop} size={16} />
       </S.ControlButtonSecondary>
 
       <S.ControlButtonSecondary type="button">
-        <Icon icon={GetIcon.Shuffle} size={16} />
+        <Icon icon={IconSprite.Shuffle} size={16} />
       </S.ControlButtonSecondary>
     </S.ControlPanel>
   )

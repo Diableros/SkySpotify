@@ -9,7 +9,7 @@ import logoLightTheme from '@/img/logo.svg'
 import { LinkPath } from '@/providers/routes'
 import Theme from '@/theme/enums'
 import Icon from '../Icon'
-import GetIcon from '../Icon/enum'
+import IconSprite from '../Icon/enum'
 
 const Menu = () => {
   const { currentTheme, toggleTheme } = React.useContext(ThemeContext)
@@ -38,7 +38,9 @@ const Menu = () => {
         <LogoutButton />
         <Icon
           icon={
-            currentTheme === Theme.Dark ? GetIcon.ThemeDark : GetIcon.ThemeLight
+            currentTheme === Theme.Dark
+              ? IconSprite.ThemeDark
+              : IconSprite.ThemeLight
           }
           size={40}
           onClick={() =>
