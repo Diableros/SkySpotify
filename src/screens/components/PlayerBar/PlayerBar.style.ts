@@ -6,7 +6,7 @@ type PlayerBarPropsType = {
 
 export const PlayerBarBox = styled.div<PlayerBarPropsType>`
   position: fixed;
-  color: ${({ theme }) => theme.textMain};
+  color: ${({ theme }) => theme.color.textMain};
   left: 0;
   bottom: -73px;
   width: 100%;
@@ -23,7 +23,7 @@ export const PlayerBar = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.bgMain};
+  background-color: ${({ theme }) => theme.color.bgMain};
 `
 
 export const CurrentTrackStateWrapper = styled.div`

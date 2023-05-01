@@ -5,7 +5,7 @@ export const SearchBox = styled.div`
   height: 70px;
   display: flex;
   align-items: flex-end;
-  border-bottom: 1px solid ${({ theme }) => theme.textSecondry};
+  border-bottom: 1px solid ${({ theme }) => theme.color.textSecondry};
   padding: 14px;
   gap: 1rem;
   flex: none;

@@ -6,7 +6,7 @@ export const ControlPanel = styled.div`
   height: 100%;
   justify-content: space-evenly;
   align-items: center;
-  color: ${({ theme }) => theme.textMain};
+  color: ${({ theme }) => theme.color.textMain};
 `
 
 export const ControlButton = styled.button`
@@ -30,5 +30,5 @@ export const ControlButton = styled.button`
   } */
 `
 export const ControlButtonSecondary = styled(ControlButton)`
-  color: ${({ theme }) => theme.textSecondry};
+  color: ${({ theme }) => theme.color.textSecondry};
 `

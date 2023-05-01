@@ -9,7 +9,7 @@ const TableHeaderRow = () => {
       <S.Col2>Исполнитель</S.Col2>
       <S.Col3>Альбом</S.Col3>
       <S.Col4>
-        <Icon icon={IconSprite.Watch} color="inherit" size={18} inActive />
+        <Icon icon={IconSprite.Watch} color="inherit" size="18px" inActive />
       </S.Col4>
     </S.Header>
   )

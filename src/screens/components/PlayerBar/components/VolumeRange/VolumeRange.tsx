@@ -44,9 +44,9 @@ const VolumeRange = ({
   return (
     <S.VolumeBox>
       {!isMute ? (
-        <Icon icon={IconSprite.Volume} onClick={handleSetMute} size={20} />
+        <Icon icon={IconSprite.Volume} onClick={handleSetMute} size="20px" />
       ) : (
-        <Icon icon={IconSprite.Mute} onClick={handleSetUnMute} size={20} />
+        <Icon icon={IconSprite.Mute} onClick={handleSetUnMute} size="20px" />
       )}
       <S.Slider
         type="range"

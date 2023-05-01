@@ -6,18 +6,18 @@ type HeaderButtonType = {
 }
 
 const activeStyle = css`
-  border-color: ${({ theme }) => theme.active};
-  color: ${({ theme }) => theme.active};
+  border-color: ${({ theme }) => theme.color.active};
+  color: ${({ theme }) => theme.color.active};
 `
 
 const activeHoverStyle = css`
-  border-color: ${({ theme }) => theme.active};
-  color: ${({ theme }) => theme.active};
+  border-color: ${({ theme }) => theme.color.active};
+  color: ${({ theme }) => theme.color.active};
 `
 
 const hoverStyle = css`
-  border-color: ${({ theme }) => theme.hover};
-  color: ${({ theme }) => theme.hover};
+  border-color: ${({ theme }) => theme.color.hover};
+  color: ${({ theme }) => theme.color.hover};
 `
 
 export const HeaderButton = styled.button<HeaderButtonType>`
@@ -27,7 +27,7 @@ export const HeaderButton = styled.button<HeaderButtonType>`
   align-items: center;
   border-radius: 19px;
   /* border: 1px solid #fff; */
-  border: 1px solid ${({ theme }) => theme.textMain};
+  border: 1px solid ${({ theme }) => theme.color.textMain};
   text-align: center;
   padding: 7px 22px 10px;
 
@@ -38,8 +38,8 @@ export const HeaderButton = styled.button<HeaderButtonType>`
   }
 
   &:active {
-    border-color: ${({ theme }) => theme.active};
-    color: ${({ theme }) => theme.active};
+    border-color: ${({ theme }) => theme.color.active};
+    color: ${({ theme }) => theme.color.active};
   }
 `
 export const HeaderButtonBox = styled.div`
@@ -58,7 +58,7 @@ export const HeaderButtonSelect = styled.div`
   border-radius: 12px;
   padding: 34px;
 
-  background-color: ${({ theme }) => theme.bgDropList};
+  background-color: ${({ theme }) => theme.color.bgDropList};
 `
 export const HeaderButtonSelectItemsBox = styled.ul`
   height: 100%;
@@ -78,11 +78,11 @@ export const HeaderButtonSelectItem = styled.li`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.hover};
+    color: ${({ theme }) => theme.color.hover};
     /* text-decoration: underline; */
   }
 
   &:active {
-    color: ${({ theme }) => theme.active};
+    color: ${({ theme }) => theme.color.active};
   }
 `

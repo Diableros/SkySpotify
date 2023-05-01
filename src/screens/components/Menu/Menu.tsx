@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { ThemeContext } from '@/providers/Theme'
+import { useThemeContext } from '@/providers/Theme'
 import LogoutButton from '../LogoutButton/LogoutButton'
 import s from './Menu.module.scss'
 import * as S from './Menu.style'
@@ -12,8 +12,9 @@ import Icon from '../Icon'
 import IconSprite from '../Icon/enum'
 
 const Menu = () => {
-  const { currentTheme, toggleTheme } = React.useContext(ThemeContext)
+  const { currentTheme, toggleTheme } = useThemeContext()
   const [isMenuShow, setIsMenuShow] = React.useState<boolean>(false)
+  const isDarkTheme = currentTheme === Theme.Dark
 
   const toggleMenuShow = () => {
     setIsMenuShow((prevShowMenuState) => !prevShowMenuState)
@@ -37,15 +38,9 @@ const Menu = () => {
         <Link to={LinkPath.Test404}>Page 404 test</Link>
         <LogoutButton />
         <Icon
-          icon={
-            currentTheme === Theme.Dark
-              ? IconSprite.ThemeDark
-              : IconSprite.ThemeLight
-          }
-          size={40}
-          onClick={() =>
-            toggleTheme(currentTheme === Theme.Light ? Theme.Dark : Theme.Light)
-          }
+          icon={isDarkTheme ? IconSprite.ThemeDark : IconSprite.ThemeLight}
+          size="40px"
+          onClick={() => toggleTheme()}
         />
       </S.Slider>
     </nav>

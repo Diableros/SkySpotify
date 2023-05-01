@@ -11,7 +11,7 @@ const User = () => {
   return (
     <S.UserBox>
       <S.UserName>{userName}</S.UserName>
-      <Icon icon={IconSprite.Avatar} size={60} roundCrop inActive />
+      <Icon icon={IconSprite.Avatar} size="60px" roundCrop inActive />
     </S.UserBox>
   )
 }

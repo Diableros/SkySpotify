@@ -4,8 +4,8 @@ export const LayoutTop = styled.div`
   width: 100%;
   flex-grow: 1;
   display: flex;
-  color: ${({ theme }) => theme.textMain};
-  background-color: ${({ theme }) => theme.bgMain};
+  color: ${({ theme }) => theme.color.textMain};
+  background-color: ${({ theme }) => theme.color.bgMain};
 `
 
 export const LayoutMiddle = styled.section`

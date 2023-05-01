@@ -16,7 +16,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  color: ${({ theme }) => theme.textSecondry};
+  color: ${({ theme }) => theme.color.textSecondry};
   min-height: 40px;
   text-transform: uppercase;
   padding: 0 1rem;
@@ -54,7 +54,7 @@ export const Col2 = styled.div`
 
 export const Col3 = styled.div`
   flex: 1.7;
-  color: ${({ theme }) => theme.textSecondry};
+  color: ${({ theme }) => theme.color.textSecondry};
 `
 
 export const Col4 = styled.div`
@@ -62,12 +62,12 @@ export const Col4 = styled.div`
   gap: 0.75rem;
   justify-content: center;
   flex: 0.5;
-  color: ${({ theme }) => theme.textSecondry};
+  color: ${({ theme }) => theme.color.textSecondry};
   padding-right: 0.75rem;
 `
 
 export const Like = styled.div`
-  color: ${({ theme }) => theme.textSecondry};
+  color: ${({ theme }) => theme.color.textSecondry};
 `
 
 export const ErrorWrapper = styled.div`

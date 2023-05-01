@@ -29,29 +29,29 @@ const ControlBox = ({
   return (
     <S.ControlPanel>
       <S.ControlButton type="button">
-        <Icon icon={IconSprite.Prev} size={20} />
+        <Icon icon={IconSprite.Prev} size="20px" />
       </S.ControlButton>
 
       {isPlaying ? (
         <S.ControlButton type="button" onClick={handlePause}>
-          <Icon icon={IconSprite.Pause} size={24} />
+          <Icon icon={IconSprite.Pause} size="24px" />
         </S.ControlButton>
       ) : (
         <S.ControlButton type="button" onClick={handlePlay}>
-          <Icon icon={IconSprite.Play} size={20} />
+          <Icon icon={IconSprite.Play} size="20px" />
         </S.ControlButton>
       )}
 
       <S.ControlButton type="button">
-        <Icon icon={IconSprite.Next} size={20} />
+        <Icon icon={IconSprite.Next} size="20px" />
       </S.ControlButton>
 
       <S.ControlButtonSecondary type="button">
-        <Icon icon={IconSprite.Loop} size={16} />
+        <Icon icon={IconSprite.Loop} size="16px" />
       </S.ControlButtonSecondary>
 
       <S.ControlButtonSecondary type="button">
-        <Icon icon={IconSprite.Shuffle} size={16} />
+        <Icon icon={IconSprite.Shuffle} size="16px" />
       </S.ControlButtonSecondary>
     </S.ControlPanel>
   )

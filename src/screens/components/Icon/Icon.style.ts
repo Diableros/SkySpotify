@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
 type PropsType = {
-  size?: number
-  width?: number
-  height?: number
+  size?: string
+  width?: string
+  height?: string
   roundCrop?: boolean
   inActive?: boolean
   color?: string
@@ -13,10 +13,10 @@ const activeCss = css`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.hover};
+    color: ${({ theme }) => theme.color.hover};
   }
   &:active {
-    color: ${({ theme }) => theme.active};
+    color: ${({ theme }) => theme.color.active};
   }
 `
 
@@ -25,8 +25,8 @@ export const IconWrapper = styled.div<PropsType>`
   ${({ size }) =>
     size
       ? `
-  width: ${size}px;
-  height: ${size}px;
+  width: ${size};
+  height: ${size};
   `
       : null}
 

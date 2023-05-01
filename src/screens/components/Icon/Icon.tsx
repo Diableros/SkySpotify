@@ -4,9 +4,9 @@ import IconSprite from './enum'
 
 type PropsType = {
   icon: IconSprite
-  size?: number
-  width?: number
-  height?: number
+  size?: string
+  width?: string
+  height?: string
   roundCrop?: boolean
   color?: string
   inActive?: boolean

@@ -4,10 +4,10 @@ type TrackListTextCellPropsType = {
   flex: number
 }
 
-const bgColor1 = 'rgba(255, 255, 255, 5%)'
-const bgColor2 = 'rgba(255, 255, 255, 15%)'
+const bgColor1 = 'rgba(123, 123, 123, 10%)'
+const bgColor2 = 'rgba(123, 123, 123, 35%)'
 
-const borderRadius = 5
+const borderRadius = '5px'
 
 const bgGradient = `
   background-image: linear-gradient(130deg, ${bgColor1} 30%, ${bgColor2} 50%, ${bgColor1} 70%);
@@ -36,14 +36,14 @@ export const TrackListRow = styled.div`
 export const TrackListAvatarCell = styled.div`
   height: 52px;
   width: 52px;
-  border-radius: ${borderRadius}px;
+  border-radius: ${borderRadius};
   ${bgGradient}
   animation: ${animation} 2s infinite linear;
 `
 export const TrackListTextCell = styled.div<TrackListTextCellPropsType>`
   height: 1.5rem;
   flex: ${({ flex }) => flex};
-  border-radius: ${borderRadius}px;
+  border-radius: ${borderRadius};
   ${bgGradient}
   animation: ${animation} 2s infinite linear;
 `

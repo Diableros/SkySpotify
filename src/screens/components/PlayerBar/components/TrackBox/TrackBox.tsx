@@ -13,8 +13,8 @@ const TrackBox = ({ currentTrack: { name, author } }: PropsType) => {
   return (
     <div className={s.TrackBox}>
       <div className={s.reactionsBox}>
-        <Icon icon={IconSprite.Like} size={24} />
-        <Icon icon={IconSprite.Dislike} size={24} />
+        <Icon icon={IconSprite.Like} size="24px" />
+        <Icon icon={IconSprite.Dislike} size="24px" />
       </div>
       <img className={s.cover} src={cover} alt="Album cover" />
       <div className={s.TrackInfo}>

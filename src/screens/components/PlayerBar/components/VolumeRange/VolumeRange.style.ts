@@ -20,17 +20,17 @@ export const Slider = styled.input`
 
   &[type='range']::-webkit-slider-runnable-track {
     height: 2px;
-    background-color: ${({ theme }) => theme.bgDropListSlider};
+    background-color: ${({ theme }) => theme.color.bgDropListSlider};
     overflow-clip-margin: hidden;
   }
 
   &[type='range']::-webkit-slider-thumb {
     position: relative;
-    background: ${({ theme }) => theme.bgMain};
+    background: ${({ theme }) => theme.color.bgMain};
     cursor: pointer;
     width: 12px;
     min-height: 12px;
-    border: 2px solid ${({ theme }) => theme.textMain};
+    border: 2px solid ${({ theme }) => theme.color.textMain};
     border-radius: 50%;
     -webkit-appearance: none;
     margin-top: -5px;
@@ -41,7 +41,7 @@ export const Slider = styled.input`
       content: '';
       height: 5px;
       width: 50px;
-      background-color: ${({ theme }) => theme.textMain};
+      background-color: ${({ theme }) => theme.color.textMain};
     }
   }
 `

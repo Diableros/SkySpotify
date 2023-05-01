@@ -7,7 +7,7 @@ export const UserBox = styled.div`
   width: 100%;
   padding: 1rem;
   gap: 1rem;
-  color: ${({ theme }) => theme.textSecondry};
+  color: ${({ theme }) => theme.color.textSecondry};
 `
 
 export const UserName = styled.p`

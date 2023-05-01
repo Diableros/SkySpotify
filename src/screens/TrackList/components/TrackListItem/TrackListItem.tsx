@@ -22,7 +22,7 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
       <S.Col2>{trackData.author}</S.Col2>
       <S.Col3>{trackData.album}</S.Col3>
       <S.Col4>
-        <Icon icon={IconSprite.Like} size={20} inActive />
+        <Icon icon={IconSprite.Like} size="20px" inActive />
         {formatTrackTime(trackData.duration_in_seconds)}
       </S.Col4>
     </S.Row>
