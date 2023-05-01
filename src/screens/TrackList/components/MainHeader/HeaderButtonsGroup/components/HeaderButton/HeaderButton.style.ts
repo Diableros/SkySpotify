@@ -1,22 +1,23 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { scrollBarStyles } from '@/global_style/globalStyles'
 
 type HeaderButtonType = {
   isActive: boolean
 }
 
-const activeStyle = `
-  border-color: var(--active-color);
-  color: var(--active-color);
+const activeStyle = css`
+  border-color: ${({ theme }) => theme.color.active};
+  color: ${({ theme }) => theme.color.active};
 `
 
-const activeHoverStyle = `
-  border-color: var(--active-color);
-  color: var(--active-color);
+const activeHoverStyle = css`
+  border-color: ${({ theme }) => theme.color.active};
+  color: ${({ theme }) => theme.color.active};
 `
 
-const hoverStyle = `
-  border-color: var(--hover-color);
-  color: var(--hover-color);
+const hoverStyle = css`
+  border-color: ${({ theme }) => theme.color.hover};
+  color: ${({ theme }) => theme.color.hover};
 `
 
 export const HeaderButton = styled.button<HeaderButtonType>`
@@ -25,7 +26,8 @@ export const HeaderButton = styled.button<HeaderButtonType>`
   justify-content: center;
   align-items: center;
   border-radius: 19px;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
+  border: 1px solid ${({ theme }) => theme.color.textMain};
   text-align: center;
   padding: 7px 22px 10px;
 
@@ -36,8 +38,8 @@ export const HeaderButton = styled.button<HeaderButtonType>`
   }
 
   &:active {
-    border-color: var(--active-color);
-    color: var(--active-color);
+    border-color: ${({ theme }) => theme.color.active};
+    color: ${({ theme }) => theme.color.active};
   }
 `
 export const HeaderButtonBox = styled.div`
@@ -56,28 +58,18 @@ export const HeaderButtonSelect = styled.div`
   border-radius: 12px;
   padding: 34px;
 
-  background-color: var(--search-select-bg-color);
+  background-color: ${({ theme }) => theme.color.bgDropList};
 `
 export const HeaderButtonSelectItemsBox = styled.ul`
   height: 100%;
-  position: relative;
+  width: 100%;
   display: flex;
   gap: 28px;
 
   flex-direction: column;
   overflow-y: auto;
 
-  &::-webkit-scrollbar {
-    width: 4px;
-    background: var(--scrollbar-bg-color);
-    border-radius: 2px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    width: 4px;
-    border-radius: 2px;
-    background: #ffffff;
-  }
+  ${scrollBarStyles}
 `
 
 export const HeaderButtonSelectItem = styled.li`
@@ -86,11 +78,11 @@ export const HeaderButtonSelectItem = styled.li`
   cursor: pointer;
 
   &:hover {
-    color: var(--hover-color);
-    text-decoration: underline;
+    color: ${({ theme }) => theme.color.hover};
+    /* text-decoration: underline; */
   }
 
   &:active {
-    color: var(--active-color);
+    color: ${({ theme }) => theme.color.active};
   }
 `

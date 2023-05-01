@@ -1,8 +1,6 @@
 import * as React from 'react'
-import clsx from 'clsx'
 import { useLocalStorage } from 'react-use'
 import useTracksQuery from '@/hooks/useTracksQuery'
-import s from './TrackList.module.scss'
 import MainHeader from './components/MainHeader/MainHeader'
 import Skeleton from './components/Skeleton'
 import * as S from './TrackList.style'
@@ -40,7 +38,7 @@ const TrackList = () => {
   )
 
   const successContent = (
-    <ul className={clsx(s.trackList, 'styled-scroll-bar')}>
+    <S.TrackList>
       {data && !isLoading ? (
         data.map((track) => (
           <TrackListItem
@@ -52,7 +50,7 @@ const TrackList = () => {
       ) : (
         <Skeleton />
       )}
-    </ul>
+    </S.TrackList>
   )
 
   return (

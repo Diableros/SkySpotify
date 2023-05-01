@@ -2,12 +2,12 @@ import { Navigate, Outlet } from 'react-router-dom'
 import PlayerBar from '@/screens/components/PlayerBar/PlayerBar'
 import Search from '@/screens/components/Search/Search'
 import Menu from '@/screens/components/Menu/Menu'
-import s from './Layout.module.scss'
 import CollectionsNav from '@/screens/components/CollectionsNav/CollectionsNav'
 import User from '../components/User/User'
 import useUserStore from '@/hooks/useUserStore'
 import useAppStore from '@/hooks/useAppStore'
 import { TrackType } from '@/types'
+import * as S from './Layout.style'
 
 const Layout = () => {
   const isLogin = useUserStore('login')
@@ -15,17 +15,17 @@ const Layout = () => {
 
   return (
     <>
-      <div className={s.layoutTop}>
+      <S.LayoutTop>
         <Menu />
-        <section className={s.layoutTopMiddle}>
+        <S.LayoutMiddle>
           <Search />
           {isLogin ? <Outlet /> : <Navigate to="/login" />}
-        </section>
-        <section className={s.layoutTopRight}>
+        </S.LayoutMiddle>
+        <S.LayoutRight>
           <User />
           <CollectionsNav />
-        </section>
-      </div>
+        </S.LayoutRight>
+      </S.LayoutTop>
       {currentTrack ? <PlayerBar currentTrack={currentTrack} /> : null}
     </>
   )

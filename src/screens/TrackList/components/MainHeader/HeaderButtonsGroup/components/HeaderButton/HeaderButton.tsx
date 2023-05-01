@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { OPTIONS_NOT_FOUND } from '../../constants'
 import * as S from './HeaderButton.style'
 

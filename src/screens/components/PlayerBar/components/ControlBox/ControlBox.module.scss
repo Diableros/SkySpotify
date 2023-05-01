@@ -19,14 +19,6 @@
     flex-direction: column;
     align-items: center;
     transition: filter 0.1s;
-
-    &:hover {
-      filter: drop-shadow(0 0 5px #fff);
-    }
-
-    &:active {
-      filter: drop-shadow(0 0 10px #fff);
-    }
   }
 
   &Svg {
