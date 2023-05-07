@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import req from '@/request/KyRequest'
-import { useAppDispatch } from './reduxHooks'
+import req from './request/KyRequest'
+import { useAppDispatch } from '../hooks/reduxHooks'
 import { setTrackStore } from '@/store/appSlice'
 
 const useTracksQuery = () => {

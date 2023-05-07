@@ -30,8 +30,8 @@ export const IconWrapper = styled.div<PropsType>`
   `
       : null}
 
-  ${({ width }) => (width ? `width: ${width}px` : null)};
-  ${({ height }) => (height ? `height: ${height}px` : null)};
+  ${({ width }) => (width ? `width: ${width}` : null)};
+  ${({ height }) => (height ? `height: ${height}` : null)};
   ${({ roundCrop }) => (roundCrop ? `border-radius: 50%;` : null)}
   overflow: hidden;
 

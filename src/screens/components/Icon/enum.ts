@@ -15,6 +15,7 @@ enum IconSprite {
   ThemeDark = 'theme-dark',
   ThemeLight = 'theme-light',
   Avatar = 'avatar',
+  Alert = 'alert',
 }
 
 export default IconSprite

@@ -9,5 +9,6 @@ export type ThemeType = {
     bgDropList: string
     bgDropListSlider: string
     bgTrackHover: string
+    textError: string
   }
 }

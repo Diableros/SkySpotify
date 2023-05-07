@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useLocalStorage } from 'react-use'
-import useTracksQuery from '@/hooks/useTracksQuery'
+import useTracksQuery from '@/queryService/useTracksQuery'
 import MainHeader from './components/MainHeader/MainHeader'
 import Skeleton from './components/Skeleton'
 import * as S from './TrackList.style'

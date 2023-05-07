@@ -12,6 +12,7 @@ export const darkTheme: ThemeType = {
     bgDropList: '#313131',
     bgDropListSlider: '#4b4949',
     bgTrackHover: '#fff02',
+    textError: '#ff5a5a',
   },
 }
 
@@ -26,6 +27,7 @@ const lightTheme: ThemeType = {
     bgDropList: '#eee',
     bgDropListSlider: '#e2e2e2',
     bgTrackHover: '#00002',
+    textError: '#ff5a5a',
   },
 }
 

@@ -4,30 +4,32 @@ import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
 import logo from '@/img/logo.svg'
 import s from './LoginScreen.module.scss'
-import Snack from '@/screens/components/Snack/Snack'
 import { userLogin } from '@/store/userSlice'
 import { useAppDispatch } from '@/hooks/reduxHooks'
 import Button, { ButtonStyle } from '../components/Button/Button'
-
-export type LoginFieldsType = {
-  email: string
-  password: string
-  passwordConfirm?: string
-}
+import { LoginFieldsType, FieldsList } from './types'
+import LoginFormInput from './components/LoginInput/LoginFormInput'
+import FIELDS from './formFields'
 
 const LoginScreen = () => {
-  const [isRegister, setIsRegister] = React.useState<boolean>(false)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const [isRegister, setIsRegister] = React.useState<boolean>(false)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFieldsType>()
+    clearErrors,
+  } = useForm<LoginFieldsType>({
+    mode: 'onTouched',
+  })
+
+  const isButtonsDisabled = Object.keys(errors).length > 0
 
   const onSubmit: SubmitHandler<LoginFieldsType> = (data) => {
     // just for probe
+    alert(JSON.stringify(data))
     dispatch(
       userLogin({
         login: true,
@@ -42,66 +44,58 @@ const LoginScreen = () => {
   }
 
   return (
-    <>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <a href="/">
-          <img src={logo} alt="Skyspotify logo" />
-        </a>
-        <div className={s['form__input-box']}>
-          <input
-            className={s.form__input}
-            type="email"
-            placeholder="e-mail"
-            {...register('email', {
-              required: '(Нужен формат e-mail)',
-              minLength: 4,
-              maxLength: 20,
-              pattern:
-                /^[A-Za-z0-9.]{2,40}@[A-Za-z0-9]{2,40}.[A-Za-z0-9]{2,7}$/,
-            })}
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <a href="/">
+        <img src={logo} alt="Skyspotify logo" />
+      </a>
+      <div className={s['form__input-box']}>
+        <LoginFormInput
+          register={register}
+          inputError={errors[FieldsList.Email]}
+          {...FIELDS[FieldsList.Email]}
+        />
+        <LoginFormInput
+          register={register}
+          inputError={errors[FieldsList.Password]}
+          {...FIELDS[FieldsList.Password]}
+        />
+        {isRegister ? (
+          <LoginFormInput
+            register={register}
+            inputError={errors[FieldsList.PasswordConfirm]}
+            {...FIELDS[FieldsList.PasswordConfirm]}
           />
-          <input
-            className={s.form__input}
-            type="password"
-            placeholder="Пароль"
-            {...register('password', {
-              required: '(длина 8-30 символов)',
-              minLength: 8,
-              maxLength: 20,
-            })}
+        ) : null}
+      </div>
+      <div className={s['form__button-box']}>
+        {isRegister ? (
+          <Button
+            style={ButtonStyle.Purple}
+            title="Зарегистрироваться"
+            action={() => console.log('Регистрация')}
+            disabled={isButtonsDisabled}
           />
-          {isRegister ? (
-            <input
-              className={s.form__input}
-              type="password"
-              placeholder="Повторите пароль"
-              {...register('passwordConfirm', {
-                required: true,
-                minLength: 8,
-                maxLength: 20,
-              })}
+        ) : (
+          <>
+            <Button
+              style={ButtonStyle.Purple}
+              title="Войти"
+              action={() => console.log('Вход')}
+              disabled={isButtonsDisabled}
             />
-          ) : null}
-        </div>
-        <div className={s['form__button-box']}>
-          {isRegister ? (
-            <Button style={ButtonStyle.Purple} title="Зарегистрироваться" />
-          ) : (
-            <>
-              <Button style={ButtonStyle.Purple} title="Войти" />
-              <Button
-                style={ButtonStyle.White}
-                title="Зарегистрироваться"
-                action={() => setIsRegister(true)}
-              />
-            </>
-          )}
-        </div>
-      </form>
-      {Object.keys(errors).length > 0 ? (
-        <Snack type="error" data={errors} />
-      ) : null}
-    </>
+            <Button
+              style={ButtonStyle.White}
+              title="Зарегистрироваться"
+              disabled={isButtonsDisabled}
+              action={() => {
+                clearErrors()
+                setIsRegister(true)
+              }}
+            />
+          </>
+        )}
+      </div>
+    </form>
   )
 }
 
