@@ -1,4 +1,4 @@
-import ky, { KyResponse } from 'ky'
+import ky, { Hooks, KyResponse } from 'ky'
 import sleep from '@/helpers/sleep'
 import BASE_API_URL from './constants'
 import { EndpointsType } from '../queries'
@@ -10,6 +10,7 @@ type ArgumentsType = {
   endpoint: EndpointsType
   param?: string
   body?: ApiRequestType
+  hooks?: Hooks
 }
 
 async function req<T>({

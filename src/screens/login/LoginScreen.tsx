@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
-import { useNavigate } from 'react-router-dom'
 import useLogin from '@/queryService/qieryHooks/useLogin'
 import { ApiRequestType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
@@ -13,9 +12,7 @@ import { FieldsList, LoginFieldsType } from './types'
 
 const LoginScreen = () => {
   const [isRegister, setIsRegister] = React.useState<boolean>(false)
-  const [loginFieldsData, setLoginFieldsData] = React.useState<ApiRequestType>()
-  // const dispatch = useAppDispatch()
-  const { data, isLoading, isError, error } = useLogin(loginFieldsData)
+  const { mutate, isLoading, error, status } = useLogin()
 
   const {
     register,
@@ -26,13 +23,25 @@ const LoginScreen = () => {
     mode: 'onTouched',
   })
 
-  const isButtonsDisabled = Object.keys(errors).length > 0
+  const isButtonsDisabled = Object.keys(errors).length > 0 || isLoading
 
   const onSubmit: SubmitHandler<ApiRequestType> = (loginFormdata) => {
-    setLoginFieldsData(loginFormdata)
+    mutate(loginFormdata)
   }
 
-  React.useEffect(() => console.log('error: ', error), [error])
+  if (error) console.dir(error)
+
+  if (status === 'error' && error) {
+    switch (error.response?.status) {
+      case 401:
+        console.log('Пользователь не найден')
+        break
+
+      default:
+        console.log('Незивестная ошибка')
+        break
+    }
+  }
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -62,7 +71,7 @@ const LoginScreen = () => {
         {isRegister ? (
           <Button
             style={ButtonStyle.Purple}
-            title="Зарегистрироваться"
+            title={isLoading ? 'Отправка данных...' : 'Зарегистрироваться'}
             action={() => console.log('Регистрация')}
             disabled={isButtonsDisabled}
           />
@@ -70,7 +79,7 @@ const LoginScreen = () => {
           <>
             <Button
               style={ButtonStyle.Purple}
-              title="Войти"
+              title={isLoading ? 'Отправка данных...' : 'Войти'}
               action={() => console.log('Вход')}
               disabled={isButtonsDisabled}
             />

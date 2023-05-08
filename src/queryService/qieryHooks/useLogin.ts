@@ -1,27 +1,26 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
+import { useNavigate } from 'react-router-dom'
 import { ApiRequestType, ApiResponseType } from '../apiTypes'
-import errorCatcher from '../helpers/errorCatcher'
 import queries from '../queries'
 import QueryKey from '../queryKeys'
 import req from '../request'
 
-const useLogin = (credentials?: ApiRequestType) => {
-  const handleLogin = (loginResponse: ApiResponseType) => {
-    console.log('server response: ', loginResponse)
+const useLogin = () => {
+  const handleSuccessLogin = (data: ApiResponseType) => {
+    console.log('Success login! User data: ', data)
+    // const dispatch = useAppDispatch()
+    // useNavigate('/')
   }
 
-  return useQuery({
-    queryFn: () =>
+  return useMutation({
+    mutationFn: (loginFieldsData: ApiRequestType) =>
       req<ApiResponseType>({
         method: 'post',
         endpoint: queries.User.Login,
-        body: credentials,
+        body: loginFieldsData,
       }),
-    queryKey: [QueryKey.UserLogin],
-    onSuccess: handleLogin,
-    onError: errorCatcher,
-    retry: 1,
-    enabled: !!credentials,
+    mutationKey: [QueryKey.UserLogin],
+    onSuccess: handleSuccessLogin,
   })
 }
 
