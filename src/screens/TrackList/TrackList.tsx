@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useLocalStorage } from 'react-use'
-import useTracksQuery from '@/queryService/useTracksQuery'
+import useFullTrackList from '@/queryService/qieryHooks/useFullTrackList'
 import MainHeader from './components/MainHeader/MainHeader'
 import Skeleton from './components/Skeleton'
 import * as S from './TrackList.style'
@@ -15,7 +15,7 @@ const LOCAL_STORAGE_FIELD = 'currentTrack'
 
 const TrackList = () => {
   // console.log('Tracklist render')
-  const { data, isLoading, isError } = useTracksQuery()
+  const { data, isLoading, isError } = useFullTrackList()
 
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
     useLocalStorage<TrackType>(LOCAL_STORAGE_FIELD)
