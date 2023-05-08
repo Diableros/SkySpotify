@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
+import { HTTPError } from 'ky'
 import useLogin from '@/queryService/qieryHooks/useLogin'
 import { ApiRequestType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
@@ -9,9 +10,10 @@ import LoginFormInput from './components/LoginInput/LoginFormInput'
 import FIELDS from './formFields'
 import s from './LoginScreen.module.scss'
 import { FieldsList, LoginFieldsType } from './types'
+import { ErrorText } from './constants'
 
 const LoginScreen = () => {
-  const [isRegister, setIsRegister] = React.useState<boolean>(false)
+  const [isRegistration, setIsRegistration] = React.useState<boolean>(false)
   const { mutate, isLoading, error, status } = useLogin()
 
   const {
@@ -19,29 +21,40 @@ const LoginScreen = () => {
     handleSubmit,
     formState: { errors },
     clearErrors,
+    setError,
   } = useForm<LoginFieldsType>({
     mode: 'onTouched',
   })
 
-  const isButtonsDisabled = Object.keys(errors).length > 0 || isLoading
+  const isSubmitButtonDisable = Object.keys(errors).length > 0 || isLoading
 
   const onSubmit: SubmitHandler<ApiRequestType> = (loginFormdata) => {
     mutate(loginFormdata)
   }
 
-  if (error) console.dir(error)
+  React.useEffect(() => {
+    if (status === 'error' && error) {
+      switch ((error as HTTPError).response.status) {
+        case 401:
+          setError(
+            'email',
+            {
+              type: 'focus',
+              message: ErrorText.UserNotFound,
+            },
+            { shouldFocus: true }
+          )
+          break
 
-  if (status === 'error' && error) {
-    switch (error.response?.status) {
-      case 401:
-        console.log('Пользователь не найден')
-        break
-
-      default:
-        console.log('Незивестная ошибка')
-        break
+        default:
+          setError('email', {
+            type: 'custom',
+            message: 'Пользователь не найден',
+          })
+          break
+      }
     }
-  }
+  }, [status, error, setError])
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -59,7 +72,7 @@ const LoginScreen = () => {
           inputError={errors[FieldsList.Password]}
           {...FIELDS[FieldsList.Password]}
         />
-        {isRegister ? (
+        {isRegistration ? (
           <LoginFormInput
             register={register}
             inputError={errors[FieldsList.PasswordConfirm]}
@@ -68,28 +81,27 @@ const LoginScreen = () => {
         ) : null}
       </div>
       <div className={s['form__button-box']}>
-        {isRegister ? (
+        {isRegistration ? (
           <Button
             style={ButtonStyle.Purple}
             title={isLoading ? 'Отправка данных...' : 'Зарегистрироваться'}
             action={() => console.log('Регистрация')}
-            disabled={isButtonsDisabled}
+            disabled={isSubmitButtonDisable}
           />
         ) : (
           <>
             <Button
               style={ButtonStyle.Purple}
-              title={isLoading ? 'Отправка данных...' : 'Войти'}
-              action={() => console.log('Вход')}
-              disabled={isButtonsDisabled}
+              title={isLoading ? 'Логинимся...' : 'Войти'}
+              disabled={isSubmitButtonDisable}
             />
             <Button
               style={ButtonStyle.White}
               title="Зарегистрироваться"
-              disabled={isButtonsDisabled}
+              disabled={isSubmitButtonDisable}
               action={() => {
                 clearErrors()
-                setIsRegister(true)
+                setIsRegistration(true)
               }}
             />
           </>

@@ -1,15 +1,23 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '@/hooks/reduxHooks'
+import { userLogin } from '@/store/userSlice'
 import { ApiRequestType, ApiResponseType } from '../apiTypes'
 import queries from '../queries'
 import QueryKey from '../queryKeys'
 import req from '../request'
 
 const useLogin = () => {
-  const handleSuccessLogin = (data: ApiResponseType) => {
-    console.log('Success login! User data: ', data)
-    // const dispatch = useAppDispatch()
-    // useNavigate('/')
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const handleSuccessLogin = ({
+    id,
+    username: userName,
+    email,
+  }: ApiResponseType) => {
+    dispatch(userLogin({ id, userName, email, token: '', login: true }))
+    navigate('/')
   }
 
   return useMutation({

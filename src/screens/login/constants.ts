@@ -22,4 +22,6 @@ export enum ErrorText {
   MismatchPasswords = 'Пароли не совпадают',
 
   Required = 'Поле обязательно для заполнения',
+
+  UserNotFound = 'Не верный пользователь или пароль',
 }

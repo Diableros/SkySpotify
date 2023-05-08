@@ -5,7 +5,7 @@ import { FieldLength, PlaceholderText, ErrorText } from './constants'
 const EMAIL_REG_EXP =
   /^(([0-9A-Za-z]{1}[-0-9A-z.]{0,}[0-9A-Za-z]{0})@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$/
 
-const PASSWORD_REG_EXP = /^[a-zA-Z0-9]+$/
+const PASSWORD_REG_EXP = /^[a-zA-Z0-9:]+$/
 
 const passwordsCompare = (
   confirmPassword: LoginFieldsType[FieldsList.PasswordConfirm],

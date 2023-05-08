@@ -18,4 +18,4 @@ type UserLoginUnauthorizedType = {
   detail: string
 }
 
-export type ApiResponseType = UserLoginSuccessType | UserLoginUnauthorizedType
+export type ApiResponseType = UserLoginSuccessType & UserLoginUnauthorizedType
