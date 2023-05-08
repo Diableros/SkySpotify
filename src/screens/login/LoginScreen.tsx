@@ -10,12 +10,18 @@ import Button, { ButtonStyle } from '../components/Button/Button'
 import { LoginFieldsType, FieldsList } from './types'
 import LoginFormInput from './components/LoginInput/LoginFormInput'
 import FIELDS from './formFields'
+import useLogin from '@/queryService/qieryHooks/useLogin'
+import { ApiRequest } from '@/queryService/apiTypes'
 
 const LoginScreen = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [isRegister, setIsRegister] = React.useState<boolean>(false)
+  const [credentials, setCredentials] = React.useState<ApiRequest>()
+  const { data, isLoading, isError } = useLogin(credentials)
 
+  console.log('use login vars: ', data, isLoading, isError)
+  console.log('credentials: ', credentials)
   const {
     register,
     handleSubmit,
@@ -27,18 +33,20 @@ const LoginScreen = () => {
 
   const isButtonsDisabled = Object.keys(errors).length > 0
 
-  const onSubmit: SubmitHandler<LoginFieldsType> = (data) => {
+  const onSubmit: SubmitHandler<ApiRequest> = (loginFormdata) => {
     // just for probe
-    alert(JSON.stringify(data))
-    dispatch(
-      userLogin({
-        login: true,
-        id: 1,
-        email: data.email,
-        token: 'blablabla',
-        userName: data.email,
-      })
-    )
+    setCredentials(loginFormdata)
+    console.log('login from data: ', loginFormdata)
+    // alert(JSON.stringify(loginFormdata))
+    // dispatch(
+    //   userLogin({
+    //     login: true,
+    //     id: 1,
+    //     email: data.email,
+    //     token: 'blablabla',
+    //     userName: data.email,
+    //   })
+    // )
 
     navigate('/')
   }

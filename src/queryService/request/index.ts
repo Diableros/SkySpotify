@@ -3,18 +3,29 @@ import sleep from '@/helpers/sleep'
 import BASE_API_URL from './constants'
 import { EndpointsType } from '../queries'
 import paramInsert from '../helpers/paramInsert'
+import { ApiRequest } from '../apiTypes'
 
-async function req<T>(
-  method: 'get' | 'post' | 'delete',
-  endpoint: EndpointsType,
+type ArgumentsType = {
+  method: 'get' | 'post' | 'delete'
+  endpoint: EndpointsType
   param?: string
-): Promise<T> {
+  body?: ApiRequest
+}
+
+async function req<T>({
+  method,
+  endpoint,
+  param,
+  body,
+}: ArgumentsType): Promise<T> {
   await sleep(3000)
 
-  const finalEndpoint = param ? paramInsert(endpoint, param) : endpoint
+  const requestEndpoint = param ? paramInsert(endpoint, param) : endpoint
+  const requestBody = body || {}
 
   const res: KyResponse = await ky[method](
-    `${BASE_API_URL}${finalEndpoint}`
+    `${BASE_API_URL}${requestEndpoint}`,
+    requestBody
   ).json()
 
   return res as T
