@@ -1,9 +1,9 @@
-type UserLogin = {
+type UserLoginCredentionals = {
   password: string
   email: string
 }
 
-export type ApiRequest = UserLogin
+export type ApiRequestType = UserLoginCredentionals
 
 export type UserLoginSuccessType = {
   id: number
@@ -14,8 +14,8 @@ export type UserLoginSuccessType = {
   email: string
 }
 
-type UserLoginUnauthorized = {
+type UserLoginUnauthorizedType = {
   detail: string
 }
 
-export type ApiResponse = UserLoginSuccessType | UserLoginUnauthorized
+export type ApiResponseType = UserLoginSuccessType | UserLoginUnauthorizedType

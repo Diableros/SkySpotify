@@ -1,27 +1,22 @@
 import * as React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
+import { useNavigate } from 'react-router-dom'
+import useLogin from '@/queryService/qieryHooks/useLogin'
+import { ApiRequestType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
-import s from './LoginScreen.module.scss'
-import { userLogin } from '@/store/userSlice'
-import { useAppDispatch } from '@/hooks/reduxHooks'
 import Button, { ButtonStyle } from '../components/Button/Button'
-import { LoginFieldsType, FieldsList } from './types'
 import LoginFormInput from './components/LoginInput/LoginFormInput'
 import FIELDS from './formFields'
-import useLogin from '@/queryService/qieryHooks/useLogin'
-import { ApiRequest } from '@/queryService/apiTypes'
+import s from './LoginScreen.module.scss'
+import { FieldsList, LoginFieldsType } from './types'
 
 const LoginScreen = () => {
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
   const [isRegister, setIsRegister] = React.useState<boolean>(false)
-  const [credentials, setCredentials] = React.useState<ApiRequest>()
-  const { data, isLoading, isError } = useLogin(credentials)
+  const [loginFieldsData, setLoginFieldsData] = React.useState<ApiRequestType>()
+  // const dispatch = useAppDispatch()
+  const { data, isLoading, isError, error } = useLogin(loginFieldsData)
 
-  console.log('use login vars: ', data, isLoading, isError)
-  console.log('credentials: ', credentials)
   const {
     register,
     handleSubmit,
@@ -33,23 +28,11 @@ const LoginScreen = () => {
 
   const isButtonsDisabled = Object.keys(errors).length > 0
 
-  const onSubmit: SubmitHandler<ApiRequest> = (loginFormdata) => {
-    // just for probe
-    setCredentials(loginFormdata)
-    console.log('login from data: ', loginFormdata)
-    // alert(JSON.stringify(loginFormdata))
-    // dispatch(
-    //   userLogin({
-    //     login: true,
-    //     id: 1,
-    //     email: data.email,
-    //     token: 'blablabla',
-    //     userName: data.email,
-    //   })
-    // )
-
-    navigate('/')
+  const onSubmit: SubmitHandler<ApiRequestType> = (loginFormdata) => {
+    setLoginFieldsData(loginFormdata)
   }
+
+  React.useEffect(() => console.log('error: ', error), [error])
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>

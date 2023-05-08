@@ -1,19 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { ApiRequest, ApiResponse, UserLoginSuccessType } from '../apiTypes'
+import { ApiRequestType, ApiResponseType } from '../apiTypes'
 import errorCatcher from '../helpers/errorCatcher'
 import queries from '../queries'
 import QueryKey from '../queryKeys'
 import req from '../request'
 
-const useLogin = (credentials?: ApiRequest) => {
-  console.log('use useLogin Hook')
-  const handleLogin = (loginResponse: ApiResponse) => {
-    console.log(loginResponse)
+const useLogin = (credentials?: ApiRequestType) => {
+  const handleLogin = (loginResponse: ApiResponseType) => {
+    console.log('server response: ', loginResponse)
   }
 
   return useQuery({
     queryFn: () =>
-      req<UserLoginSuccessType>({
+      req<ApiResponseType>({
         method: 'post',
         endpoint: queries.User.Login,
         body: credentials,
@@ -21,6 +20,7 @@ const useLogin = (credentials?: ApiRequest) => {
     queryKey: [QueryKey.UserLogin],
     onSuccess: handleLogin,
     onError: errorCatcher,
+    retry: 1,
     enabled: !!credentials,
   })
 }
