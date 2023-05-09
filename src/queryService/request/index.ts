@@ -1,9 +1,11 @@
-import ky, { Hooks, KyResponse } from 'ky'
+import ky, { Hooks, HTTPError, KyResponse, Options } from 'ky'
 import sleep from '@/helpers/sleep'
 import BASE_API_URL from './constants'
 import { EndpointsType } from '../queries'
 import paramInsert from '../helpers/paramInsert'
 import { ApiRequestType } from '../apiTypes'
+
+const REQUEST_DELAY = 0
 
 type ArgumentsType = {
   method: 'get' | 'post' | 'delete'
@@ -13,23 +15,42 @@ type ArgumentsType = {
   hooks?: Hooks
 }
 
+const kyApi = ky.create({
+  prefixUrl: BASE_API_URL,
+})
+
 async function req<T>({
   method,
   endpoint,
   param,
   body,
 }: ArgumentsType): Promise<T> {
-  await sleep(3000)
+  await sleep(REQUEST_DELAY * 1000)
 
   const requestEndpoint = param ? paramInsert(endpoint, param) : endpoint
-  const requestBody = { json: body } || {}
 
-  const res: KyResponse = await ky[method](
-    `${BASE_API_URL}${requestEndpoint}`,
-    requestBody
+  const options: Options = {
+    // hooks: {
+    //   afterResponse: [
+    //     (_request, _options, response) => {
+    //       if (response.status === 401) {
+    //         response.json().then((data) => console.log(data))
+    //       } else {
+    //         console.log(response.statusText)
+    //       }
+    //     },
+    //   ],
+    // },
+  }
+
+  if (body) Object.assign(options, { json: body })
+
+  const response: KyResponse = await kyApi[method](
+    requestEndpoint,
+    options
   ).json()
 
-  return res as T
+  return response as T
 }
 
 export default req

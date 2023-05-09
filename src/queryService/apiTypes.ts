@@ -24,4 +24,10 @@ type UserLoginUnauthorizedType = {
   detail: string
 }
 
-export type ApiResponseType = UserLoginSuccessType & UserLoginUnauthorizedType
+type UserSignUpPasswordErrorType = {
+  password: string
+}
+
+export type ApiResponseType = UserLoginSuccessType &
+  UserLoginUnauthorizedType &
+  UserSignUpPasswordErrorType

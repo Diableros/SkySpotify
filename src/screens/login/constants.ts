@@ -8,7 +8,7 @@ export enum FieldLength {
   EmailMinLength = '6',
   EmailMaxLength = '30',
 
-  PasswordMinLength = '4',
+  PasswordMinLength = '8',
   PasswordMaxLength = '20',
 }
 

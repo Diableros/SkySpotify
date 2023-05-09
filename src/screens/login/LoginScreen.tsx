@@ -2,35 +2,35 @@ import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
 import { HTTPError } from 'ky'
+import { useQueryClient } from '@tanstack/react-query'
 import useLogin from '@/queryService/qieryHooks/useLogin'
-import { ApiRequestType } from '@/queryService/apiTypes'
+import { ApiRequestType, ApiResponseType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
 import Button, { ButtonStyle } from '../components/Button/Button'
 import LoginFormInput from './components/LoginInput/LoginFormInput'
 import FIELDS from './formFields'
 import s from './LoginScreen.module.scss'
 import { FieldsList, LoginFieldsType } from './types'
-import { ErrorText } from './constants'
 import useSignUp from '@/queryService/qieryHooks/useSignUp'
+import QueryKey from '@/queryService/queryKeys'
+import { ErrorText } from './constants'
 
 const LoginScreen = () => {
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false)
+  const queryClient = useQueryClient()
 
   const {
-    data: loginData,
     mutate: userLogin,
     isLoading: userLoginWait,
     error: loginError,
-    status: loginStatus,
-    failureReason,
+    isError: loginIsError,
   } = useLogin()
 
   const {
-    data: signUpData,
     mutate: userSignUp,
     isLoading: userSignUpWait,
     error: signUpError,
-    status: signUpStatus,
+    isError: signUpIsError,
   } = useSignUp()
 
   const {
@@ -47,7 +47,6 @@ const LoginScreen = () => {
   const isSignUpButtonDisable = Object.keys(errors).length > 0 || userSignUpWait
 
   const onSubmit: SubmitHandler<ApiRequestType> = ({ email, password }) => {
-    // console.log(loginFormdata)
     if (isSignUp) {
       userSignUp({ username: email, email, password })
     } else {
@@ -55,59 +54,37 @@ const LoginScreen = () => {
     }
   }
 
-  React.useEffect(() => {
-    console.log('Login data', failureReason)
-    console.log('SignUp data', signUpData)
-  }, [failureReason, signUpData])
+  const setServerErrorToUseForm = React.useCallback(
+    (error: HTTPError) => {
+      error.response
+        .json()
+        .then((responseObj: ApiResponseType) => {
+          const fieldWithMessage = Object.keys(responseObj)[0]
 
-  React.useEffect(() => {
-    if (loginStatus === 'error' && loginError) {
-      console.log(loginData)
-      switch ((loginError as HTTPError).response.status) {
-        case 401:
           setError(
-            'email',
+            fieldWithMessage === 'password' ? 'password' : 'email',
             {
               type: 'focus',
-              message: ErrorText.UserNotFound,
+              message: String(
+                responseObj[fieldWithMessage as keyof ApiResponseType] ||
+                  ErrorText.UnknownError
+              ),
             },
             { shouldFocus: true }
           )
-          break
-
-        default:
-          setError('email', {
-            type: 'custom',
-            message: ErrorText.UnknownError,
-          })
-          break
-      }
-    }
-  }, [loginStatus, loginError, setError, loginData])
+        })
+        .catch(() => {})
+    },
+    [setError]
+  )
 
   React.useEffect(() => {
-    if (signUpStatus === 'error' && signUpError) {
-      switch ((signUpError as HTTPError).response.status) {
-        case 400:
-          setError(
-            'email',
-            {
-              type: 'focus',
-              message: ErrorText.SignUpFiled,
-            },
-            { shouldFocus: true }
-          )
-          break
+    if (loginIsError) setServerErrorToUseForm(loginError as HTTPError)
+  }, [loginError, loginIsError, setServerErrorToUseForm])
 
-        default:
-          setError('email', {
-            type: 'custom',
-            message: ErrorText.UnknownError,
-          })
-          break
-      }
-    }
-  }, [signUpStatus, signUpError, setError])
+  React.useEffect(() => {
+    if (signUpIsError) setServerErrorToUseForm(signUpError as HTTPError)
+  }, [signUpError, signUpIsError, setServerErrorToUseForm])
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -138,7 +115,6 @@ const LoginScreen = () => {
           <Button
             style={ButtonStyle.Purple}
             title={userSignUpWait ? 'Отправка данных...' : 'Зарегистрироваться'}
-            action={() => console.log('Регистрация')}
             disabled={isSignUpButtonDisable}
           />
         ) : (
@@ -152,6 +128,9 @@ const LoginScreen = () => {
               style={ButtonStyle.White}
               title="Зарегистрироваться"
               action={() => {
+                queryClient.invalidateQueries({
+                  queryKey: [QueryKey.UserLogin],
+                })
                 clearErrors()
                 setIsSignUp(true)
               }}
