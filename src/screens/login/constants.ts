@@ -24,4 +24,7 @@ export enum ErrorText {
   Required = 'Поле обязательно для заполнения',
 
   UserNotFound = 'Не верный пользователь или пароль',
+
+  UnknownError = 'Неизвесная ошибка',
+  SignUpFiled = 'Регистрация не пройдена',
 }

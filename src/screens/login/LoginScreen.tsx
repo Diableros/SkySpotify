@@ -11,10 +11,27 @@ import FIELDS from './formFields'
 import s from './LoginScreen.module.scss'
 import { FieldsList, LoginFieldsType } from './types'
 import { ErrorText } from './constants'
+import useSignUp from '@/queryService/qieryHooks/useSignUp'
 
 const LoginScreen = () => {
-  const [isRegistration, setIsRegistration] = React.useState<boolean>(false)
-  const { mutate, isLoading, error, status } = useLogin()
+  const [isSignUp, setIsSignUp] = React.useState<boolean>(false)
+
+  const {
+    data: loginData,
+    mutate: userLogin,
+    isLoading: userLoginWait,
+    error: loginError,
+    status: loginStatus,
+    failureReason,
+  } = useLogin()
+
+  const {
+    data: signUpData,
+    mutate: userSignUp,
+    isLoading: userSignUpWait,
+    error: signUpError,
+    status: signUpStatus,
+  } = useSignUp()
 
   const {
     register,
@@ -26,15 +43,27 @@ const LoginScreen = () => {
     mode: 'onTouched',
   })
 
-  const isSubmitButtonDisable = Object.keys(errors).length > 0 || isLoading
+  const isSubmitButtonDisable = Object.keys(errors).length > 0 || userLoginWait
+  const isSignUpButtonDisable = Object.keys(errors).length > 0 || userSignUpWait
 
-  const onSubmit: SubmitHandler<ApiRequestType> = (loginFormdata) => {
-    mutate(loginFormdata)
+  const onSubmit: SubmitHandler<ApiRequestType> = ({ email, password }) => {
+    // console.log(loginFormdata)
+    if (isSignUp) {
+      userSignUp({ username: email, email, password })
+    } else {
+      userLogin({ email, password })
+    }
   }
 
   React.useEffect(() => {
-    if (status === 'error' && error) {
-      switch ((error as HTTPError).response.status) {
+    console.log('Login data', failureReason)
+    console.log('SignUp data', signUpData)
+  }, [failureReason, signUpData])
+
+  React.useEffect(() => {
+    if (loginStatus === 'error' && loginError) {
+      console.log(loginData)
+      switch ((loginError as HTTPError).response.status) {
         case 401:
           setError(
             'email',
@@ -49,12 +78,36 @@ const LoginScreen = () => {
         default:
           setError('email', {
             type: 'custom',
-            message: 'Пользователь не найден',
+            message: ErrorText.UnknownError,
           })
           break
       }
     }
-  }, [status, error, setError])
+  }, [loginStatus, loginError, setError, loginData])
+
+  React.useEffect(() => {
+    if (signUpStatus === 'error' && signUpError) {
+      switch ((signUpError as HTTPError).response.status) {
+        case 400:
+          setError(
+            'email',
+            {
+              type: 'focus',
+              message: ErrorText.SignUpFiled,
+            },
+            { shouldFocus: true }
+          )
+          break
+
+        default:
+          setError('email', {
+            type: 'custom',
+            message: ErrorText.UnknownError,
+          })
+          break
+      }
+    }
+  }, [signUpStatus, signUpError, setError])
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -72,7 +125,7 @@ const LoginScreen = () => {
           inputError={errors[FieldsList.Password]}
           {...FIELDS[FieldsList.Password]}
         />
-        {isRegistration ? (
+        {isSignUp ? (
           <LoginFormInput
             register={register}
             inputError={errors[FieldsList.PasswordConfirm]}
@@ -81,27 +134,26 @@ const LoginScreen = () => {
         ) : null}
       </div>
       <div className={s['form__button-box']}>
-        {isRegistration ? (
+        {isSignUp ? (
           <Button
             style={ButtonStyle.Purple}
-            title={isLoading ? 'Отправка данных...' : 'Зарегистрироваться'}
+            title={userSignUpWait ? 'Отправка данных...' : 'Зарегистрироваться'}
             action={() => console.log('Регистрация')}
-            disabled={isSubmitButtonDisable}
+            disabled={isSignUpButtonDisable}
           />
         ) : (
           <>
             <Button
               style={ButtonStyle.Purple}
-              title={isLoading ? 'Логинимся...' : 'Войти'}
+              title={userLoginWait ? 'Логинимся...' : 'Войти'}
               disabled={isSubmitButtonDisable}
             />
             <Button
               style={ButtonStyle.White}
               title="Зарегистрироваться"
-              disabled={isSubmitButtonDisable}
               action={() => {
                 clearErrors()
-                setIsRegistration(true)
+                setIsSignUp(true)
               }}
             />
           </>

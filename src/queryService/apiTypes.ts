@@ -3,7 +3,13 @@ type UserLoginCredentionals = {
   email: string
 }
 
-export type ApiRequestType = UserLoginCredentionals
+type UserSignUpCredentionals = {
+  username: string
+  email: string
+  password: string
+}
+
+export type ApiRequestType = UserLoginCredentionals | UserSignUpCredentionals
 
 export type UserLoginSuccessType = {
   id: number
