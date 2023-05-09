@@ -11,10 +11,13 @@ const useSignUp = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const handleSuccessSignUp = () => {
-    // dispatch(userLogin({ id, userName, email, token: '', login: true }))
-    // navigate('/')
-    console.log('SignUp success!')
+  const handleSuccessSignUp = ({
+    id,
+    username: userName,
+    email,
+  }: ApiResponseType) => {
+    dispatch(userLogin({ id, userName, email, token: '', login: true }))
+    navigate('/')
   }
 
   return useMutation({
