@@ -28,3 +28,11 @@ export enum ErrorText {
   UnknownError = 'Неизвесная ошибка',
   SignUpFiled = 'Регистрация не пройдена',
 }
+
+export enum ButtonTitle {
+  SignUpLoader = 'Отправка данных...',
+  SignUpTitle = 'Зарегистрироваться',
+
+  LoginLoader = 'Логинимся',
+  LoginTitle = 'Войти',
+}

@@ -13,7 +13,7 @@ import s from './LoginScreen.module.scss'
 import { FieldsList, LoginFieldsType } from './types'
 import useSignUp from '@/queryService/qieryHooks/useSignUp'
 import QueryKey from '@/queryService/queryKeys'
-import { ErrorText } from './constants'
+import { ErrorText, ButtonTitle } from './constants'
 
 const LoginScreen = () => {
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false)
@@ -62,7 +62,9 @@ const LoginScreen = () => {
           const fieldWithMessage = Object.keys(responseObj)[0]
 
           setError(
-            fieldWithMessage === 'password' ? 'password' : 'email',
+            fieldWithMessage === 'password'
+              ? FieldsList.Password
+              : FieldsList.Email,
             {
               type: 'focus',
               message: String(
@@ -114,14 +116,20 @@ const LoginScreen = () => {
         {isSignUp ? (
           <Button
             style={ButtonStyle.Purple}
-            title={userSignUpWait ? 'Отправка данных...' : 'Зарегистрироваться'}
+            title={
+              userSignUpWait
+                ? ButtonTitle.SignUpLoader
+                : ButtonTitle.SignUpTitle
+            }
             disabled={isSignUpButtonDisable}
           />
         ) : (
           <>
             <Button
               style={ButtonStyle.Purple}
-              title={userLoginWait ? 'Логинимся...' : 'Войти'}
+              title={
+                userLoginWait ? ButtonTitle.LoginLoader : ButtonTitle.LoginTitle
+              }
               disabled={isSubmitButtonDisable}
             />
             <Button
