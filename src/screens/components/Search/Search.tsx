@@ -5,7 +5,7 @@ import * as S from './Search.style'
 const Search = () => {
   return (
     <S.SearchBox>
-      <Icon icon={IconSprite.Search} size="19px" inActive />
+      <Icon icon={IconSprite.Search} size="19px" inactive />
       <S.SearchInput type="search" name="search" placeholder="Поиск" />
     </S.SearchBox>
   )

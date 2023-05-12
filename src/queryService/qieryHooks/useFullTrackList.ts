@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import req from '../request'
-import { useAppDispatch } from '../../hooks/reduxHooks'
+import { useAppDispatch } from '@/store/hooks/reduxHooks'
 import { setTrackStore } from '@/store/appSlice'
 import { TrackType } from '@/types'
 import queries from '../queries'

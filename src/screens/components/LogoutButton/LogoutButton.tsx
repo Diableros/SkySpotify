@@ -1,5 +1,5 @@
 import s from './LogoutButton.module.scss'
-import { useAppDispatch } from '@/hooks/reduxHooks'
+import { useAppDispatch } from '@/store/hooks/reduxHooks'
 import { userLogout } from '@/store/userSlice'
 
 const LogoutButton = () => {

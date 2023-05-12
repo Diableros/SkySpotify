@@ -10,7 +10,7 @@ export type TrackType = {
   album: string
   logo: null
   track_file: string
-  stared_user: UserDataType
+  stared_user: UserDataType[]
 }
 
 export type ControlsType = {

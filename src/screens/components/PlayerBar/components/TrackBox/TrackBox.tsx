@@ -4,17 +4,25 @@ import cover from '@/img/blank_cover.png'
 import { TrackType } from '@/types'
 import Icon from '@/screens/components/Icon'
 import IconSprite from '@/screens/components/Icon/enum'
+import useUserStore from '@/store/hooks/useUserStore'
 
 type PropsType = {
   currentTrack: TrackType
 }
 
-const TrackBox = ({ currentTrack: { name, author } }: PropsType) => {
+const TrackBox = ({
+  currentTrack: { name, author, stared_user },
+}: PropsType) => {
+  const currentUserId = useUserStore('id')
+
   return (
     <div className={s.TrackBox}>
       <div className={s.reactionsBox}>
-        <Icon icon={IconSprite.Like} size="24px" />
-        <Icon icon={IconSprite.Dislike} size="24px" />
+        {stared_user.some(({ id }) => id === currentUserId) ? (
+          <Icon icon={IconSprite.Like} size="24px" />
+        ) : (
+          <Icon icon={IconSprite.Dislike} size="24px" />
+        )}
       </div>
       <img className={s.cover} src={cover} alt="Album cover" />
       <div className={s.TrackInfo}>

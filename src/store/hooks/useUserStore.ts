@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { useAppSelector } from '@/store/hooks/reduxHooks'
 import { RootStateType } from '@/store'
 import { UserDataType } from '@/store/userSlice'
 

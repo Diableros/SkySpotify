@@ -1,4 +1,4 @@
-import ky, { KyResponse, Options } from 'ky'
+import ky, { KyResponse } from 'ky'
 import sleep from '@/helpers/sleep'
 import BASE_API_URL from './constants'
 import paramInsert from '../helpers/paramInsert'

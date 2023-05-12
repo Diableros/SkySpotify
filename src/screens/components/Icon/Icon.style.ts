@@ -5,7 +5,7 @@ type PropsType = {
   width?: string
   height?: string
   roundCrop?: boolean
-  inActive?: boolean
+  inactive?: boolean
   color?: string
 }
 
@@ -37,7 +37,7 @@ export const IconWrapper = styled.div<PropsType>`
 
   color: ${({ color }) => (!color ? `inherit` : color)};
 
-  ${({ inActive }) => (!inActive ? activeCss : null)};
+  ${({ inactive }) => (!inactive ? activeCss : null)};
 
   & > svg {
     width: 100%;

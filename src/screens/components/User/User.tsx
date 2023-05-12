@@ -1,5 +1,5 @@
 import * as S from './User.style'
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { useAppSelector } from '@/store/hooks/reduxHooks'
 import Icon from '../Icon'
 import IconSprite from '../Icon/enum'
 
@@ -11,7 +11,7 @@ const User = () => {
   return (
     <S.UserBox>
       <S.UserName>{userName}</S.UserName>
-      <Icon icon={IconSprite.Avatar} size="60px" roundCrop inActive />
+      <Icon icon={IconSprite.Avatar} size="60px" roundCrop inactive />
     </S.UserBox>
   )
 }

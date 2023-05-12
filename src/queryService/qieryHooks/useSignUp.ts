@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '@/hooks/reduxHooks'
+import { useAppDispatch } from '@/store/hooks/reduxHooks'
 import { userLogin } from '@/store/userSlice'
 import { ApiRequestType, ApiResponseType } from '../apiTypes'
 import queries from '../queries'

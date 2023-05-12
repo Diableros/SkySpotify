@@ -1,7 +1,7 @@
 import * as React from 'react'
 import HeaderButton from './components/HeaderButton'
 import { searchButtons } from './constants'
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { useAppSelector } from '@/store/hooks/reduxHooks'
 import { RootStateType } from '@/store'
 import getSearchOptionsList from './helpers/getSearchOptionsList'
 import { ButtonType } from './type'
