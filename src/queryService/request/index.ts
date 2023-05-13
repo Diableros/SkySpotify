@@ -24,16 +24,16 @@ async function req<T>({
   const requestEndpoint = param ? paramInsert(endpoint, param) : endpoint
 
   const customOptions: Options = {
-    hooks: {
-      beforeRequest: [
-        (request) => {
-          const refreshToken = window.localStorage.getItem('refreshToken')
-          if (refreshToken)
-            request.headers.set('Authorization', `Bearer ${refreshToken}`)
-          console.log('Заголовок авторизации проставлен')
-        },
-      ],
-    },
+    // hooks: {
+    //   beforeRequest: [
+    //     (request) => {
+    //       const refreshToken = window.localStorage.getItem('refreshToken')
+    //       if (refreshToken)
+    //         request.headers.set('Authorization', `Bearer ${refreshToken}`)
+    //       console.log('Заголовок авторизации проставлен')
+    //     },
+    //   ],
+    // },
   }
 
   if (body) Object.assign(options, { json: { ...body }, ...customOptions })

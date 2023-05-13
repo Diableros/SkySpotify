@@ -6,7 +6,6 @@ import { TrackType } from '@/types'
 import queries from '../queries'
 import errorCatcher from '../helpers/errorCatcher'
 import QueryKey from '../queryKeys'
-import useUserStore from '@/store/hooks/useUserStore'
 import { ReqMethod } from '../request/types'
 
 const useFullTrackList = () => {
@@ -15,8 +14,6 @@ const useFullTrackList = () => {
   const handleGetFullTracklist = (trackList: TrackType[]) => {
     dispatch(setTrackStore(trackList))
   }
-
-  console.log(useUserStore('token'))
 
   return useQuery({
     queryFn: () =>

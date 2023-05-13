@@ -37,6 +37,10 @@ export type GetTokenResponseType = {
   access: string
 }
 
+export type GetRefreshResponseType = {
+  access: string
+}
+
 export type FavoriteResponse = {
   detail: string
 }

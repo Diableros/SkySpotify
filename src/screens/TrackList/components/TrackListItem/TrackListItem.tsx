@@ -22,12 +22,18 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
   const [isLiked, setIsLiked] = React.useState<boolean>(
     trackData.stared_user.some(({ id }) => id === currentUserId)
   )
+  const token = useUserStore('token')
 
   const handleLikeClick = (id: number) => {
     req<FavoriteResponse>({
       method: !isLiked ? ReqMethod.Post : ReqMethod.Delete,
       endpoint: queries.Catalog.TrackFavoriteCreate,
       param: String(id),
+      options: {
+        headers: {
+          Autorization: `Bearer ${token}`,
+        },
+      },
     }).then((response) => console.log(response))
     setIsLiked((prev) => !prev)
   }
