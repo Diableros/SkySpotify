@@ -4,7 +4,7 @@ import { SubmitHandler } from 'react-hook-form/dist/types'
 import { HTTPError } from 'ky'
 import { useQueryClient } from '@tanstack/react-query'
 import useLogin from '@/queryService/qieryHooks/useLogin'
-import { ApiRequestType, ApiResponseType } from '@/queryService/apiTypes'
+import { AuthRequestType, AuthResponseType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
 import Button, { ButtonStyle } from '../components/Button/Button'
 import LoginFormInput from './components/LoginInput/LoginFormInput'
@@ -46,7 +46,7 @@ const LoginScreen = () => {
   const isSubmitButtonDisable = Object.keys(errors).length > 0 || userLoginWait
   const isSignUpButtonDisable = Object.keys(errors).length > 0 || userSignUpWait
 
-  const onSubmit: SubmitHandler<ApiRequestType> = ({ email, password }) => {
+  const onSubmit: SubmitHandler<AuthRequestType> = ({ email, password }) => {
     if (isSignUp) {
       userSignUp({ username: email, email, password })
     } else {
@@ -58,7 +58,7 @@ const LoginScreen = () => {
     (error: HTTPError) => {
       error.response
         .json()
-        .then((responseObj: ApiResponseType) => {
+        .then((responseObj: AuthResponseType) => {
           const fieldWithMessage = Object.keys(responseObj)[0]
 
           setError(
@@ -68,7 +68,7 @@ const LoginScreen = () => {
             {
               type: 'focus',
               message: String(
-                responseObj[fieldWithMessage as keyof ApiResponseType] ||
+                responseObj[fieldWithMessage as keyof AuthResponseType] ||
                   ErrorText.UnknownError
               ),
             },
@@ -137,7 +137,7 @@ const LoginScreen = () => {
               title="Зарегистрироваться"
               action={() => {
                 queryClient.invalidateQueries({
-                  queryKey: [QueryKey.UserLogin],
+                  queryKey: [QueryKey.UserSignUp],
                 })
                 clearErrors()
                 setIsSignUp(true)

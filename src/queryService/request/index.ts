@@ -1,4 +1,4 @@
-import ky, { KyResponse } from 'ky'
+import ky, { KyResponse, Options } from 'ky'
 import sleep from '@/helpers/sleep'
 import BASE_API_URL from './constants'
 import paramInsert from '../helpers/paramInsert'
@@ -23,21 +23,22 @@ async function req<T>({
 
   const requestEndpoint = param ? paramInsert(endpoint, param) : endpoint
 
-  // const options: Options = {
-  // hooks: {
-  //   afterResponse: [
-  //     (_request, _options, response) => {
-  //       if (response.status === 401) {
-  //         response.json().then((data) => console.log(data))
-  //       } else {
-  //         console.log(response.statusText)
-  //       }
-  //     },
-  //   ],
-  // },
-  // }
+  const customOptions: Options = {
+    hooks: {
+      beforeRequest: [
+        (request) => {
+          const refreshToken = window.localStorage.getItem('refreshToken')
+          if (refreshToken)
+            request.headers.set('Authorization', `Bearer ${refreshToken}`)
+          console.log('Заголовок авторизации проставлен')
+        },
+      ],
+    },
+  }
 
-  if (body) Object.assign(options, { json: body })
+  if (body) Object.assign(options, { json: { ...body }, ...customOptions })
+
+  // console.log('options: ', JSON.stringify(options))
 
   const response: KyResponse = await kyApi[method](
     requestEndpoint,

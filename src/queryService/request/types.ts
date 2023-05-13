@@ -1,11 +1,17 @@
 import { Options } from 'ky'
-import { ApiRequestType } from '../apiTypes'
+import { AuthRequestType } from '../apiTypes'
 import { EndpointsType } from '../queries'
 
+export enum ReqMethod {
+  Get = 'get',
+  Post = 'post',
+  Delete = 'delete',
+}
+
 export type ReqArgumentsType = {
-  method: 'get' | 'post' | 'delete'
+  method: ReqMethod
   endpoint: EndpointsType
   param?: string
-  body?: ApiRequestType
+  body?: AuthRequestType
   options?: Options
 }

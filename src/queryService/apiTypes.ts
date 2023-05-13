@@ -1,4 +1,4 @@
-type UserLoginCredentionals = {
+type UserResponseType = {
   password: string
   email: string
 }
@@ -9,7 +9,7 @@ type UserSignUpCredentionals = {
   password: string
 }
 
-export type ApiRequestType = UserLoginCredentionals | UserSignUpCredentionals
+export type AuthRequestType = UserResponseType | UserSignUpCredentionals
 
 export type UserLoginSuccessType = {
   id: number
@@ -20,14 +20,23 @@ export type UserLoginSuccessType = {
   email: string
 }
 
-type UserLoginUnauthorizedType = {
+export type UserLoginUnauthorizedType = {
   detail: string
 }
 
-type UserSignUpPasswordErrorType = {
+export type UserSignUpPasswordErrorType = {
   password: string
 }
 
-export type ApiResponseType = UserLoginSuccessType &
+export type AuthResponseType = UserLoginSuccessType &
   UserLoginUnauthorizedType &
   UserSignUpPasswordErrorType
+
+export type GetTokenResponseType = {
+  refresh: string
+  access: string
+}
+
+export type FavoriteResponse = {
+  detail: string
+}
