@@ -17,18 +17,18 @@ const PlayerBar = ({ currentTrack }: PropsType) => {
     autoPlay: false,
   })
 
-  // const stateInfo = (
-  //   <S.CurrentTrackStateWrapper>
-  //     <S.CurrentTrackState>
-  //       {JSON.stringify(state, null, 2)}
-  //     </S.CurrentTrackState>
-  //   </S.CurrentTrackStateWrapper>
-  // )
+  const stateInfo = (
+    <S.CurrentTrackStateWrapper>
+      <S.CurrentTrackState>
+        {JSON.stringify(state, null, 2)}
+      </S.CurrentTrackState>
+    </S.CurrentTrackStateWrapper>
+  )
 
   return (
     <S.PlayerBarBox isShow={!!currentTrack}>
       {audio}
-      {/* {stateInfo} */}
+      {stateInfo}
       <ProgressBar {...state} />
       <S.PlayerBar>
         <ControlBox controls={controls} state={state} />

@@ -14,4 +14,5 @@ export type ReqArgumentsType = {
   param?: string
   body?: AuthRequestType
   options?: Options
+  undelayed?: boolean
 }

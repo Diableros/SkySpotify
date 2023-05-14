@@ -11,8 +11,8 @@ export enum Catalog {
   TrackAllList = 'catalog/track/all',
   TrackFavoriteAllList = 'catalog/track/favorite/all',
   TrackRead = 'catalog/track/{param}/',
-  TrackFavoriteCreate = 'catalog/track/{param}/favorite',
-  TrackFavoriteDelete = 'catalog/track/{param}/favorite',
+  TrackFavoriteCreate = 'catalog/track/{param}/favorite/',
+  TrackFavoriteDelete = 'catalog/track/{param}/favorite/',
 }
 
 export type EndpointsType = User | Catalog

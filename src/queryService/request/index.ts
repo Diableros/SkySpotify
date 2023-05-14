@@ -18,8 +18,9 @@ async function req<T>({
   param,
   body,
   options = {},
+  undelayed = false,
 }: ReqArgumentsType): Promise<T> {
-  await sleep(REQUEST_DELAY * 1000)
+  if (!undelayed) await sleep(REQUEST_DELAY * 1000)
 
   const requestEndpoint = param ? paramInsert(endpoint, param) : endpoint
 

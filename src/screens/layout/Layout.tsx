@@ -8,6 +8,7 @@ import useUserStore from '@/store/hooks/useUserStore'
 import useAppStore from '@/store/hooks/useAppStore'
 import { TrackType } from '@/types'
 import * as S from './Layout.style'
+import InvisibleComponent from './InvisibleComponent'
 
 const Layout = () => {
   const isLogin = useUserStore('login')
@@ -15,6 +16,7 @@ const Layout = () => {
 
   return (
     <>
+      <InvisibleComponent />
       <S.LayoutTop>
         <Menu />
         <S.LayoutMiddle>

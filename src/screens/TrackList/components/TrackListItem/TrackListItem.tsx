@@ -31,11 +31,16 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
       param: String(id),
       options: {
         headers: {
-          Autorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       },
-    }).then((response) => console.log(response))
-    setIsLiked((prev) => !prev)
+      undelayed: true,
+    })
+      .then(() => {
+        // console.log(response)
+        setIsLiked(!isLiked)
+      })
+      .catch((error) => console.log(error))
   }
 
   return (
