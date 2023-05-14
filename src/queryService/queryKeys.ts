@@ -4,6 +4,7 @@ enum QueryKey {
   UserSignUp = 'userSignUp',
   UserToken = 'userToken',
   RefreshToken = 'refreshToken',
+  ToggleFavorite = 'toggleFavorite',
 }
 
 export default QueryKey

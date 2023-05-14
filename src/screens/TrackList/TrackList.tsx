@@ -16,6 +16,7 @@ const LOCAL_STORAGE_FIELD = 'currentTrack'
 const TrackList = () => {
   // console.log('Tracklist render')
   const { data, isLoading, isError } = useFullTrackList()
+  const [forceRender, setForceRender] = React.useState<boolean>(false)
 
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
     useLocalStorage<TrackType>(LOCAL_STORAGE_FIELD)
@@ -30,6 +31,10 @@ const TrackList = () => {
       dispatch(setCurrentTrack(currentTrackInLocalStorage))
     }
   }, [currentTrackInLocalStorage, currentTrackInStore, dispatch])
+
+  React.useEffect(() => {
+    setForceRender((prev) => !prev)
+  }, [isLoading])
 
   const errorMessage = (
     <S.ErrorWrapper>

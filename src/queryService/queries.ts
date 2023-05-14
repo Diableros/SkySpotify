@@ -8,7 +8,7 @@ export enum User {
 export enum Catalog {
   SelectionList = 'catalog/selection/',
   SelectionRead = 'catalog/selection/{param}/',
-  TrackAllList = 'catalog/track/all',
+  TrackAllList = 'catalog/track/all/',
   TrackFavoriteAllList = 'catalog/track/favorite/all',
   TrackRead = 'catalog/track/{param}/',
   TrackFavoriteCreate = 'catalog/track/{param}/favorite/',

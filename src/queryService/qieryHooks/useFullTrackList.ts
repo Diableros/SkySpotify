@@ -18,7 +18,7 @@ const useFullTrackList = () => {
   return useQuery({
     queryFn: () =>
       req<TrackType[]>({
-        method: ReqMethod.Post,
+        method: ReqMethod.Get,
         endpoint: queries.Catalog.TrackAllList,
       }),
     queryKey: [QueryKey.FullTrackList],

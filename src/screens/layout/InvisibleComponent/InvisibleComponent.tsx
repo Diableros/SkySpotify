@@ -26,9 +26,8 @@ const InvisibleComponent = () => {
       dispatch(userSetAccessToken({ token }))
       // console.log(`Access token was refreshed: ${token}`)
     },
-    onError: (error) => console.log(error.message),
-    refetchInterval: 2 * 60 * 1000,
-    // staleTime: 2 * 60 * 1000,
+    onError: (response: Response) => console.log(response),
+    refetchInterval: 5 * 60 * 1000,
   })
 
   return <S.InvisibleComponent />
