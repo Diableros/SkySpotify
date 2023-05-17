@@ -6,10 +6,17 @@ import { AuthRequestType, AuthResponseType } from '../apiTypes'
 import queries from '../queries'
 import QueryKey from '../queryKeys'
 import req from '../request'
+import { ReqMethod } from '../request/types'
+import useToken from './useToken'
 
 const useSignUp = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const { mutate: getToken } = useToken()
+
+  const handleGetToken = ({ email, password }: AuthResponseType) => {
+    getToken({ email, password })
+  }
 
   const handleSuccessSignUp = ({
     id,
@@ -23,12 +30,13 @@ const useSignUp = () => {
   return useMutation({
     mutationFn: (loginFieldsData: AuthRequestType) =>
       req<AuthResponseType>({
-        method: 'post',
+        method: ReqMethod.Post,
         endpoint: queries.User.SignUp,
         body: loginFieldsData,
       }),
     mutationKey: [QueryKey.UserLogin],
     onSuccess: handleSuccessSignUp,
+    onMutate: handleGetToken,
   })
 }
 

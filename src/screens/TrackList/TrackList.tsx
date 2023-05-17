@@ -10,12 +10,12 @@ import useAppStore from '@/store/hooks/useAppStore'
 import { TrackType } from '@/types'
 import { useAppDispatch } from '@/store/hooks/reduxHooks'
 import { setCurrentTrack } from '@/store/appSlice'
-
-const LOCAL_STORAGE_FIELD = 'currentTrack'
+import { LOCAL_STORAGE_FIELD } from './constants'
 
 const TrackList = () => {
   // console.log('Tracklist render')
   const { data, isLoading, isError } = useFullTrackList()
+  const [tracksData, setTracksData] = React.useState<TrackType[] | undefined>()
 
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
     useLocalStorage<TrackType>(LOCAL_STORAGE_FIELD)
@@ -30,6 +30,10 @@ const TrackList = () => {
       dispatch(setCurrentTrack(currentTrackInLocalStorage))
     }
   }, [currentTrackInLocalStorage, currentTrackInStore, dispatch])
+
+  React.useEffect(() => {
+    setTracksData(data)
+  }, [data])
 
   const errorMessage = (
     <S.ErrorWrapper>

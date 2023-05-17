@@ -4,22 +4,21 @@ import { AuthRequestType, GetTokenResponseType } from '../apiTypes'
 import queries from '../queries'
 import QueryKey from '../queryKeys'
 import req from '../request'
+import { ReqMethod } from '../request/types'
 
 const useToken = () => {
-  const [, setRefreshToken] = useLocalStorage('refreshToken')
-  const [, setAccesshToken] = useLocalStorage('accessToken')
+  const [, setRefreshToken] = useLocalStorage('token')
 
   return useMutation({
     mutationFn: ({ email, password }: AuthRequestType) =>
       req<GetTokenResponseType>({
-        method: 'post',
+        method: ReqMethod.Post,
         endpoint: queries.User.GetToken,
         body: { email, password },
       }),
     mutationKey: [QueryKey.UserToken],
-    onSuccess: ({ refresh, access }) => {
+    onSuccess: ({ refresh }) => {
       setRefreshToken(refresh)
-      setAccesshToken(access)
     },
   })
 }

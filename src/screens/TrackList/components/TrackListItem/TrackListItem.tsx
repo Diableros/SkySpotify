@@ -7,10 +7,7 @@ import * as S from '../../TrackList.style'
 import IconSprite from '@/screens/components/Icon/enum'
 import Icon from '@/screens/components/Icon'
 import useUserStore from '@/store/hooks/useUserStore'
-import req from '@/queryService/request'
-import { FavoriteResponse } from '@/queryService/apiTypes'
-import queries from '@/queryService/queries'
-import { ReqMethod } from '@/queryService/request/types'
+import useToggleFavorite from '@/queryService/qieryHooks/useToggleFavorite'
 
 type PropsType = {
   trackData: TrackType
@@ -22,14 +19,10 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
   const [isLiked, setIsLiked] = React.useState<boolean>(
     trackData.stared_user.some(({ id }) => id === currentUserId)
   )
+  const { mutate: toggleFavorite } = useToggleFavorite(isLiked, setIsLiked)
 
   const handleLikeClick = (id: number) => {
-    req<FavoriteResponse>({
-      method: !isLiked ? ReqMethod.Post : ReqMethod.Delete,
-      endpoint: queries.Catalog.TrackFavoriteCreate,
-      param: String(id),
-    }).then((response) => console.log(response))
-    setIsLiked((prev) => !prev)
+    toggleFavorite(id)
   }
 
   return (

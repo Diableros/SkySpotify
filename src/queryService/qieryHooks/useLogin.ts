@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
+import { useLocalStorage } from 'react-use'
 import { useAppDispatch } from '@/store/hooks/reduxHooks'
 import { userLogin } from '@/store/userSlice'
 import { AuthRequestType, AuthResponseType } from '../apiTypes'
@@ -10,6 +11,7 @@ import useToken from './useToken'
 import { ReqMethod } from '../request/types'
 
 const useLogin = () => {
+  const [, setLocalUser] = useLocalStorage('localUser')
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { mutate: getToken } = useToken()
@@ -24,6 +26,7 @@ const useLogin = () => {
     email,
   }: AuthResponseType) => {
     dispatch(userLogin({ id, userName, email, token: '', login: true }))
+    setLocalUser({ id, userName, email })
     navigate('/')
   }
 
