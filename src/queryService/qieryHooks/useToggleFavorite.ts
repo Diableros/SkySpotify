@@ -19,7 +19,7 @@ const useToggleFavorite = (
     mutationFn: (id: TrackType['id']) =>
       req<FavoriteResponse>({
         method: !isLiked ? ReqMethod.Post : ReqMethod.Delete,
-        endpoint: queries.Catalog.TrackFavoriteCreate,
+        endpoint: queries.Catalog.TrackFavorite,
         param: String(id),
         options: {
           headers: {
@@ -35,7 +35,9 @@ const useToggleFavorite = (
       })
       setIsLiked(!isLiked)
     },
-    onError: (response: Response) => console.log(response),
+    onError: (error: string) => {
+      throw new Error(error)
+    },
   })
 }
 

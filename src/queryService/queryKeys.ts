@@ -1,5 +1,6 @@
 enum QueryKey {
   FullTrackList = 'fullTrackList',
+  CollectionList = 'collectionList',
   UserLogin = 'userLogin',
   UserSignUp = 'userSignUp',
   UserToken = 'userToken',

@@ -1,3 +1,5 @@
+import { TrackType } from '@/types'
+
 type UserResponseType = {
   password: string
   email: string
@@ -9,7 +11,14 @@ type UserSignUpCredentionals = {
   password: string
 }
 
-export type AuthRequestType = UserResponseType | UserSignUpCredentionals
+type UserCheckTokenType = {
+  refresh: string
+}
+
+export type AuthRequestType =
+  | UserResponseType
+  | UserSignUpCredentionals
+  | UserCheckTokenType
 
 export type UserLoginSuccessType = {
   id: number
@@ -28,9 +37,10 @@ export type UserSignUpPasswordErrorType = {
   password: string
 }
 
-export type AuthResponseType = UserLoginSuccessType &
-  UserLoginUnauthorizedType &
-  UserSignUpPasswordErrorType
+export type AuthResponseType =
+  | UserLoginSuccessType
+  | UserLoginUnauthorizedType
+  | UserSignUpPasswordErrorType
 
 export type GetTokenResponseType = {
   refresh: string
@@ -43,4 +53,11 @@ export type GetRefreshResponseType = {
 
 export type FavoriteResponse = {
   detail: string
+}
+
+export type CollectionType = {
+  id: number
+  items: TrackType[]
+  owner: string
+  name: string
 }

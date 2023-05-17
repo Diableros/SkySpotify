@@ -83,3 +83,14 @@ export const ErrorMessage = styled.p`
   color: #dd4422;
   font-size: 2rem;
 `
+
+export const PageTitle = styled.h1`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 50px 1rem 40px 1rem;
+  gap: 45px;
+  flex: none;
+  font-size: 4rem;
+`

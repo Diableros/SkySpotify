@@ -1,9 +1,5 @@
-const errorCatcher = (error: unknown) => {
-  if (error instanceof Error) {
-    console.log(error.message)
-  } else {
-    console.log('Unknown error', JSON.stringify(error))
-  }
+const errorCatcher = (error: string) => {
+  throw new Error(error)
 }
 
 export default errorCatcher
