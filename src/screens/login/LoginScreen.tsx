@@ -1,16 +1,10 @@
 import * as React from 'react'
 import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
-import { useNavigate } from 'react-router-dom'
-import { useLocalStorage } from 'react-use'
 import { HTTPError } from 'ky'
 import { useQueryClient } from '@tanstack/react-query'
 import useLogin from '@/queryService/qieryHooks/useLogin'
-import {
-  AuthRequestType,
-  AuthResponseType,
-  GetRefreshResponseType,
-} from '@/queryService/apiTypes'
+import { AuthResponseType, UserRequestType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
 import Button, { ButtonStyle } from '../components/Button/Button'
 import LoginFormInput from './components/LoginInput/LoginFormInput'
@@ -20,16 +14,10 @@ import { FieldsList, LoginFieldsType } from './types'
 import useSignUp from '@/queryService/qieryHooks/useSignUp'
 import QueryKey from '@/queryService/queryKeys'
 import { ErrorText, ButtonTitle } from './constants'
-import req from '@/queryService/request'
-import { ReqMethod } from '@/queryService/request/types'
-import queries from '@/queryService/queries'
-import { useAppDispatch } from '@/store/hooks/reduxHooks'
 
 const LoginScreen = () => {
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false)
   const queryClient = useQueryClient()
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const {
     mutate: userLogin,
@@ -58,7 +46,7 @@ const LoginScreen = () => {
   const isSubmitButtonDisable = Object.keys(errors).length > 0 || userLoginWait
   const isSignUpButtonDisable = Object.keys(errors).length > 0 || userSignUpWait
 
-  const onSubmit: SubmitHandler<AuthRequestType> = ({ email, password }) => {
+  const onSubmit: SubmitHandler<UserRequestType> = ({ email, password }) => {
     if (isSignUp) {
       userSignUp({ username: email, email, password })
     } else {

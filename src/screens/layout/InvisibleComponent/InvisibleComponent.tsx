@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useLocalStorage } from 'react-use'
+import { HTTPError } from 'ky'
 import * as S from './InvisibleComponent.style'
 import { GetRefreshResponseType } from '@/queryService/apiTypes'
 import req from '@/queryService/request'
@@ -26,7 +27,9 @@ const InvisibleComponent = () => {
       dispatch(userSetAccessToken({ token }))
       // console.log(`Access token was refreshed: ${token}`)
     },
-    onError: (response: Response) => console.log(response),
+    onError: (response: HTTPError) => {
+      if (refresh) throw new Error(response.message)
+    },
     refetchInterval: 5 * 60 * 1000,
   })
 

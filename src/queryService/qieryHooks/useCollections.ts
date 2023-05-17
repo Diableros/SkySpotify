@@ -18,6 +18,7 @@ const useCollection = (id: ReqArgumentsType['param']) => {
     onError: errorCatcher,
     onSuccess: (data) => data,
     enabled: !!id,
+    refetchOnWindowFocus: false,
   })
 }
 

@@ -7,16 +7,16 @@ import TrackListItem from '../TrackList/components/TrackListItem'
 import * as S from '../TrackList/TrackList.style'
 import { setCurrentTrack } from '@/store/appSlice'
 import { useAppDispatch } from '@/store/hooks/reduxHooks'
-import { LOCAL_STORAGE_FIELD } from '../TrackList/constants'
 import TableHeaderRow from '../TrackList/components/TableHeaderRow/TableHeaderRow'
+import LocalStorageField from '@/constants'
 
 const Favorites = () => {
   const tracks = useAppStore('trackList') as TrackType[]
   const currentUserId = useUserStore('id')
 
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
-    useLocalStorage<TrackType>(LOCAL_STORAGE_FIELD)
-  const currentTrackInStore = useAppStore(LOCAL_STORAGE_FIELD)
+    useLocalStorage<TrackType>(LocalStorageField.CurrentTrack)
+  const currentTrackInStore = useAppStore(LocalStorageField.CurrentTrack)
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {

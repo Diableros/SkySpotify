@@ -1,8 +1,8 @@
 import { TrackType } from '@/types'
 
-type UserResponseType = {
-  password: string
+export type UserRequestType = {
   email: string
+  password: string
 }
 
 type UserSignUpCredentionals = {
@@ -16,7 +16,7 @@ type UserCheckTokenType = {
 }
 
 export type AuthRequestType =
-  | UserResponseType
+  | UserRequestType
   | UserSignUpCredentionals
   | UserCheckTokenType
 

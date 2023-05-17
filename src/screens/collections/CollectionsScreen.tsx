@@ -7,10 +7,10 @@ import TrackListItem from '../TrackList/components/TrackListItem'
 import * as S from '../TrackList/TrackList.style'
 import { setCurrentTrack } from '@/store/appSlice'
 import { useAppDispatch } from '@/store/hooks/reduxHooks'
-import { LOCAL_STORAGE_FIELD } from '../TrackList/constants'
 import useCollection from '@/queryService/qieryHooks/useCollections'
 import Skeleton from '../TrackList/components/Skeleton'
 import TableHeaderRow from '../TrackList/components/TableHeaderRow/TableHeaderRow'
+import LocalStorageField from '@/constants'
 
 const CollectionsScreen = () => {
   const { playlist } = useParams()
@@ -18,8 +18,8 @@ const CollectionsScreen = () => {
   const { data, isLoading, refetch, isRefetching } = useCollection(playlist)
 
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
-    useLocalStorage<TrackType>(LOCAL_STORAGE_FIELD)
-  const currentTrackInStore = useAppStore(LOCAL_STORAGE_FIELD)
+    useLocalStorage<TrackType>(LocalStorageField.CurrentTrack)
+  const currentTrackInStore = useAppStore(LocalStorageField.CurrentTrack)
   const dispatch = useAppDispatch()
 
   React.useEffect(() => {
