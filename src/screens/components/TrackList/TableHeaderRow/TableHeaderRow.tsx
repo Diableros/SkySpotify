@@ -1,4 +1,4 @@
-import * as S from '../../TrackList.style'
+import * as S from '../Tracklist.style'
 import Icon from '@/screens/components/Icon'
 import IconSprite from '@/screens/components/Icon/enum'
 

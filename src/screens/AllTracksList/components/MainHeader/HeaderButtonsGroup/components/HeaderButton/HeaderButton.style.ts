@@ -5,6 +5,10 @@ type HeaderButtonType = {
   isActive: boolean
 }
 
+type ButtonBadgeType = {
+  number: number
+}
+
 const activeStyle = css`
   border-color: ${({ theme }) => theme.color.active};
   color: ${({ theme }) => theme.color.active};
@@ -18,6 +22,10 @@ const activeHoverStyle = css`
 const hoverStyle = css`
   border-color: ${({ theme }) => theme.color.hover};
   color: ${({ theme }) => theme.color.hover};
+`
+
+export const HeaderButtonBox = styled.div`
+  position: relative;
 `
 
 export const HeaderButton = styled.button<HeaderButtonType>`
@@ -41,9 +49,6 @@ export const HeaderButton = styled.button<HeaderButtonType>`
     border-color: ${({ theme }) => theme.color.active};
     color: ${({ theme }) => theme.color.active};
   }
-`
-export const HeaderButtonBox = styled.div`
-  position: relative;
 `
 
 export const HeaderButtonSelect = styled.div`
@@ -84,5 +89,25 @@ export const HeaderButtonSelectItem = styled.li`
 
   &:active {
     color: ${({ theme }) => theme.color.active};
+  }
+`
+
+export const ButtonBadge = styled.div<ButtonBadgeType>`
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background-color: ${({ theme }) => theme.color.active};
+  border-radius: 50%;
+  right: -8px;
+  top: -10px;
+
+  &::after {
+    position: absolute;
+    content: '${({ number }) => number}';
+    color: ${({ theme }) => theme.color.textMain};
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `

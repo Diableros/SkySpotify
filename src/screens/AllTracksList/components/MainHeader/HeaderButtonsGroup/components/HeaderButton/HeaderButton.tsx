@@ -19,6 +19,7 @@ const HeaderButton = ({
 }: PropsType) => {
   return (
     <S.HeaderButtonBox>
+      <S.ButtonBadge number={5} />
       <S.HeaderButton type="button" onClick={onClick} isActive={isActive}>
         {name}
       </S.HeaderButton>

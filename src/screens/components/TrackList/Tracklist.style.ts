@@ -40,6 +40,7 @@ export const Row = styled.li`
     margin-bottom: calc(73px + 0.75rem);
   }
 `
+
 export const Col1 = styled.div`
   padding-left: 0.5rem;
   display: flex;
@@ -66,10 +67,6 @@ export const Col4 = styled.div`
   padding-right: 0.75rem;
 `
 
-export const Like = styled.div`
-  color: ${({ theme }) => theme.color.textSecondry};
-`
-
 export const ErrorWrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -82,15 +79,4 @@ export const ErrorWrapper = styled.div`
 export const ErrorMessage = styled.p`
   color: #dd4422;
   font-size: 2rem;
-`
-
-export const PageTitle = styled.h1`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 50px 1rem 40px 1rem;
-  gap: 45px;
-  flex: none;
-  font-size: 4rem;
 `
