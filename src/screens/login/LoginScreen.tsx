@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
 import { HTTPError } from 'ky'
 import { useQueryClient } from '@tanstack/react-query'
+import Loader from './components/Loader'
 import useLogin from '@/queryService/qieryHooks/useLogin'
 import { AuthResponseType, UserRequestType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
@@ -14,8 +15,10 @@ import { FieldsList, LoginFieldsType } from './types'
 import useSignUp from '@/queryService/qieryHooks/useSignUp'
 import QueryKey from '@/queryService/queryKeys'
 import { ErrorText, ButtonTitle } from './constants'
+import useCheckLogin from '@/queryService/qieryHooks/useCheckLogin'
 
 const LoginScreen = () => {
+  const { isLoading, isError } = useCheckLogin()
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false)
   const queryClient = useQueryClient()
 
@@ -88,7 +91,7 @@ const LoginScreen = () => {
     if (signUpIsError) setServerErrorToUseForm(signUpError as HTTPError)
   }, [signUpError, signUpIsError, setServerErrorToUseForm])
 
-  return (
+  const loginForm = (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <a href="/">
         <img src={logo} alt="Skyspotify logo" />
@@ -148,6 +151,8 @@ const LoginScreen = () => {
       </div>
     </form>
   )
+
+  return isLoading && !isError ? <Loader /> : loginForm
 }
 
 export default LoginScreen

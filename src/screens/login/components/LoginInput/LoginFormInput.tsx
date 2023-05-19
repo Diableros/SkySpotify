@@ -4,6 +4,7 @@ import { InputObjectType } from '../../types'
 import * as S from './LoginFormInput.style'
 
 const INPUT_UNKNOWN_ERROR = 'Недопустимое значение'
+
 const LoginFormInput = ({
   type,
   name,

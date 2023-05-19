@@ -1,5 +1,11 @@
 import { TrackType } from '@/types'
 
+export type LocalUserType = {
+  id: number
+  userName: string
+  email: string
+}
+
 export type UserRequestType = {
   email: string
   password: string
@@ -11,7 +17,7 @@ type UserSignUpCredentionals = {
   password: string
 }
 
-type UserCheckTokenType = {
+export type UserCheckTokenType = {
   refresh: string
 }
 
