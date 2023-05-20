@@ -67,7 +67,7 @@ export const Col4 = styled.div`
   padding-right: 0.75rem;
 `
 
-export const ErrorWrapper = styled.div`
+export const MessageWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -78,5 +78,9 @@ export const ErrorWrapper = styled.div`
 
 export const ErrorMessage = styled.p`
   color: #dd4422;
+  font-size: 2rem;
+`
+export const NotFound = styled.p`
+  color: ${({ theme }) => theme.color.textSecondry};
   font-size: 2rem;
 `

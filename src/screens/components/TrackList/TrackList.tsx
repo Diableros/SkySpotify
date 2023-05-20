@@ -12,7 +12,7 @@ import Skeleton from '../Skeleton'
 import TableHeaderRow from './TableHeaderRow'
 
 type PropsType = {
-  tracksArray: TrackType[] | undefined
+  tracksArray: TrackType[]
   showSkeleton?: boolean
   showError?: boolean
 }
@@ -21,8 +21,8 @@ const TrackList = ({
   showSkeleton = false,
   showError = false,
 }: PropsType) => {
-  const { byAuthor, byGenre, bySearch, byYear } = useSearchStore()
-  const [currentTracks, setCurrentTracks] = React.useState<TrackType[]>([])
+  const { byAuthor, byGenre, byText, byYear } = useSearchStore()
+  const [filteredTracks, setFilteredTracks] = React.useState<TrackType[]>([])
   const [currentTrackInLocalStorage, setCurrentTrackInLocalStorage] =
     useLocalStorage<TrackType>(LocalStorageField.CurrentTrack)
   const currentTrackInStore = useAppStore(LocalStorageField.CurrentTrack)
@@ -37,34 +37,42 @@ const TrackList = ({
     }
   }, [currentTrackInLocalStorage, currentTrackInStore, dispatch])
 
-  // React.useEffect(() => {
-  //   if (bySearch)
-  //     setCurrentTracks(
-  //       currentTracks.filter((track) => track.name.includes(bySearch))
-  //     )
-  // }, [byAuthor, byGenre, bySearch, byYear, setCurrentTracks, currentTracks])
+  React.useEffect(() => {
+    if (tracksArray)
+      setFilteredTracks(
+        tracksArray.filter((track) => {
+          const searchString = byText.toLowerCase()
+          const title = track.name.toLocaleLowerCase()
+          return title.includes(searchString)
+        })
+      )
+  }, [tracksArray, byText])
+
+  const filteredContent = filteredTracks.length ? (
+    filteredTracks.map((track) => (
+      <TrackListItem
+        key={track.id}
+        trackData={track}
+        setCurrentTrack={setCurrentTrackInLocalStorage}
+      />
+    ))
+  ) : (
+    <S.MessageWrapper>
+      <S.NotFound>Треки не найдены...</S.NotFound>
+    </S.MessageWrapper>
+  )
 
   const successContent = (
     <S.TrackList>
       <TableHeaderRow />
-      {!showSkeleton && tracksArray ? (
-        tracksArray.map((track) => (
-          <TrackListItem
-            key={track.id}
-            trackData={track}
-            setCurrentTrack={setCurrentTrackInLocalStorage}
-          />
-        ))
-      ) : (
-        <Skeleton />
-      )}
+      {!showSkeleton ? filteredContent : <Skeleton />}
     </S.TrackList>
   )
 
   const errorContent = (
-    <S.ErrorWrapper>
+    <S.MessageWrapper>
       <S.ErrorMessage>Error getting list of tracks</S.ErrorMessage>
-    </S.ErrorWrapper>
+    </S.MessageWrapper>
   )
 
   return !showError ? successContent : errorContent

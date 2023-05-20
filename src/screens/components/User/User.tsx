@@ -40,7 +40,7 @@ const User = () => {
     refetchInterval: 2 * 60 * 1000,
     enabled: !!refresh,
     retry: 1,
-    refetchOnMount: false,
+    // refetchOnMount: false,
     refetchIntervalInBackground: true,
   })
 
