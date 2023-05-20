@@ -18,7 +18,7 @@ import { ErrorText, ButtonTitle } from './constants'
 import useCheckLogin from '@/queryService/qieryHooks/useCheckLogin'
 
 const LoginScreen = () => {
-  const { isLoading, isError } = useCheckLogin()
+  const checkInpRogress = useCheckLogin()
   const [isSignUp, setIsSignUp] = React.useState<boolean>(false)
   const queryClient = useQueryClient()
 
@@ -152,7 +152,7 @@ const LoginScreen = () => {
     </form>
   )
 
-  return isLoading && !isError ? <Loader /> : loginForm
+  return checkInpRogress ? <Loader /> : loginForm
 }
 
 export default LoginScreen

@@ -16,7 +16,7 @@ const useCheckLogin = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  return useQuery({
+  const { fetchStatus } = useQuery({
     queryFn: () =>
       req<GetTokenResponseType>({
         method: ReqMethod.Post,
@@ -28,9 +28,17 @@ const useCheckLogin = () => {
       dispatch(userLogin({ id, email, token, userName }))
       navigate('/')
     },
+    onError: () => {},
     retry: 0,
-    queryKey: [QueryKey.RefreshToken],
+    queryKey: [QueryKey.CheckLocalUser],
+    refetchOnWindowFocus: false,
+    retryDelay: 3000,
+    enabled: !!token && !!userData,
   })
+
+  const checkInProgress = !(fetchStatus === 'idle')
+
+  return checkInProgress
 }
 
 export default useCheckLogin

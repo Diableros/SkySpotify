@@ -10,12 +10,13 @@ import queries from '@/queryService/queries'
 import QueryKey from '@/queryService/queryKeys'
 import { userSetAccessToken } from '@/store/userSlice'
 import { useAppDispatch } from '@/store/hooks/reduxHooks'
+import LocalStorageField from '@/constants'
 
 const InvisibleComponent = () => {
   const dispatch = useAppDispatch()
-  const [refresh] = useLocalStorage<string>('token')
+  const [refresh] = useLocalStorage<string>(LocalStorageField.Token)
 
-  useQuery({
+  const { refetch } = useQuery({
     queryFn: () =>
       req<GetRefreshResponseType>({
         method: ReqMethod.Post,
@@ -31,7 +32,13 @@ const InvisibleComponent = () => {
       if (refresh) throw new Error(response.message)
     },
     refetchInterval: 5 * 60 * 1000,
+    enabled: !!refresh,
+    retry: 0,
   })
+
+  React.useEffect(() => {
+    refetch()
+  }, [refetch, refresh])
 
   return <S.InvisibleComponent />
 }
