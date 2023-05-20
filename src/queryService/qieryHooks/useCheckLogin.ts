@@ -30,7 +30,7 @@ const useCheckLogin = () => {
     },
     onError: () => {},
     retry: 0,
-    queryKey: [QueryKey.CheckLocalUser],
+    queryKey: [QueryKey.RefreshToken],
     refetchOnWindowFocus: false,
     retryDelay: 3000,
     enabled: !!token && !!userData,

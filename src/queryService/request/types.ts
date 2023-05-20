@@ -12,7 +12,7 @@ export type ReqArgumentsType = {
   method: ReqMethod
   endpoint: EndpointsType
   param?: string
-  body?: AuthRequestType
+  body?: Record<string, string> | string | undefined | null
   options?: Options
   undelayed?: boolean
 }

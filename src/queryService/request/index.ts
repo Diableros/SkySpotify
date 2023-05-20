@@ -37,7 +37,7 @@ async function req<T>({
     // },
   }
 
-  if (body) Object.assign(options, { json: { ...body }, ...customOptions })
+  if (body) Object.assign(options, { json: body, ...customOptions })
 
   // console.log('options: ', JSON.stringify(options))
 

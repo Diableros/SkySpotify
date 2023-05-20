@@ -43,7 +43,7 @@ const ControlBox = ({
 
       {isPlaying ? (
         <S.ControlButton type="button" onClick={handlePause}>
-          <Icon icon={IconSprite.Pause} size="24px" />
+          <Icon icon={IconSprite.Pause} size="20px" />
         </S.ControlButton>
       ) : (
         <S.ControlButton type="button" onClick={handlePlay}>
