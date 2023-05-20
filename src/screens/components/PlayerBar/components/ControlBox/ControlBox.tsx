@@ -1,34 +1,43 @@
 import * as React from 'react'
 import { HTMLMediaState } from 'react-use/lib/factory/createHTMLMediaHook'
 import * as S from './ControlBox.style'
-import { ControlsType } from '@/types'
+import { ControlsType, TrackType } from '@/types'
 import Icon from '@/screens/components/Icon'
 import IconSprite from '@/screens/components/Icon/enum'
+import useTrackSwitch from '@/hooks/useTrackSwitch'
+
+type PropsType = {
+  controls: ControlsType
+  state: HTMLMediaState
+  setCurrentTrack: React.Dispatch<React.SetStateAction<TrackType>>
+}
 
 const ControlBox = ({
   controls: { play, pause },
   state: { paused },
-}: {
-  controls: ControlsType
-  state: HTMLMediaState
-}) => {
+  setCurrentTrack,
+}: PropsType) => {
+  const [prev, next, currentTrack] = useTrackSwitch()
   const [isPlaying, setIsPlaying] = React.useState<boolean>(!paused)
 
   const handlePlay = () => {
-    setIsPlaying(true)
-    play()
+    play()?.then(() => setIsPlaying(true))
   }
 
   const handlePause = () => {
-    setIsPlaying(false)
     pause()
+    setIsPlaying(false)
   }
 
   React.useEffect(() => setIsPlaying(!paused), [paused])
+  React.useEffect(
+    () => setCurrentTrack(currentTrack),
+    [currentTrack, setCurrentTrack]
+  )
 
   return (
     <S.ControlPanel>
-      <S.ControlButton type="button">
+      <S.ControlButton type="button" onClick={prev}>
         <Icon icon={IconSprite.Prev} size="20px" />
       </S.ControlButton>
 
@@ -42,7 +51,7 @@ const ControlBox = ({
         </S.ControlButton>
       )}
 
-      <S.ControlButton type="button">
+      <S.ControlButton type="button" onClick={next}>
         <Icon icon={IconSprite.Next} size="20px" />
       </S.ControlButton>
 

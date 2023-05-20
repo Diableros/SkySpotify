@@ -12,27 +12,34 @@ type PropsType = {
 }
 
 const PlayerBar = ({ currentTrack }: PropsType) => {
+  const [newCurrentTrack, setNewCurrentTrack] =
+    React.useState<TrackType>(currentTrack)
+
   const [audio, state, controls] = useAudio({
-    src: currentTrack.track_file,
+    src: newCurrentTrack.track_file,
     autoPlay: false,
   })
 
-  const stateInfo = (
-    <S.CurrentTrackStateWrapper>
-      <S.CurrentTrackState>
-        {JSON.stringify(state, null, 2)}
-      </S.CurrentTrackState>
-    </S.CurrentTrackStateWrapper>
-  )
+  // const stateInfo = (
+  //   <S.CurrentTrackStateWrapper>
+  //     <S.CurrentTrackState>
+  //       {JSON.stringify(state, null, 2)}
+  //     </S.CurrentTrackState>
+  //   </S.CurrentTrackStateWrapper>
+  // )
 
   return (
     <S.PlayerBarBox isShow={!!currentTrack}>
       {audio}
-      {stateInfo}
+      {/* {stateInfo} */}
       <ProgressBar {...state} />
       <S.PlayerBar>
-        <ControlBox controls={controls} state={state} />
-        <TrackBox currentTrack={currentTrack} />
+        <ControlBox
+          controls={controls}
+          state={state}
+          setCurrentTrack={setNewCurrentTrack}
+        />
+        <TrackBox currentTrack={newCurrentTrack} />
         <VolumeRange {...controls} />
       </S.PlayerBar>
     </S.PlayerBarBox>
