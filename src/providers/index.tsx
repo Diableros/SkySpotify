@@ -6,13 +6,13 @@ import AppThemeProvider from './Theme'
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <QueryProvider>
-      <AppThemeProvider>
+    <AppThemeProvider>
+      <QueryProvider>
         <ReduxProvider>
           <RouterProvider>{children}</RouterProvider>
         </ReduxProvider>
-      </AppThemeProvider>
-    </QueryProvider>
+      </QueryProvider>
+    </AppThemeProvider>
   )
 }
 

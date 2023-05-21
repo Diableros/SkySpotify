@@ -1,4 +1,7 @@
+import Theme from './enums'
+
 export type ThemeType = {
+  name: Theme
   color: {
     textMain: string
     textSecondry: string

@@ -1,13 +1,16 @@
 import * as React from 'react'
+import { useTheme } from 'styled-components'
 import type { Dispatch, SetStateAction } from 'react'
 import { TrackType } from '@/types'
-import cover from '@/img/blank_cover.png'
+import coverDark from '@/img/cover_dark.svg'
+import coverLight from '@/img/cover_light.svg'
 import formatTrackTime from '@/helpers/formatTrackTime'
 import * as S from '../Tracklist.style'
 import IconSprite from '@/screens/components/Icon/enum'
 import Icon from '@/screens/components/Icon'
 import useUserStore from '@/store/hooks/useUserStore'
 import useToggleFavorite from '@/queryService/qieryHooks/useToggleFavorite'
+import Theme from '@/theme/enums'
 
 type PropsType = {
   trackData: TrackType
@@ -15,6 +18,7 @@ type PropsType = {
 }
 
 const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
+  const theme = useTheme()
   const currentUserId = useUserStore('id')
   const [isLiked, setIsLiked] = React.useState<boolean>(
     trackData.stared_user.some(({ id }) => id === currentUserId)
@@ -29,7 +33,10 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <S.Row onClick={() => setCurrentTrack(trackData)}>
       <S.Col1>
-        <img src={cover} alt="Album cover" />
+        <img
+          src={theme.name === Theme.Dark ? coverDark : coverLight}
+          alt="Album cover"
+        />
         {trackData.name}
       </S.Col1>
       <S.Col2>{trackData.author}</S.Col2>

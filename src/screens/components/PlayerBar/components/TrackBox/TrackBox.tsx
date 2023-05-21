@@ -1,11 +1,14 @@
 import * as React from 'react'
+import { useTheme } from 'styled-components'
 import s from './TrackBox.module.scss'
-import cover from '@/img/blank_cover.png'
 import { TrackType } from '@/types'
 import Icon from '@/screens/components/Icon'
 import IconSprite from '@/screens/components/Icon/enum'
 import useUserStore from '@/store/hooks/useUserStore'
 import useToggleFavorite from '@/queryService/qieryHooks/useToggleFavorite'
+import coverDark from '@/img/cover_dark.svg'
+import coverLight from '@/img/cover_light.svg'
+import Theme from '@/theme/enums'
 
 type PropsType = {
   currentTrack: TrackType
@@ -14,6 +17,7 @@ type PropsType = {
 const TrackBox = ({
   currentTrack: { name, author, stared_user, id },
 }: PropsType) => {
+  const theme = useTheme()
   const currentUserId = useUserStore('id')
   const [isLiked, setIsLiked] = React.useState<boolean>(
     stared_user.some(({ id: staredId }) => staredId === currentUserId)
@@ -37,7 +41,11 @@ const TrackBox = ({
           <Icon icon={IconSprite.Dislike} size="24px" />
         )}
       </button>
-      <img className={s.cover} src={cover} alt="Album cover" />
+      <img
+        className={s.cover}
+        src={theme.name === Theme.Dark ? coverDark : coverLight}
+        alt="Album cover"
+      />
       <div className={s.TrackInfo}>
         <div className={s.TrackInfoTitle}>{name}</div>
         <div className={s.TrackInfoAutor}>{author}</div>

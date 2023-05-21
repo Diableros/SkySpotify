@@ -42,6 +42,7 @@ export const SearchClear = styled.div`
   right: 0px;
   top: 50%;
   transform: traslate(-50%, 0);
+  color: ${({ theme }) => theme.color.textSecondry};
   cursor: pointer;
 
   &:hover {

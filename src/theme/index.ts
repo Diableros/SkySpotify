@@ -2,6 +2,7 @@ import { ThemeType } from './types'
 import Theme from './enums'
 
 export const darkTheme: ThemeType = {
+  name: Theme.Dark,
   color: {
     textMain: '#fff',
     textSecondry: '#4e4e4e',
@@ -17,6 +18,7 @@ export const darkTheme: ThemeType = {
 }
 
 const lightTheme: ThemeType = {
+  name: Theme.Light,
   color: {
     textMain: '#181818',
     textSecondry: '#b1b1b1',
