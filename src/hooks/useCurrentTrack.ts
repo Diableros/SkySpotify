@@ -15,19 +15,22 @@ const useCurrentTrack = () => {
     LocalStorageField.CurrentTrack
   )
 
+  const setLocalCurrentTrackUse = React.useCallback(setLocalCurrentTrack, [
+    setLocalCurrentTrack,
+  ])
+
   const setСurrentTrackExternally = (track: TrackType) => {
     setLocalCurrentTrack(track)
     dispatch(setStoreCurrentTrack(track))
   }
 
   React.useEffect(() => {
-    if (localCurrentTrack && !stateCurrentTrack) {
+    if (localCurrentTrack && !stateCurrentTrack)
       dispatch(setStoreCurrentTrack(localCurrentTrack))
-    }
-    if (!localCurrentTrack && stateCurrentTrack) {
-      setLocalCurrentTrack(stateCurrentTrack)
-    }
-  }, [localCurrentTrack, setLocalCurrentTrack, stateCurrentTrack, dispatch])
+
+    if (!localCurrentTrack && stateCurrentTrack)
+      setLocalCurrentTrackUse(stateCurrentTrack)
+  }, [localCurrentTrack, setLocalCurrentTrackUse, stateCurrentTrack, dispatch])
 
   return {
     currentTrack: stateCurrentTrack,

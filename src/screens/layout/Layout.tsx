@@ -13,7 +13,6 @@ const Layout = () => {
   const isLogin = useUserStore('login')
   const { currentTrack } = useCurrentTrack()
 
-  console.log(`Layout current track is: `, currentTrack?.id)
   return (
     <>
       <S.LayoutTop>

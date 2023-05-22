@@ -1,39 +1,26 @@
-import * as React from 'react'
-import { useLocalStorage } from 'react-use'
 import useAppStore from '@/store/hooks/useAppStore'
 import { TrackType } from '@/types'
-import LocalStorageField from '@/constants'
+import useCurrentTrack from './useCurrentTrack'
 
-const useTrackSwitch = (): [() => void, () => void, TrackType] => {
+const useTrackSwitch = (): [() => void, () => void] => {
   const tracklist = useAppStore('trackList') as TrackType[]
-  const currentTrack = useAppStore('currentTrack') as TrackType
-  const [, setLocalStorageCurrentTrack] = useLocalStorage(
-    LocalStorageField.CurrentTrack
-  )
-  const [newCurrentTrack, setNewCurrentTrack] = React.useState(currentTrack)
+  const { currentTrack, setCurrentTrack } = useCurrentTrack()
 
-  const indexOfTrack = tracklist.findIndex(
-    ({ id }) => id === newCurrentTrack.id
+  const indexOfCurrentTrack = tracklist.findIndex(
+    ({ id }) => id === currentTrack.id
   )
 
   const handlePrevTrack = () => {
-    if (indexOfTrack > 0) setNewCurrentTrack(tracklist[indexOfTrack - 1])
+    if (indexOfCurrentTrack > 0)
+      setCurrentTrack(tracklist[indexOfCurrentTrack - 1])
   }
 
   const handleNextTrack = () => {
-    if (indexOfTrack < tracklist.length - 1)
-      setNewCurrentTrack(tracklist[indexOfTrack + 1])
+    if (indexOfCurrentTrack < tracklist.length - 1)
+      setCurrentTrack(tracklist[indexOfCurrentTrack + 1])
   }
 
-  React.useEffect(() => {
-    setNewCurrentTrack(currentTrack)
-  }, [currentTrack, setNewCurrentTrack])
-
-  React.useEffect(() => {
-    setLocalStorageCurrentTrack(newCurrentTrack)
-  }, [setLocalStorageCurrentTrack, newCurrentTrack])
-
-  return [handlePrevTrack, handleNextTrack, newCurrentTrack]
+  return [handlePrevTrack, handleNextTrack]
 }
 
 export default useTrackSwitch
