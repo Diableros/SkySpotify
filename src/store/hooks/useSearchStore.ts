@@ -1,5 +1,6 @@
 import { useAppSelector } from '@/store/hooks/reduxHooks'
 import { RootStateType } from '@/store'
+import { Button } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/enum'
 
 export const useSearchStore = () => {
   const byAuthor = useAppSelector((state: RootStateType) => state.search.Author)
@@ -9,7 +10,12 @@ export const useSearchStore = () => {
     (state: RootStateType) => state.search.textSearch
   )
 
-  return { byAuthor, byGenre, byYear, byText }
+  return {
+    [Button.Author]: byAuthor,
+    [Button.Genre]: byGenre,
+    [Button.Year]: byYear,
+    byText,
+  }
 }
 
 export default useSearchStore

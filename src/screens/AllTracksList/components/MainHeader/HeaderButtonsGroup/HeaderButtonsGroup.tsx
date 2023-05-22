@@ -21,6 +21,7 @@ const HeaderButtonsGroup = () => {
         return (
           <HeaderButton
             key={currentButton}
+            buttonId={currentButton}
             name={searchButtons[currentButton].title}
             isActive={activeButton === currentButton}
             onClick={() => setActiveButton(currentButton)}

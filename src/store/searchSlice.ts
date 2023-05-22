@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Button } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/enum'
 
 export type SearchStateType = {
-  [Button.Author]: string[] | undefined
-  [Button.Year]: 'newestFirst' | 'oldestFirst' | undefined
-  [Button.Genre]: string[] | undefined
   textSearch: string
+  [Button.Author]?: string[]
+  [Button.Year]?: 'newestFirst' | 'oldestFirst'
+  [Button.Genre]?: string[]
 }
 
 const searchInitialState: SearchStateType = {
