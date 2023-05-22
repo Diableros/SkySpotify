@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { useAudio } from 'react-use'
 import ControlBox from './components/ControlBox/ControlBox'
 import TrackBox from './components/TrackBox/TrackBox'
@@ -6,16 +5,17 @@ import VolumeRange from './components/VolumeRange/VolumeRange'
 import * as S from './PlayerBar.style'
 import ProgressBar from './components/ProgressBar'
 import useCurrentTrack from '@/hooks/useCurrentTrack'
-import { TrackType } from '@/types'
+import useAppStore from '@/store/hooks/useAppStore'
 
 const PlayerBar = () => {
   const { currentTrack } = useCurrentTrack()
+  const isAutoplay = useAppStore('isAutoplay') as boolean
 
   const trackUrl = currentTrack?.track_file || ''
 
   const [audio, state, controls] = useAudio({
     src: trackUrl,
-    autoPlay: false,
+    autoPlay: isAutoplay,
   })
 
   // const stateInfo = (

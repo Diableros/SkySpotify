@@ -5,6 +5,8 @@ import { ControlsType } from '@/types'
 import Icon from '@/screens/components/Icon'
 import IconSprite from '@/screens/components/Icon/enum'
 import useTrackSwitch from '@/hooks/useTrackSwitch'
+import { useAppDispatch } from '@/store/hooks/reduxHooks'
+import { setIsAutoplay } from '@/store/appSlice'
 
 type PropsType = {
   controls: ControlsType
@@ -15,16 +17,21 @@ const ControlBox = ({
   controls: { play, pause },
   state: { paused },
 }: PropsType) => {
+  const dispatch = useAppDispatch()
   const [prev, next] = useTrackSwitch()
   const [isPlaying, setIsPlaying] = React.useState<boolean>(!paused)
 
   const handlePlay = () => {
-    play()?.then(() => setIsPlaying(true))
+    play()?.then(() => {
+      setIsPlaying(true)
+      dispatch(setIsAutoplay(true))
+    })
   }
 
   const handlePause = () => {
     pause()
     setIsPlaying(false)
+    dispatch(setIsAutoplay(false))
   }
 
   React.useEffect(() => setIsPlaying(!paused), [paused])
