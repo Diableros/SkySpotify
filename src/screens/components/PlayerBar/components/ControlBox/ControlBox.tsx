@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { HTMLMediaState } from 'react-use/lib/factory/createHTMLMediaHook'
 import * as S from './ControlBox.style'
-import { ControlsType, TrackType } from '@/types'
+import { ControlsType } from '@/types'
 import Icon from '@/screens/components/Icon'
 import IconSprite from '@/screens/components/Icon/enum'
 import useTrackSwitch from '@/hooks/useTrackSwitch'
@@ -9,15 +9,13 @@ import useTrackSwitch from '@/hooks/useTrackSwitch'
 type PropsType = {
   controls: ControlsType
   state: HTMLMediaState
-  setCurrentTrack: React.Dispatch<React.SetStateAction<TrackType>>
 }
 
 const ControlBox = ({
   controls: { play, pause },
   state: { paused },
-  setCurrentTrack,
 }: PropsType) => {
-  const [prev, next, currentTrack] = useTrackSwitch()
+  const [prev, next] = useTrackSwitch()
   const [isPlaying, setIsPlaying] = React.useState<boolean>(!paused)
 
   const handlePlay = () => {
@@ -30,10 +28,6 @@ const ControlBox = ({
   }
 
   React.useEffect(() => setIsPlaying(!paused), [paused])
-  React.useEffect(
-    () => setCurrentTrack(currentTrack),
-    [currentTrack, setCurrentTrack]
-  )
 
   return (
     <S.ControlPanel>

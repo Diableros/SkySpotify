@@ -4,19 +4,17 @@ import ControlBox from './components/ControlBox/ControlBox'
 import TrackBox from './components/TrackBox/TrackBox'
 import VolumeRange from './components/VolumeRange/VolumeRange'
 import * as S from './PlayerBar.style'
-import { TrackType } from '@/types'
 import ProgressBar from './components/ProgressBar'
+import useCurrentTrack from '@/hooks/useCurrentTrack'
+import { TrackType } from '@/types'
 
-type PropsType = {
-  currentTrack: TrackType
-}
+const PlayerBar = () => {
+  const { currentTrack } = useCurrentTrack()
 
-const PlayerBar = ({ currentTrack }: PropsType) => {
-  const [newCurrentTrack, setNewCurrentTrack] =
-    React.useState<TrackType>(currentTrack)
+  const trackUrl = currentTrack?.track_file || ''
 
   const [audio, state, controls] = useAudio({
-    src: newCurrentTrack.track_file,
+    src: trackUrl,
     autoPlay: false,
   })
 
@@ -29,17 +27,13 @@ const PlayerBar = ({ currentTrack }: PropsType) => {
   // )
 
   return (
-    <S.PlayerBarBox isShow={!!currentTrack}>
+    <S.PlayerBarBox>
       {audio}
       {/* {stateInfo} */}
       <ProgressBar {...state} />
       <S.PlayerBar>
-        <ControlBox
-          controls={controls}
-          state={state}
-          setCurrentTrack={setNewCurrentTrack}
-        />
-        <TrackBox currentTrack={newCurrentTrack} />
+        <ControlBox controls={controls} state={state} />
+        <TrackBox />
         <VolumeRange {...controls} />
       </S.PlayerBar>
     </S.PlayerBarBox>

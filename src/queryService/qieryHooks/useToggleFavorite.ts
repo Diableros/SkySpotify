@@ -13,7 +13,7 @@ const useToggleFavorite = (
 ) => {
   const token = useUserStore('token') as string
 
-  // const queryClient = useQueryClient()
+  const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: (id: TrackType['id']) =>
@@ -30,9 +30,9 @@ const useToggleFavorite = (
       }),
     mutationKey: [QueryKey.ToggleFavorite],
     onSuccess: () => {
-      // queryClient.invalidateQueries({
-      //   queryKey: [QueryKey.FullTrackList],
-      // })
+      queryClient.invalidateQueries({
+        queryKey: [QueryKey.FullTrackList],
+      })
       setIsLiked(!isLiked)
     },
     onError: (error: string) => {

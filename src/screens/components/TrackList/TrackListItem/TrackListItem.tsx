@@ -11,10 +11,11 @@ import Icon from '@/screens/components/Icon'
 import useUserStore from '@/store/hooks/useUserStore'
 import useToggleFavorite from '@/queryService/qieryHooks/useToggleFavorite'
 import Theme from '@/theme/enums'
+import useCurrentTrack from '@/hooks/useCurrentTrack'
 
 type PropsType = {
   trackData: TrackType
-  setCurrentTrack: Dispatch<SetStateAction<TrackType | undefined>>
+  setCurrentTrack: (teackId: TrackType) => void
 }
 
 const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {

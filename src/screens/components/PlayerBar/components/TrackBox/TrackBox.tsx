@@ -9,31 +9,36 @@ import useToggleFavorite from '@/queryService/qieryHooks/useToggleFavorite'
 import coverDark from '@/img/cover_dark.svg'
 import coverLight from '@/img/cover_light.svg'
 import Theme from '@/theme/enums'
+import useCurrentTrack from '@/hooks/useCurrentTrack'
 
-type PropsType = {
-  currentTrack: TrackType
-}
-
-const TrackBox = ({
-  currentTrack: { name, author, stared_user, id },
-}: PropsType) => {
+const TrackBox = () => {
   const theme = useTheme()
   const currentUserId = useUserStore('id')
-  const [isLiked, setIsLiked] = React.useState<boolean>(
-    stared_user.some(({ id: staredId }) => staredId === currentUserId)
-  )
+  const { currentTrack } = useCurrentTrack()
+
+  const [isLiked, setIsLiked] = React.useState<boolean>(false)
+
   const { mutate: toggleFavorite } = useToggleFavorite(isLiked, setIsLiked)
 
   const handleLikeClick = (trackId: TrackType['id']) => {
     toggleFavorite(trackId)
   }
 
-  return (
+  React.useEffect(() => {
+    if (currentTrack)
+      setIsLiked(
+        currentTrack.stared_user.some(
+          ({ id: staredId }) => staredId === currentUserId
+        )
+      )
+  }, [setIsLiked, currentTrack, currentUserId])
+
+  return currentTrack ? (
     <div className={s.TrackBox}>
       <button
         type="button"
         className={s.reactionsBox}
-        onClick={() => handleLikeClick(id)}
+        onClick={() => handleLikeClick(currentTrack.id)}
       >
         {isLiked ? (
           <Icon icon={IconSprite.Like} size="24px" />
@@ -47,11 +52,11 @@ const TrackBox = ({
         alt="Album cover"
       />
       <div className={s.TrackInfo}>
-        <div className={s.TrackInfoTitle}>{name}</div>
-        <div className={s.TrackInfoAutor}>{author}</div>
+        <div className={s.TrackInfoTitle}>{currentTrack.name}</div>
+        <div className={s.TrackInfoAutor}>{currentTrack.author}</div>
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default TrackBox
