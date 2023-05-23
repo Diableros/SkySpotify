@@ -24,10 +24,10 @@ const PlayerBar = () => {
   const [audio, state, controls] = useAudio({
     src: trackUrl,
     autoPlay: isAutoplay,
+    loop: isLoop,
     onEnded: () => {
       next(isShuffle)
     },
-    loop: isLoop,
   })
 
   const LoopShuffleControls: LoopShuffleControlsType = {

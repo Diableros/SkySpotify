@@ -1,6 +1,7 @@
 import { TRACKS_NO_DATA } from '../constants'
 import { TrackType } from '@/types'
-import { SearchField } from '../enum'
+import { Button, SearchField } from '../enum'
+import { SearchByYear } from '../type'
 
 const getSearchOptionsList = (
   searchField: SearchField,
@@ -8,13 +9,17 @@ const getSearchOptionsList = (
 ): string[] => {
   if (!trackList?.length) return [TRACKS_NO_DATA]
 
+  if (searchField === SearchField.ReleaseDate) {
+    return Object.values(SearchByYear).map((option) => option)
+  }
+
   const optionsSet = new Set<string>(
     trackList.map((listItem) => {
-      if (searchField === SearchField.ReleaseDate) {
-        const currentItemDate = new Date(listItem[SearchField.ReleaseDate])
+      // if (searchField === SearchField.ReleaseDate) {
+      //   const currentItemDate = new Date(listItem[SearchField.ReleaseDate])
 
-        return String(currentItemDate.getFullYear())
-      }
+      //   return String(currentItemDate.getFullYear())
+      // }
 
       return listItem[searchField]
     })

@@ -3,15 +3,15 @@ import { Button } from '@/screens/AllTracksList/components/MainHeader/HeaderButt
 
 export type SearchStateType = {
   textSearch: string
-  [Button.Author]?: string[]
-  [Button.Year]?: 'newestFirst' | 'oldestFirst'
-  [Button.Genre]?: string[]
+  [Button.Author]: string[]
+  [Button.Year]: string[]
+  [Button.Genre]: string[]
 }
 
 const searchInitialState: SearchStateType = {
-  [Button.Author]: undefined,
-  [Button.Year]: undefined,
-  [Button.Genre]: undefined,
+  [Button.Author]: [],
+  [Button.Year]: [],
+  [Button.Genre]: [],
   textSearch: '',
 }
 

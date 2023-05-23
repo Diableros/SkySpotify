@@ -1,9 +1,8 @@
-import { HTMLMediaState } from 'react-use/lib/factory/createHTMLMediaHook'
 import styled from 'styled-components'
 
 type ProgressBarType = {
-  time: HTMLMediaState['time']
-  duration: HTMLMediaState['duration']
+  time: number
+  duration: number
 }
 
 export const ProgressBarBox = styled.div`
@@ -27,11 +26,17 @@ export const ProgressBarBox = styled.div`
     box-shadow: 0 0 10px 0px ${({ theme }) => theme.color.active};
   }
 `
-export const ProgressBar = styled.div<ProgressBarType>`
+
+export const ProgressBar = styled.div.attrs<ProgressBarType>(
+  ({ time, duration }) => ({
+    style: {
+      width: `${Math.round((time / duration) * 1000) / 10}%`,
+    },
+  })
+)`
   position: absolute;
   background-color: ${({ theme }) => theme.color.active};
   top: 0;
   left: 0;
   height: 100%;
-  width: ${({ time, duration }) => (time / duration) * 100}%;
 `
