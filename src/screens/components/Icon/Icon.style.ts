@@ -7,6 +7,7 @@ type PropsType = {
   roundCrop?: boolean
   inactive?: boolean
   color?: string
+  isActive?: boolean
 }
 
 const activeCss = css`
@@ -35,7 +36,9 @@ export const IconWrapper = styled.div<PropsType>`
   ${({ roundCrop }) => (roundCrop ? `border-radius: 50%;` : null)}
   overflow: hidden;
 
-  color: ${({ color }) => (!color ? `inherit` : color)};
+  color: ${({ color, isActive, theme }) =>
+    // eslint-disable-next-line no-nested-ternary
+    isActive ? theme.color.active : !color ? `inherit` : color};
 
   ${({ inactive }) => (!inactive ? activeCss : null)};
 

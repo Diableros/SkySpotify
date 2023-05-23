@@ -14,7 +14,7 @@ export const PlayerBarBox = styled.div`
   color: ${({ theme }) => theme.color.textMain};
   left: 0;
   width: 100%;
-  height: 73px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   animation: ${slider} 0.5s linear;

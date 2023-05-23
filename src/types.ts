@@ -21,3 +21,10 @@ export type ControlsType = {
   mute: () => void
   unmute: () => void
 }
+
+export type LoopShuffleControlsType = {
+  isLoop: boolean
+  setIsLoop: React.Dispatch<React.SetStateAction<boolean>>
+  isShuffle: boolean
+  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>
+}

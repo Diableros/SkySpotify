@@ -45,7 +45,7 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
       <S.Col4>
         <button type="button" onClick={() => handleLikeClick(trackData.id)}>
           {isLiked ? (
-            <Icon icon={IconSprite.Like} size="20px" />
+            <Icon icon={IconSprite.Like} size="20px" isActive />
           ) : (
             <Icon icon={IconSprite.Dislike} size="20px" />
           )}

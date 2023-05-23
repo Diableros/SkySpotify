@@ -11,6 +11,7 @@ type PropsType = {
   color?: string
   inactive?: boolean
   onClick?: () => void
+  isActive?: boolean
 }
 
 const Icon = ({
@@ -22,6 +23,7 @@ const Icon = ({
   color,
   onClick,
   inactive = false,
+  isActive = false,
 }: PropsType) => {
   return (
     <S.IconWrapper
@@ -32,6 +34,7 @@ const Icon = ({
       color={color}
       onClick={onClick}
       inactive={inactive}
+      isActive={isActive}
     >
       <svg>
         <use xlinkHref={`${sprite}#icon-${icon}`} />
