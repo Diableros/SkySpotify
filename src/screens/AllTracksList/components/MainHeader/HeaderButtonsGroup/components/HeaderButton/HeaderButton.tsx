@@ -4,6 +4,9 @@ import { OPTIONS_NOT_FOUND } from '../../constants'
 import { Button } from '../../enum'
 import * as S from './HeaderButton.style'
 import { SearchByYear } from '../../type'
+import { useAppDispatch } from '@/store/hooks/reduxHooks'
+import Icon from '@/screens/components/Icon'
+import IconSprite from '@/screens/components/Icon/enum'
 
 type PropsType = {
   buttonId: Button
@@ -22,6 +25,7 @@ const HeaderButton = ({
   resetButtons,
   optionsList = [OPTIONS_NOT_FOUND],
 }: PropsType) => {
+  const dispatch = useAppDispatch()
   const { [Button[buttonId]]: searchOptions } = useSearchStore()
   const [filterOptions, setFilterOptions] = React.useState<
     string[] | undefined
@@ -33,9 +37,33 @@ const HeaderButton = ({
     setFilterOptions([option])
   }
 
+  const handleSearchCancel = () => {
+    console.log(`Cancelling search ${buttonId}`)
+  }
+
+  React.useEffect(() => {
+    switch (buttonId) {
+      case Button.Author:
+        console.log(`Push ${filterOptions || 'nothing'} to byAuthor`)
+        break
+      case Button.Genre:
+        console.log(`Push ${filterOptions || 'nothing'} to byGenre`)
+        break
+      case Button.Year:
+        console.log(`Push ${filterOptions || 'nothing'} to byYear`)
+        break
+
+      default:
+        throw new Error('Unknown dispatch action')
+    }
+  }, [buttonId, dispatch, filterOptions])
+
   return (
     <S.HeaderButtonBox>
       <S.ButtonBadge number={filterOptions?.length} />
+      <S.ButtonSearchCancel onClick={handleSearchCancel}>
+        <Icon icon={IconSprite.Cross} size="16px" />
+      </S.ButtonSearchCancel>
       <S.HeaderButton type="button" onClick={onClick} isActive={isActive}>
         {name}
       </S.HeaderButton>
