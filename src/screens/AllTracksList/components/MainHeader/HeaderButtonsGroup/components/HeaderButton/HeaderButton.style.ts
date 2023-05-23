@@ -102,6 +102,10 @@ export const ButtonBadge = styled.div<ButtonBadgeType>`
   right: -8px;
   top: -10px;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &::before {
     position: absolute;
     content: '${({ number }) => number || ''}';
@@ -126,6 +130,7 @@ export const ButtonSearchCancel = styled.div`
   top: -5px;
   right: 3px;
   color: ${({ theme }) => theme.color.hover};
+  pointer-events: none;
 
   &:hover {
     visibility: visible;

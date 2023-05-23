@@ -39,6 +39,7 @@ const HeaderButton = ({
 
   const handleSearchCancel = () => {
     console.log(`Cancelling search ${buttonId}`)
+    setFilterOptions([])
   }
 
   React.useEffect(() => {
@@ -60,10 +61,15 @@ const HeaderButton = ({
 
   return (
     <S.HeaderButtonBox>
-      <S.ButtonBadge number={filterOptions?.length} />
-      <S.ButtonSearchCancel onClick={handleSearchCancel}>
-        <Icon icon={IconSprite.Cross} size="16px" />
-      </S.ButtonSearchCancel>
+      <S.ButtonBadge
+        number={filterOptions?.length}
+        onClick={handleSearchCancel}
+      />
+      {filterOptions?.length ? (
+        <S.ButtonSearchCancel>
+          <Icon icon={IconSprite.Cross} size="16px" />
+        </S.ButtonSearchCancel>
+      ) : null}
       <S.HeaderButton type="button" onClick={onClick} isActive={isActive}>
         {name}
       </S.HeaderButton>
