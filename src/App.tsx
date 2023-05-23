@@ -1,4 +1,4 @@
-import TrackList from '@/screens/TrackList'
+import TrackList from '@/screens/AllTracksList'
 
 const App = () => {
   return <TrackList />

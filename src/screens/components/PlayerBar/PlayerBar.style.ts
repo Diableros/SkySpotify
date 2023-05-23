@@ -1,20 +1,24 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
-type PlayerBarPropsType = {
-  isShow: boolean
-}
+const slider = keyframes`
+  0% {
+    bottom: -73px;
+  }
+  100% {
+    bottom: 0px;
+  }
+`
 
-export const PlayerBarBox = styled.div<PlayerBarPropsType>`
+export const PlayerBarBox = styled.div`
   position: fixed;
   color: ${({ theme }) => theme.color.textMain};
   left: 0;
-  bottom: -73px;
   width: 100%;
-  height: 73px;
+  height: 70px;
   display: flex;
   flex-direction: column;
-  transition: bottom 0.2s ease-in-out;
-  ${({ isShow }) => (isShow ? `bottom: 0px;` : null)}
+  animation: ${slider} 0.5s linear;
+  bottom: 0;
 `
 
 export const PlayerBar = styled.div`

@@ -9,16 +9,26 @@ export enum ButtonStyle {
 type ButtonStyleType = {
   style: ButtonStyle
   title: string
-  action: () => void
+  disabled?: boolean
+  action?: () => void
 }
 
-const Button = ({ style, title, action }: ButtonStyleType) => {
+const Button = ({
+  style,
+  title,
+  disabled = false,
+  action,
+}: ButtonStyleType) => {
   switch (style) {
     case ButtonStyle.Purple:
       return (
         <button
           type="submit"
-          className={clsx(s.btn, s['btn--purple'])}
+          className={clsx(
+            s.btn,
+            s['btn--purple'],
+            disabled && s['btn--disabled']
+          )}
           onClick={action}
         >
           {title}

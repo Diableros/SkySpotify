@@ -1,108 +1,158 @@
 import * as React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { SubmitHandler } from 'react-hook-form/dist/types'
+import { HTTPError } from 'ky'
+import { useQueryClient } from '@tanstack/react-query'
+import Loader from './components/Loader'
+import useLogin from '@/queryService/qieryHooks/useLogin'
+import { AuthResponseType, UserRequestType } from '@/queryService/apiTypes'
 import logo from '@/img/logo.svg'
-import s from './LoginScreen.module.scss'
-import Snack from '@/screens/components/Snack/Snack'
-import { userLogin } from '@/store/userSlice'
-import { useAppDispatch } from '@/hooks/reduxHooks'
 import Button, { ButtonStyle } from '../components/Button/Button'
-
-export type LoginFieldsType = {
-  email: string
-  password: string
-  passwordConfirm?: string
-}
+import LoginFormInput from './components/LoginInput/LoginFormInput'
+import FIELDS from './formFields'
+import s from './LoginScreen.module.scss'
+import { FieldsList, LoginFieldsType } from './types'
+import useSignUp from '@/queryService/qieryHooks/useSignUp'
+import QueryKey from '@/queryService/queryKeys'
+import { ErrorText, ButtonTitle } from './constants'
+import useCheckLogin from '@/queryService/qieryHooks/useCheckLogin'
 
 const LoginScreen = () => {
-  const [isRegister, setIsRegister] = React.useState<boolean>(false)
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  const checkInpRogress = useCheckLogin()
+  const [isSignUp, setIsSignUp] = React.useState<boolean>(false)
+  const queryClient = useQueryClient()
+
+  const {
+    mutate: userLogin,
+    isLoading: userLoginWait,
+    error: loginError,
+    isError: loginIsError,
+  } = useLogin()
+
+  const {
+    mutate: userSignUp,
+    isLoading: userSignUpWait,
+    error: signUpError,
+    isError: signUpIsError,
+  } = useSignUp()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFieldsType>()
+    clearErrors,
+    setError,
+  } = useForm<LoginFieldsType>({
+    mode: 'onTouched',
+  })
 
-  const onSubmit: SubmitHandler<LoginFieldsType> = (data) => {
-    // just for probe
-    dispatch(
-      userLogin({
-        login: true,
-        id: 1,
-        email: data.email,
-        token: 'blablabla',
-        userName: data.email,
-      })
-    )
+  const isSubmitButtonDisable = Object.keys(errors).length > 0 || userLoginWait
+  const isSignUpButtonDisable = Object.keys(errors).length > 0 || userSignUpWait
 
-    navigate('/')
+  const onSubmit: SubmitHandler<UserRequestType> = ({ email, password }) => {
+    if (isSignUp) {
+      userSignUp({ username: email, email, password })
+    } else {
+      userLogin({ email, password })
+    }
   }
 
-  return (
-    <>
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <a href="/">
-          <img src={logo} alt="Skyspotify logo" />
-        </a>
-        <div className={s['form__input-box']}>
-          <input
-            className={s.form__input}
-            type="email"
-            placeholder="e-mail"
-            {...register('email', {
-              required: '(Нужен формат e-mail)',
-              minLength: 4,
-              maxLength: 20,
-              pattern:
-                /^[A-Za-z0-9.]{2,40}@[A-Za-z0-9]{2,40}.[A-Za-z0-9]{2,7}$/,
-            })}
-          />
-          <input
-            className={s.form__input}
-            type="password"
-            placeholder="Пароль"
-            {...register('password', {
-              required: '(длина 8-30 символов)',
-              minLength: 8,
-              maxLength: 20,
-            })}
-          />
-          {isRegister ? (
-            <input
-              className={s.form__input}
-              type="password"
-              placeholder="Повторите пароль"
-              {...register('passwordConfirm', {
-                required: true,
-                minLength: 8,
-                maxLength: 20,
-              })}
-            />
-          ) : null}
-        </div>
-        <div className={s['form__button-box']}>
-          {isRegister ? (
-            <Button style={ButtonStyle.Purple} title="Зарегистрироваться" />
-          ) : (
-            <>
-              <Button style={ButtonStyle.Purple} title="Войти" />
-              <Button
-                style={ButtonStyle.White}
-                title="Зарегистрироваться"
-                action={() => setIsRegister(true)}
-              />
-            </>
-          )}
-        </div>
-      </form>
-      {Object.keys(errors).length > 0 ? (
-        <Snack type="error" data={errors} />
-      ) : null}
-    </>
+  const setServerErrorToUseForm = React.useCallback(
+    (error: HTTPError) => {
+      error.response
+        .json()
+        .then((responseObj: AuthResponseType) => {
+          const fieldWithMessage = Object.keys(responseObj)[0]
+
+          setError(
+            fieldWithMessage === 'password'
+              ? FieldsList.Password
+              : FieldsList.Email,
+            {
+              type: 'focus',
+              message: String(
+                responseObj[fieldWithMessage as keyof AuthResponseType] ||
+                  ErrorText.UnknownError
+              ),
+            },
+            { shouldFocus: true }
+          )
+        })
+        .catch(() => {})
+    },
+    [setError]
   )
+
+  React.useEffect(() => {
+    if (loginIsError) setServerErrorToUseForm(loginError as HTTPError)
+  }, [loginError, loginIsError, setServerErrorToUseForm])
+
+  React.useEffect(() => {
+    if (signUpIsError) setServerErrorToUseForm(signUpError as HTTPError)
+  }, [signUpError, signUpIsError, setServerErrorToUseForm])
+
+  const loginForm = (
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+      <a href="/">
+        <img src={logo} alt="Skyspotify logo" />
+      </a>
+      <div className={s['form__input-box']}>
+        <LoginFormInput
+          register={register}
+          inputError={errors[FieldsList.Email]}
+          {...FIELDS[FieldsList.Email]}
+        />
+        <LoginFormInput
+          register={register}
+          inputError={errors[FieldsList.Password]}
+          {...FIELDS[FieldsList.Password]}
+        />
+        {isSignUp ? (
+          <LoginFormInput
+            register={register}
+            inputError={errors[FieldsList.PasswordConfirm]}
+            {...FIELDS[FieldsList.PasswordConfirm]}
+          />
+        ) : null}
+      </div>
+      <div className={s['form__button-box']}>
+        {isSignUp ? (
+          <Button
+            style={ButtonStyle.Purple}
+            title={
+              userSignUpWait
+                ? ButtonTitle.SignUpLoader
+                : ButtonTitle.SignUpTitle
+            }
+            disabled={isSignUpButtonDisable}
+          />
+        ) : (
+          <>
+            <Button
+              style={ButtonStyle.Purple}
+              title={
+                userLoginWait ? ButtonTitle.LoginLoader : ButtonTitle.LoginTitle
+              }
+              disabled={isSubmitButtonDisable}
+            />
+            <Button
+              style={ButtonStyle.White}
+              title="Зарегистрироваться"
+              action={() => {
+                queryClient.invalidateQueries({
+                  queryKey: [QueryKey.UserSignUp],
+                })
+                clearErrors()
+                setIsSignUp(true)
+              }}
+            />
+          </>
+        )}
+      </div>
+    </form>
+  )
+
+  return checkInpRogress ? <Loader /> : loginForm
 }
 
 export default LoginScreen

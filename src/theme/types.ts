@@ -1,4 +1,7 @@
+import Theme from './enums'
+
 export type ThemeType = {
+  name: Theme
   color: {
     textMain: string
     textSecondry: string
@@ -9,5 +12,6 @@ export type ThemeType = {
     bgDropList: string
     bgDropListSlider: string
     bgTrackHover: string
+    textError: string
   }
 }

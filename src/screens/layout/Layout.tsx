@@ -1,17 +1,17 @@
+import * as React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import PlayerBar from '@/screens/components/PlayerBar/PlayerBar'
 import Search from '@/screens/components/Search/Search'
 import Menu from '@/screens/components/Menu/Menu'
 import CollectionsNav from '@/screens/components/CollectionsNav/CollectionsNav'
 import User from '../components/User/User'
-import useUserStore from '@/hooks/useUserStore'
-import useAppStore from '@/hooks/useAppStore'
-import { TrackType } from '@/types'
+import useUserStore from '@/store/hooks/useUserStore'
 import * as S from './Layout.style'
+import useCurrentTrack from '@/hooks/useCurrentTrack'
 
 const Layout = () => {
   const isLogin = useUserStore('login')
-  const currentTrack = useAppStore('currentTrack') as TrackType | undefined
+  const { currentTrack } = useCurrentTrack()
 
   return (
     <>
@@ -26,7 +26,7 @@ const Layout = () => {
           <CollectionsNav />
         </S.LayoutRight>
       </S.LayoutTop>
-      {currentTrack ? <PlayerBar currentTrack={currentTrack} /> : null}
+      {currentTrack ? <PlayerBar /> : null}
     </>
   )
 }

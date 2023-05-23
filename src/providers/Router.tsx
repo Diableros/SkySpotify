@@ -2,11 +2,12 @@ import * as React from 'react'
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import CollectionsScreen from '@/screens/Collections/CollectionsScreen'
 import LoginScreen from '@/screens/Login/LoginScreen'
-import { useAppSelector } from '@/hooks/reduxHooks'
+import { useAppSelector } from '@/store/hooks/reduxHooks'
 import { RootStateType } from '@/store'
 import NotFoundScreen from '@/screens/NotFound/NotFoundScreen'
 import Layout from '@/screens/Layout/Layout'
 import { Route } from './routes'
+import Favorites from '@/screens/Favorites'
 
 const Router = ({ children }: { children: React.ReactNode }) => {
   const userLogin = useAppSelector((state: RootStateType) => state.user.login)
@@ -23,6 +24,10 @@ const Router = ({ children }: { children: React.ReactNode }) => {
         {
           path: Route.Collections,
           element: <CollectionsScreen />,
+        },
+        {
+          path: Route.Favorites,
+          element: <Favorites />,
         },
         {
           path: Route.Internal404,

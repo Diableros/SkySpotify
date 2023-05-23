@@ -5,8 +5,9 @@ type PropsType = {
   width?: string
   height?: string
   roundCrop?: boolean
-  inActive?: boolean
+  inactive?: boolean
   color?: string
+  isActive?: boolean
 }
 
 const activeCss = css`
@@ -30,14 +31,16 @@ export const IconWrapper = styled.div<PropsType>`
   `
       : null}
 
-  ${({ width }) => (width ? `width: ${width}px` : null)};
-  ${({ height }) => (height ? `height: ${height}px` : null)};
+  ${({ width }) => (width ? `width: ${width}` : null)};
+  ${({ height }) => (height ? `height: ${height}` : null)};
   ${({ roundCrop }) => (roundCrop ? `border-radius: 50%;` : null)}
   overflow: hidden;
 
-  color: ${({ color }) => (!color ? `inherit` : color)};
+  color: ${({ color, isActive, theme }) =>
+    // eslint-disable-next-line no-nested-ternary
+    isActive ? theme.color.active : !color ? `inherit` : color};
 
-  ${({ inActive }) => (!inActive ? activeCss : null)};
+  ${({ inactive }) => (!inactive ? activeCss : null)};
 
   & > svg {
     width: 100%;

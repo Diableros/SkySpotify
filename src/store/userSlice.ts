@@ -23,9 +23,15 @@ const userSlice = createSlice({
     userLogout() {
       return userInitialState
     },
+    userSetAccessToken(state, action: PayloadAction<{ token: string }>) {
+      return {
+        ...state,
+        token: action.payload.token,
+      }
+    },
   },
 })
 
-export const { userLogin, userLogout } = userSlice.actions
+export const { userLogin, userLogout, userSetAccessToken } = userSlice.actions
 
 export default userSlice.reducer

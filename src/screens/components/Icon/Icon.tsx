@@ -9,8 +9,9 @@ type PropsType = {
   height?: string
   roundCrop?: boolean
   color?: string
-  inActive?: boolean
+  inactive?: boolean
   onClick?: () => void
+  isActive?: boolean
 }
 
 const Icon = ({
@@ -21,7 +22,8 @@ const Icon = ({
   roundCrop = false,
   color,
   onClick,
-  inActive = false,
+  inactive = false,
+  isActive = false,
 }: PropsType) => {
   return (
     <S.IconWrapper
@@ -31,7 +33,8 @@ const Icon = ({
       roundCrop={roundCrop}
       color={color}
       onClick={onClick}
-      inActive={inActive}
+      inactive={inactive}
+      isActive={isActive}
     >
       <svg>
         <use xlinkHref={`${sprite}#icon-${icon}`} />

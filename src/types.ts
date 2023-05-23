@@ -10,7 +10,7 @@ export type TrackType = {
   album: string
   logo: null
   track_file: string
-  stared_user: UserDataType
+  stared_user: UserDataType[]
 }
 
 export type ControlsType = {
@@ -20,4 +20,11 @@ export type ControlsType = {
   volume: (volume: number) => void
   mute: () => void
   unmute: () => void
+}
+
+export type LoopShuffleControlsType = {
+  isLoop: boolean
+  setIsLoop: React.Dispatch<React.SetStateAction<boolean>>
+  isShuffle: boolean
+  setIsShuffle: React.Dispatch<React.SetStateAction<boolean>>
 }

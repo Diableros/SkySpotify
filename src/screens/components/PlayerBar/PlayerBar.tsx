@@ -4,35 +4,58 @@ import ControlBox from './components/ControlBox/ControlBox'
 import TrackBox from './components/TrackBox/TrackBox'
 import VolumeRange from './components/VolumeRange/VolumeRange'
 import * as S from './PlayerBar.style'
-import { TrackType } from '@/types'
 import ProgressBar from './components/ProgressBar'
+import useCurrentTrack from '@/hooks/useCurrentTrack'
+import useAppStore from '@/store/hooks/useAppStore'
+import useTrackSwitch from '@/hooks/useTrackSwitch'
+import { LoopShuffleControlsType } from '@/types'
 
-type PropsType = {
-  currentTrack: TrackType
-}
+const SHOW_TRACK_STATE_INFO = false
 
-const PlayerBar = ({ currentTrack }: PropsType) => {
+const PlayerBar = () => {
+  const [isLoop, setIsLoop] = React.useState<boolean>(false)
+  const [isShuffle, setIsShuffle] = React.useState<boolean>(false)
+  const { currentTrack } = useCurrentTrack()
+  const isAutoplay = useAppStore('isAutoplay') as boolean
+  const { next } = useTrackSwitch()
+
+  const trackUrl = currentTrack?.track_file || ''
+
   const [audio, state, controls] = useAudio({
-    src: currentTrack.track_file,
-    autoPlay: false,
+    src: trackUrl,
+    autoPlay: isAutoplay,
+    loop: isLoop,
+    onEnded: () => {
+      next(isShuffle)
+    },
   })
 
-  // const stateInfo = (
-  //   <S.CurrentTrackStateWrapper>
-  //     <S.CurrentTrackState>
-  //       {JSON.stringify(state, null, 2)}
-  //     </S.CurrentTrackState>
-  //   </S.CurrentTrackStateWrapper>
-  // )
+  const LoopShuffleControls: LoopShuffleControlsType = {
+    isLoop,
+    setIsLoop,
+    isShuffle,
+    setIsShuffle,
+  }
+
+  const stateInfo = (
+    <S.CurrentTrackStateWrapper>
+      <S.CurrentTrackState>
+        {JSON.stringify(state, null, 2)}
+      </S.CurrentTrackState>
+    </S.CurrentTrackStateWrapper>
+  )
 
   return (
-    <S.PlayerBarBox isShow={!!currentTrack}>
+    <S.PlayerBarBox>
       {audio}
-      {/* {stateInfo} */}
-      <ProgressBar {...state} />
+      {SHOW_TRACK_STATE_INFO && stateInfo}
+      <ProgressBar state={state} controls={controls} />
       <S.PlayerBar>
-        <ControlBox controls={controls} state={state} />
-        <TrackBox currentTrack={currentTrack} />
+        <ControlBox
+          controls={{ ...controls, ...LoopShuffleControls }}
+          state={state}
+        />
+        <TrackBox />
         <VolumeRange {...controls} />
       </S.PlayerBar>
     </S.PlayerBarBox>
