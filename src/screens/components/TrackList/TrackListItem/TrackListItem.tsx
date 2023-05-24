@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useTheme } from 'styled-components'
-import type { Dispatch, SetStateAction } from 'react'
 import { TrackType } from '@/types'
 import coverDark from '@/img/cover_dark.svg'
 import coverLight from '@/img/cover_light.svg'
@@ -11,7 +10,6 @@ import Icon from '@/screens/components/Icon'
 import useUserStore from '@/store/hooks/useUserStore'
 import useToggleFavorite from '@/queryService/qieryHooks/useToggleFavorite'
 import Theme from '@/theme/enums'
-import useCurrentTrack from '@/hooks/useCurrentTrack'
 
 type PropsType = {
   trackData: TrackType

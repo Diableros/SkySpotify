@@ -5,13 +5,12 @@ import { TrackType } from '@/types'
 import TrackList from '../components/TrackList'
 
 const AllTracksList = () => {
-  const { data, isLoading, isError, isFetching } = useFullTrackList()
+  const { data, isLoading, isError, isFetching, isFetched } = useFullTrackList()
   const [tracksData, setTracksData] = React.useState<TrackType[] | undefined>()
 
   React.useEffect(() => {
-    setTracksData(data)
-    console.log(isFetching)
-  }, [data, isFetching])
+    if (!isFetching && isFetched) setTracksData(data)
+  }, [data, isFetching, isFetched])
 
   return (
     <>
