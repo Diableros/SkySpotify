@@ -38,20 +38,20 @@ const HeaderButton = ({
   }
 
   const handleSearchCancel = () => {
-    console.log(`Cancelling search ${buttonId}`)
+    // console.log(`Cancelling search ${buttonId}`)
     setFilterOptions([])
   }
 
   React.useEffect(() => {
     switch (buttonId) {
       case Button.Author:
-        console.log(`Push ${filterOptions || 'nothing'} to byAuthor`)
+        // console.log(`Push ${filterOptions || 'nothing'} to byAuthor`)
         break
       case Button.Genre:
-        console.log(`Push ${filterOptions || 'nothing'} to byGenre`)
+        // console.log(`Push ${filterOptions || 'nothing'} to byGenre`)
         break
       case Button.Year:
-        console.log(`Push ${filterOptions || 'nothing'} to byYear`)
+        // console.log(`Push ${filterOptions || 'nothing'} to byYear`)
         break
 
       default:
