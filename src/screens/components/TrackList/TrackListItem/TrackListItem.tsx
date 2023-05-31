@@ -36,7 +36,7 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
           src={theme.name === Theme.Dark ? coverDark : coverLight}
           alt="Album cover"
         />
-        {trackData.name}
+        {trackData.name} {trackData.release_date}
       </S.Col1>
       <S.Col2>{trackData.author}</S.Col2>
       <S.Col3>{trackData.album}</S.Col3>

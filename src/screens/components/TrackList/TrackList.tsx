@@ -6,9 +6,11 @@ import useSearchStore from '@/store/hooks/useSearchStore'
 import Skeleton from '../Skeleton'
 import TableHeaderRow from './TableHeaderRow'
 import useCurrentTrack from '@/hooks/useCurrentTrack'
+import { Button } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/enum'
+import { SearchByYear } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/type'
 
 type PropsType = {
-  tracksArray: TrackType[] | undefined
+  tracksArray?: TrackType[]
   showSkeleton?: boolean
   showError?: boolean
 }
@@ -17,20 +19,57 @@ const TrackList = ({
   showSkeleton = false,
   showError = false,
 }: PropsType) => {
-  const { byAuthor, byGenre, byText, byYear } = useSearchStore()
+  const {
+    [Button.Author]: byAuthor,
+    [Button.Genre]: byGenre,
+    [Button.Year]: byYear,
+    byText,
+  } = useSearchStore()
   const { setCurrentTrack } = useCurrentTrack()
   const [filteredTracks, setFilteredTracks] = React.useState<TrackType[]>([])
 
+  const getFilteredTracks = React.useMemo(
+    () => () => {
+      if (tracksArray) {
+        let result = tracksArray
+
+        if (byText.length > 0)
+          result = result.filter((track) => {
+            const searchString = byText.toLowerCase()
+            const title = track.name.toLocaleLowerCase()
+            return title.includes(searchString)
+          })
+
+        if (byAuthor.length > 0)
+          result = result.filter((track) => byAuthor.includes(track.author))
+
+        if (byGenre.length > 0)
+          result = result.filter((track) => byGenre.includes(track.genre))
+
+        if (byYear.length > 0) {
+          result = Array.from(result).sort(
+            ({ release_date: adate }, { release_date: bdate }) => {
+              const current = new Date(adate).valueOf()
+              const next = new Date(bdate).valueOf()
+
+              if (byYear.includes(SearchByYear.OldestFirst)) {
+                return current - next
+              }
+              return next - current
+            }
+          )
+        }
+
+        return result
+      }
+      return []
+    },
+    [byAuthor, byGenre, byText, byYear, tracksArray]
+  )
+
   React.useEffect(() => {
-    if (tracksArray)
-      setFilteredTracks(
-        tracksArray.filter((track) => {
-          const searchString = byText.toLowerCase()
-          const title = track.name.toLocaleLowerCase()
-          return title.includes(searchString)
-        })
-      )
-  }, [tracksArray, byText])
+    if (tracksArray) setFilteredTracks(getFilteredTracks())
+  }, [tracksArray, setFilteredTracks, getFilteredTracks])
 
   const filteredContent = filteredTracks.length ? (
     filteredTracks.map((track) => (

@@ -3,10 +3,14 @@ import useSearchStore from '@/store/hooks/useSearchStore'
 import { OPTIONS_NOT_FOUND } from '../../constants'
 import { Button } from '../../enum'
 import * as S from './HeaderButton.style'
-import { SearchByYear } from '../../type'
 import { useAppDispatch } from '@/store/hooks/reduxHooks'
 import Icon from '@/screens/components/Icon'
 import IconSprite from '@/screens/components/Icon/enum'
+import {
+  setSearchByAuthor,
+  setSearchByGenre,
+  setSearchByYear,
+} from '@/store/searchSlice'
 
 type PropsType = {
   buttonId: Button
@@ -32,9 +36,13 @@ const HeaderButton = ({
   >(searchOptions)
 
   const handleClickOption = (option: string) => {
-    // console.log([Button[buttonId]])
-    // console.log(`Clicked option is: ${option}`)
-    setFilterOptions([option])
+    if (buttonId === Button.Year) {
+      setFilterOptions([option])
+    } else {
+      const newFilterOptions = new Set(filterOptions)
+      newFilterOptions.add(option)
+      setFilterOptions(Array.from(newFilterOptions))
+    }
   }
 
   const handleSearchCancel = () => {
@@ -43,19 +51,23 @@ const HeaderButton = ({
   }
 
   React.useEffect(() => {
-    switch (buttonId) {
-      case Button.Author:
-        // console.log(`Push ${filterOptions || 'nothing'} to byAuthor`)
-        break
-      case Button.Genre:
-        // console.log(`Push ${filterOptions || 'nothing'} to byGenre`)
-        break
-      case Button.Year:
-        // console.log(`Push ${filterOptions || 'nothing'} to byYear`)
-        break
+    if (filterOptions) {
+      switch (buttonId) {
+        case Button.Author:
+          dispatch(setSearchByAuthor({ [Button.Author]: filterOptions }))
+          break
 
-      default:
-        throw new Error('Unknown dispatch action')
+        case Button.Genre:
+          dispatch(setSearchByGenre({ [Button.Genre]: filterOptions }))
+          break
+
+        case Button.Year:
+          dispatch(setSearchByYear({ [Button.Year]: filterOptions }))
+          break
+
+        default:
+          throw new Error('Unknown dispatch action')
+      }
     }
   }, [buttonId, dispatch, filterOptions])
 
