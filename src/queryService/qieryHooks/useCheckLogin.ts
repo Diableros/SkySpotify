@@ -1,3 +1,5 @@
+import * as React from 'react'
+import { isExpired } from 'react-jwt'
 import { useQuery } from '@tanstack/react-query'
 import { useLocalStorage } from 'react-use'
 import { useNavigate } from 'react-router-dom'
@@ -12,28 +14,45 @@ import { GetTokenResponseType, LocalUserType } from '../apiTypes'
 
 const useCheckLogin = () => {
   const [userData] = useLocalStorage<LocalUserType>(LocalStorageField.LocalUser)
-  const [token] = useLocalStorage<string>(LocalStorageField.Token)
+  const [localStorageToken] = useLocalStorage<string>(LocalStorageField.Token)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const tokenIsExpired = isExpired(localStorageToken || '')
+
+  React.useEffect(() => {
+    if (tokenIsExpired) {
+      navigate('/login')
+    }
+  }, [tokenIsExpired, navigate])
 
   const { fetchStatus } = useQuery({
     queryFn: () =>
       req<GetTokenResponseType>({
         method: ReqMethod.Post,
         endpoint: queries.User.RefreshToken,
-        body: { refresh: token as string },
+        body: { refresh: localStorageToken as string },
       }),
     onSuccess: () => {
-      const { id, email, userName } = userData
-      dispatch(userLogin({ id, email, token, userName }))
-      navigate('/')
+      if (userData && localStorageToken) {
+        const { id, email, userName } = userData
+        dispatch(
+          userLogin({
+            id,
+            email,
+            token: localStorageToken,
+            userName,
+            login: true,
+          })
+        )
+        navigate('/')
+      }
     },
     onError: () => {},
     retry: 0,
     queryKey: [QueryKey.RefreshToken],
     refetchOnWindowFocus: false,
     retryDelay: 3000,
-    enabled: !!token && !!userData,
+    enabled: !!userData && !tokenIsExpired,
   })
 
   const checkInProgress = !(fetchStatus === 'idle')

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useLocation } from 'react-router-dom'
 import { TrackType } from '@/types'
 import * as S from './Tracklist.style'
 import TrackListItem from './TrackListItem'
@@ -8,6 +9,7 @@ import TableHeaderRow from './TableHeaderRow'
 import useCurrentTrack from '@/hooks/useCurrentTrack'
 import { Button } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/enum'
 import { SearchByYear } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/type'
+import useUserStore from '@/store/hooks/useUserStore'
 
 type PropsType = {
   tracksArray?: TrackType[]
@@ -19,6 +21,8 @@ const TrackList = ({
   showSkeleton = false,
   showError = false,
 }: PropsType) => {
+  const currentUserId = useUserStore('id')
+  const { pathname } = useLocation()
   const {
     [Button.Author]: byAuthor,
     [Button.Genre]: byGenre,
@@ -30,8 +34,8 @@ const TrackList = ({
 
   const getFilteredTracks = React.useMemo(
     () => () => {
-      if (tracksArray) {
-        let result = tracksArray
+      if (tracksArray && !pathname.includes('collections')) {
+        let result = [...tracksArray]
 
         if (byText.length > 0)
           result = result.filter((track) => {
@@ -47,24 +51,22 @@ const TrackList = ({
           result = result.filter((track) => byGenre.includes(track.genre))
 
         if (byYear.length > 0) {
-          result = Array.from(result).sort(
-            ({ release_date: adate }, { release_date: bdate }) => {
-              const current = new Date(adate).valueOf()
-              const next = new Date(bdate).valueOf()
+          result.sort(({ release_date: adate }, { release_date: bdate }) => {
+            const current = new Date(adate).valueOf()
+            const next = new Date(bdate).valueOf()
 
-              if (byYear.includes(SearchByYear.OldestFirst)) {
-                return current - next
-              }
-              return next - current
+            if (byYear.includes(SearchByYear.OldestFirst)) {
+              return current - next
             }
-          )
+            return next - current
+          })
         }
 
         return result
       }
-      return []
+      return tracksArray || []
     },
-    [byAuthor, byGenre, byText, byYear, tracksArray]
+    [byAuthor, byGenre, byText, byYear, tracksArray, pathname]
   )
 
   React.useEffect(() => {
@@ -77,6 +79,7 @@ const TrackList = ({
         key={track.id}
         trackData={track}
         setCurrentTrack={setCurrentTrack}
+        isLikedTrack={track.stared_user.some(({ id }) => id === currentUserId)}
       />
     ))
   ) : (

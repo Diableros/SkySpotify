@@ -7,30 +7,39 @@ import formatTrackTime from '@/helpers/formatTrackTime'
 import * as S from '../Tracklist.style'
 import IconSprite from '@/screens/components/Icon/enum'
 import Icon from '@/screens/components/Icon'
-import useUserStore from '@/store/hooks/useUserStore'
 import useToggleFavorite from '@/queryService/qieryHooks/useToggleFavorite'
 import Theme from '@/theme/enums'
 
 type PropsType = {
   trackData: TrackType
-  setCurrentTrack: (teackId: TrackType) => void
+  setCurrentTrack: (track: TrackType) => void
+  isLikedTrack: boolean
 }
 
-const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
+const TrackListItem = ({
+  trackData,
+  setCurrentTrack,
+  isLikedTrack,
+}: PropsType) => {
   const theme = useTheme()
-  const currentUserId = useUserStore('id')
-  const [isLiked, setIsLiked] = React.useState<boolean>(
-    trackData.stared_user.some(({ id }) => id === currentUserId)
-  )
+  const [isLiked, setIsLiked] = React.useState<boolean>(isLikedTrack)
   const { mutate: toggleFavorite } = useToggleFavorite(isLiked, setIsLiked)
 
-  const handleLikeClick = (id: number) => {
+  const handleOnRowClick = (settedTrack: TrackType) => {
+    setCurrentTrack(settedTrack)
+  }
+
+  const handleOnLikeClick = (
+    id: number,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation()
     toggleFavorite(id)
   }
 
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <S.Row onClick={() => setCurrentTrack(trackData)}>
+    <S.Row onClick={() => handleOnRowClick(trackData)}>
       <S.Col1>
         <img
           src={theme.name === Theme.Dark ? coverDark : coverLight}
@@ -41,8 +50,11 @@ const TrackListItem = ({ trackData, setCurrentTrack }: PropsType) => {
       <S.Col2>{trackData.author}</S.Col2>
       <S.Col3>{trackData.album}</S.Col3>
       <S.Col4>
-        <button type="button" onClick={() => handleLikeClick(trackData.id)}>
-          {isLiked ? (
+        <button
+          type="button"
+          onClick={(event) => handleOnLikeClick(trackData.id, event)}
+        >
+          {isLikedTrack ? (
             <Icon icon={IconSprite.Like} size="20px" isActive />
           ) : (
             <Icon icon={IconSprite.Dislike} size="20px" />
