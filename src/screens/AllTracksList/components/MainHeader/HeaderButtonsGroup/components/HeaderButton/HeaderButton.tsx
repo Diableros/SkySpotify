@@ -36,6 +36,13 @@ const HeaderButton = ({
   >(searchOptions)
 
   const handleClickOption = (option: string) => {
+    if (filterOptions?.includes(option)) {
+      setFilterOptions(
+        filterOptions.filter((curOption) => curOption !== option)
+      )
+      return
+    }
+
     if (buttonId === Button.Year) {
       setFilterOptions([option])
     } else {
@@ -92,6 +99,7 @@ const HeaderButton = ({
               <S.HeaderButtonSelectItem
                 key={option}
                 onClick={() => handleClickOption(option)}
+                isSelected={filterOptions?.includes(option) || false}
               >
                 {option}
               </S.HeaderButtonSelectItem>

@@ -10,6 +10,7 @@ import useCurrentTrack from '@/hooks/useCurrentTrack'
 import { Button } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/enum'
 import { SearchByYear } from '@/screens/AllTracksList/components/MainHeader/HeaderButtonsGroup/type'
 import useUserStore from '@/store/hooks/useUserStore'
+import { Route } from '@/providers/routes'
 
 type PropsType = {
   tracksArray?: TrackType[]
@@ -32,10 +33,33 @@ const TrackList = ({
   const { setCurrentTrack } = useCurrentTrack()
   const [filteredTracks, setFilteredTracks] = React.useState<TrackType[]>([])
 
-  const getFilteredTracks = React.useMemo(
+  const getFilteredTracks = React.useCallback(
     () => () => {
-      if (tracksArray && !pathname.includes('collections')) {
+      if (tracksArray) {
         let result = [...tracksArray]
+
+        if (
+          !pathname.includes('collections') &&
+          !pathname.includes(Route.Favorites)
+        ) {
+          if (byAuthor.length > 0)
+            result = result.filter((track) => byAuthor.includes(track.author))
+
+          if (byGenre.length > 0)
+            result = result.filter((track) => byGenre.includes(track.genre))
+
+          if (byYear.length > 0) {
+            result.sort(({ release_date: adate }, { release_date: bdate }) => {
+              const current = new Date(adate).valueOf()
+              const next = new Date(bdate).valueOf()
+
+              if (byYear.includes(SearchByYear.OldestFirst)) {
+                return current - next
+              }
+              return next - current
+            })
+          }
+        }
 
         if (byText.length > 0)
           result = result.filter((track) => {
@@ -43,24 +67,6 @@ const TrackList = ({
             const title = track.name.toLocaleLowerCase()
             return title.includes(searchString)
           })
-
-        if (byAuthor.length > 0)
-          result = result.filter((track) => byAuthor.includes(track.author))
-
-        if (byGenre.length > 0)
-          result = result.filter((track) => byGenre.includes(track.genre))
-
-        if (byYear.length > 0) {
-          result.sort(({ release_date: adate }, { release_date: bdate }) => {
-            const current = new Date(adate).valueOf()
-            const next = new Date(bdate).valueOf()
-
-            if (byYear.includes(SearchByYear.OldestFirst)) {
-              return current - next
-            }
-            return next - current
-          })
-        }
 
         return result
       }

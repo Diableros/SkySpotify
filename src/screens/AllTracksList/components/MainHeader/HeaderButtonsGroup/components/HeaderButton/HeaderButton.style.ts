@@ -9,6 +9,10 @@ type ButtonBadgeType = {
   number?: number
 }
 
+type HeaderButtonSelectItemType = {
+  isSelected: boolean
+}
+
 const activeStyle = css`
   border-color: ${({ theme }) => theme.color.active};
   color: ${({ theme }) => theme.color.active};
@@ -77,10 +81,13 @@ export const HeaderButtonSelectItemsBox = styled.ul`
   ${scrollBarStyles}
 `
 
-export const HeaderButtonSelectItem = styled.li`
+export const HeaderButtonSelectItem = styled.li<HeaderButtonSelectItemType>`
   font-size: 20px;
   line-height: 24px;
   cursor: pointer;
+
+  ${({ isSelected, theme }) =>
+    isSelected ? `color: ${theme.color.active};` : ''}
 
   &:hover {
     color: ${({ theme }) => theme.color.hover};
