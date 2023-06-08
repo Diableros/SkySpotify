@@ -33,47 +33,48 @@ const TrackList = ({
   const { setCurrentTrack } = useCurrentTrack()
   const [filteredTracks, setFilteredTracks] = React.useState<TrackType[]>([])
 
-  const getFilteredTracks = React.useCallback(
-    () => () => {
-      if (tracksArray) {
-        let result = [...tracksArray]
-
-        if (
-          !pathname.includes('collections') &&
-          !pathname.includes(Route.Favorites)
-        ) {
-          if (byAuthor.length > 0)
-            result = result.filter((track) => byAuthor.includes(track.author))
-
-          if (byGenre.length > 0)
-            result = result.filter((track) => byGenre.includes(track.genre))
-
-          if (byYear.length > 0) {
-            result.sort(({ release_date: adate }, { release_date: bdate }) => {
-              const current = new Date(adate).valueOf()
-              const next = new Date(bdate).valueOf()
-
-              if (byYear.includes(SearchByYear.OldestFirst)) {
-                return current - next
-              }
-              return next - current
-            })
-          }
-        }
-
-        if (byText.length > 0)
-          result = result.filter((track) => {
-            const searchString = byText.toLowerCase()
-            const title = track.name.toLocaleLowerCase()
-            return title.includes(searchString)
-          })
-
-        return result
+  const getFilteredTracks = React.useCallback(() => {
+    if (tracksArray) {
+      const filterResultByText = (searchString: string, title: string) => {
+        return title.toLocaleLowerCase().includes(searchString.toLowerCase())
       }
-      return tracksArray || []
-    },
-    [byAuthor, byGenre, byText, byYear, tracksArray, pathname]
-  )
+
+      const isFiltersDisabled =
+        pathname.includes('collections') || pathname.includes(Route.Favorites)
+
+      return tracksArray
+        .filter(({ author, genre, name }) => {
+          if (isFiltersDisabled) {
+            return !byText.length || filterResultByText(byText, name)
+          }
+
+          return (
+            (!byAuthor.length || byAuthor.includes(author)) &&
+            (!byGenre.length || byGenre.includes(genre)) &&
+            (!byText.length || filterResultByText(byText, name))
+          )
+        })
+        .sort(({ release_date: adate }, { release_date: bdate }) => {
+          if (isFiltersDisabled) {
+            return 0
+          }
+
+          const current = new Date(adate).valueOf()
+          const next = new Date(bdate).valueOf()
+
+          if (byYear.includes(SearchByYear.OldestFirst)) {
+            return current - next
+          }
+
+          if (byYear.includes(SearchByYear.NewestFirst)) {
+            return next - current
+          }
+
+          return 0
+        })
+    }
+    return []
+  }, [byAuthor, byGenre, byText, byYear, tracksArray, pathname])
 
   React.useEffect(() => {
     if (tracksArray) setFilteredTracks(getFilteredTracks())

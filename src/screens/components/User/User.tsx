@@ -27,7 +27,7 @@ const User = () => {
       req<GetRefreshResponseType>({
         method: ReqMethod.Post,
         endpoint: queries.User.RefreshToken,
-        body: { refresh },
+        body: { refresh: String(refresh) },
       }),
     queryKey: [QueryKey.RefreshToken],
     onSuccess: ({ access: token }) => {
