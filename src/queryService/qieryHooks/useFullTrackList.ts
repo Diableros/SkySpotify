@@ -20,6 +20,7 @@ const useFullTrackList = () => {
       req<TrackType[]>({
         method: ReqMethod.Get,
         endpoint: queries.Catalog.TrackAllList,
+        undelayed: true,
       }),
     queryKey: [QueryKey.FullTrackList],
     onError: errorCatcher,

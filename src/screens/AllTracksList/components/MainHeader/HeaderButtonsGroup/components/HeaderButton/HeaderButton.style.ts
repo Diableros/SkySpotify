@@ -6,7 +6,11 @@ type HeaderButtonType = {
 }
 
 type ButtonBadgeType = {
-  number: number
+  number?: number
+}
+
+type HeaderButtonSelectItemType = {
+  isSelected: boolean
 }
 
 const activeStyle = css`
@@ -77,10 +81,13 @@ export const HeaderButtonSelectItemsBox = styled.ul`
   ${scrollBarStyles}
 `
 
-export const HeaderButtonSelectItem = styled.li`
+export const HeaderButtonSelectItem = styled.li<HeaderButtonSelectItemType>`
   font-size: 20px;
   line-height: 24px;
   cursor: pointer;
+
+  ${({ isSelected, theme }) =>
+    isSelected ? `color: ${theme.color.active};` : ''}
 
   &:hover {
     color: ${({ theme }) => theme.color.hover};
@@ -93,6 +100,7 @@ export const HeaderButtonSelectItem = styled.li`
 `
 
 export const ButtonBadge = styled.div<ButtonBadgeType>`
+  ${({ number }) => (!number ? `display: none;` : '')}
   position: absolute;
   width: 26px;
   height: 26px;
@@ -101,13 +109,38 @@ export const ButtonBadge = styled.div<ButtonBadgeType>`
   right: -8px;
   top: -10px;
 
-  &::after {
+  &:hover {
+    cursor: pointer;
+  }
+
+  &::before {
     position: absolute;
-    content: '${({ number }) => number}';
+    content: '${({ number }) => number || ''}';
     color: ${({ theme }) => theme.color.textMain};
     font-size: 14px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  &:hover + div {
+    visibility: visible;
+    cursor: pointer;
+  }
+`
+
+export const ButtonSearchCancel = styled.div`
+  position: absolute;
+  visibility: hidden;
+  width: 10px;
+  height: 10px;
+  top: -5px;
+  right: 3px;
+  color: ${({ theme }) => theme.color.hover};
+  pointer-events: none;
+
+  &:hover {
+    visibility: visible;
+    color: ${({ theme }) => theme.color.hover};
   }
 `

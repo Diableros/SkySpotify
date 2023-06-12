@@ -5,14 +5,14 @@ import { FieldLength, PlaceholderText, ErrorText } from './constants'
 const EMAIL_REG_EXP =
   /^(([0-9A-Za-z]{1}[0-9A-Za-z.]{0,}[0-9A-Za-z]{0,})@([0-9A-Za-z]{1,}\.){1,}[0-9A-Za-z]{2,})$/
 
-const PASSWORD_REG_EXP = /^[a-zA-Z0-9:]+$/
+const PASSWORD_REG_EXP = /^[a-zA-Z0-9:@$#_]+$/
 
 const passwordsCompare = (
   confirmPassword: LoginFieldsType[FieldsList.PasswordConfirm],
   { [FieldsList.Password]: password }: FieldValues
 ) => confirmPassword === password || ErrorText.MismatchPasswords
 
-const PASSWORD_REQUIREMENTS = {
+const passwordRequirements = {
   required: ErrorText.Required,
   minLength: {
     value: Number(FieldLength.PasswordMinLength),
@@ -25,7 +25,7 @@ const PASSWORD_REQUIREMENTS = {
   pattern: PASSWORD_REG_EXP,
 }
 
-const FIELDS: FieldsType = {
+const formFields: FieldsType = {
   email: {
     type: 'email',
     name: FieldsList.Email,
@@ -48,7 +48,7 @@ const FIELDS: FieldsType = {
     type: 'password',
     name: FieldsList.Password,
     placeholder: PlaceholderText.Password,
-    registerOptions: { ...PASSWORD_REQUIREMENTS },
+    registerOptions: { ...passwordRequirements },
   },
 
   passwordConfirm: {
@@ -56,10 +56,10 @@ const FIELDS: FieldsType = {
     name: FieldsList.PasswordConfirm,
     placeholder: PlaceholderText.PasswordConfirm,
     registerOptions: {
-      ...PASSWORD_REQUIREMENTS,
+      ...passwordRequirements,
       validate: passwordsCompare,
     },
   },
 }
 
-export default FIELDS
+export default formFields
