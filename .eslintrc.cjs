@@ -20,6 +20,7 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    '@typescript-eslint/ban-ts-comment': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'react/require-default-props': 0,
     'react/react-in-jsx-scope': 0,
@@ -38,4 +39,4 @@ module.exports = {
       },
     ],
   },
-};
+}
